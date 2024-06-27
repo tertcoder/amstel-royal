@@ -3,6 +3,7 @@ import Login from "./features/authentication/Login";
 import AuthLayout from "./ui/AuthLayout";
 import Signup from "./features/authentication/Signup";
 import OtpVerification from "./features/authentication/OtpVerification";
+import SignupSuccess from "./features/authentication/SignupSuccess";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "/otp_verification",
     element: <OtpVerification />,
+  },
+  {
+    path: "/signup_success",
+    element: <SignupSuccess />,
   },
 ]);
 
