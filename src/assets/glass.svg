@@ -11,8 +11,8 @@
 <pattern id="pattern1_104_337" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image0_104_337" transform="scale(0.000949668 0.000390778)"/>
 </pattern>
-<filter id="filter0_f_104_337" x="0.105103" y="209.721" width="215.98" height="57.6963" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<filter id="filter0_f_104_337" x="0.105103" y="209.721" width="215.98" height="57.6963" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+<feFlood floodOpacity="0" result="BackgroundImageFix"/>
 <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
 <feGaussianBlur stdDeviation="10" result="effect1_foregroundBlur_104_337"/>
 </filter>

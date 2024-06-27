@@ -4,6 +4,10 @@ import AuthLayout from "./ui/AuthLayout";
 import Signup from "./features/authentication/Signup";
 import OtpVerification from "./features/authentication/OtpVerification";
 import SignupSuccess from "./features/authentication/SignupSuccess";
+import AppLayout from "./ui/AppLayout";
+import Home from "./Screen/Home";
+import Bars from "./Screen/Bars";
+import Profile from "./Screen/Profile";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +30,23 @@ const router = createBrowserRouter([
   {
     path: "/signup_success",
     element: <SignupSuccess />,
+  },
+  {
+    element: <AppLayout />,
+    children: [
+      {
+        path: "/home",
+        element: <Home />,
+      },
+      {
+        path: "/bars",
+        element: <Bars />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+    ],
   },
 ]);
 

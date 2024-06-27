@@ -12,6 +12,9 @@ export default {
         "text-white": "#EBE4D6",
         "btn-color": "#B88409",
         input: "#E8E8E8",
+        "main-one": "#1A7235",
+        "main-one-light": "#A4C1AD",
+        "main-two": "#BC141A",
       },
       boxShadow: {
         "sm-blur": "0 0 10px rgba(44, 30, 14, 0.05)",
