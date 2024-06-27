@@ -40,7 +40,7 @@ function OtpInput({ length, onChange }: OtpInputProps) {
       {otp.map((data, index) => (
         <input
           key={index}
-          type="text"
+          type="number"
           name="otp"
           maxLength={1}
           value={data}
