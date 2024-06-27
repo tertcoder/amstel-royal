@@ -2,7 +2,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Login from "./features/authentication/Login";
 import AuthLayout from "./ui/AuthLayout";
 import Signup from "./features/authentication/Signup";
-import OTP from "./features/authentication/OTP";
+import OtpVerification from "./features/authentication/OtpVerification";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/otp_verification",
-    element: <OTP />,
+    element: <OtpVerification />,
   },
 ]);
 
