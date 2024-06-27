@@ -7,7 +7,7 @@ function MainBtn({
 }) {
   return (
     <button
-      className="shadow-sm-blur text-bg-one bg-btn-color rounded-lg py-3 font-medium"
+      className="shadow-sm-blur text-bg-one bg-btn-color w-full rounded-lg py-3 font-medium"
       onClick={onClick}
     >
       {text}
