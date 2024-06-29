@@ -5,8 +5,8 @@ import GlassProst from "../../ui/GlassProst";
 function SignupSuccess() {
   const navigate = useNavigate();
   return (
-    <div className="flex h-screen flex-col items-center px-8 pb-8 pt-16">
-      <h2 className="mb-12 text-2xl font-medium text-text-black">
+    <div className="flex h-screen flex-col items-center px-4 pb-8">
+      <h2 className="mb-12 mt-16 text-2xl font-medium text-text-black">
         Sign-Up Success
       </h2>
       {/* <img src={cheers} alt="Amstel Royal Prost" /> */}

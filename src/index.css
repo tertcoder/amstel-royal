@@ -10,6 +10,21 @@
     -webkit-box-shadow: 0 0 0 30px #e8e8e8 inset !important;
     -webkit-text-fill-color: #2c1e0e !important;
   }
+  html {
+    scrollbar-width: 0px;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gold-gradient {
+    background: linear-gradient(
+      64.18deg,
+      #eed587 0%,
+      #b88409 50%,
+      #c59727 99.5%
+    );
+  }
 }
 
 @layer components {
@@ -19,7 +34,6 @@
   .link.active {
     @apply bg-main-one-light;
   }
-
   .link .label {
     @apply text-main-one;
     visibility: hidden;
@@ -40,17 +54,14 @@
     width: 225px;
     height: 225px;
   }
-
   .glass {
     position: absolute;
     transform-origin: bottom center;
   }
-
   .glass-left {
     left: 30px;
     animation: cheer-left 3s infinite;
   }
-
   .glass-right {
     right: 30px;
     animation: cheer-right 3s infinite;
@@ -71,7 +82,6 @@
       transform: rotate(-10deg) translateY(-20px);
     }
   }
-
   @keyframes cheer-right {
     0%,
     100% {
@@ -87,7 +97,6 @@
       transform: rotate(10deg) translateY(-20px);
     }
   }
-
   .glass-shadow {
     position: absolute;
     left: 50%;

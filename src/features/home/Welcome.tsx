@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo-2.webp";
 function Welcome() {
+  const navigate = useNavigate();
   return (
-    <div className="flex justify-between">
+    <div className="mt-8 flex justify-between">
       <div className="flex items-center gap-3">
         <img src={logo} alt="Amstel Royal Logo" className="w-16" />
         <div>
@@ -13,7 +15,7 @@ function Welcome() {
       </div>
       <div className="flex items-center gap-2">
         <button className="relative p-1">
-          <span className="bg-main-two absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full text-center text-sm font-medium text-text-white">
+          <span className="absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full bg-main-two text-center text-sm font-medium text-text-white">
             1
           </span>
           <svg
@@ -31,7 +33,7 @@ function Welcome() {
             />
           </svg>
         </button>
-        <button className="p-1">
+        <button className="p-1" onClick={() => navigate("/")}>
           <svg
             width="28"
             height="28"

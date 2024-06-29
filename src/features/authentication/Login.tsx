@@ -1,19 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MainBtn from "../../ui/MainBtn";
 
 function Login() {
+  const navigate = useNavigate();
   return (
     <div className="mt-2 flex flex-col items-center">
-      <p className="text-text-black/70 text-center text-sm">
+      <p className="text-center text-sm text-text-black/70">
         Log in to start earning points with every sip of Amstel!
       </p>
       <form action="" className="mt-6 w-full space-y-5">
         <div className="flex flex-col gap-4">
-          <div className="bg-input focus-within:border-text-black/70 shadow-sm-blur flex justify-between rounded-xl px-4 py-3 duration-150 focus-within:border">
+          <div className="flex justify-between rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70">
             <input
               type="text"
               placeholder="Identifier"
-              className="text-text-black placeholder:text-text-black/70 flex-1 bg-inherit outline-none"
+              className="flex-1 bg-inherit text-text-black outline-none placeholder:text-text-black/70"
               autoComplete="false"
             />
             <svg
@@ -35,11 +36,11 @@ function Login() {
           </div>
 
           <div className="flex flex-col space-y-2">
-            <div className="bg-input focus-within:border-text-black/70 shadow-sm-blur flex justify-between rounded-xl px-4 py-3 duration-150 focus-within:border">
+            <div className="flex justify-between rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70">
               <input
                 type="password"
                 placeholder="Password"
-                className="placeholder:text-text-black/70 text-text-black auto flex-1 bg-inherit outline-none"
+                className="auto flex-1 bg-inherit text-text-black outline-none placeholder:text-text-black/70"
               />
               <svg
                 width="24"
@@ -68,7 +69,7 @@ function Login() {
             </div>
             <Link
               to=""
-              className="text-text-black/70 self-end text-sm underline"
+              className="self-end text-sm text-text-black/70 underline"
             >
               forgot password?
             </Link>
@@ -78,13 +79,13 @@ function Login() {
           <MainBtn
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               e.preventDefault();
-              console.log("Clicked!");
+              navigate("/home");
             }}
             text="Log in"
           />
           <Link
             to="/signup"
-            className="text-text-black/70 self-end text-sm underline"
+            className="self-end text-sm text-text-black/70 underline"
           >
             I don’t have an account
           </Link>

@@ -5,16 +5,16 @@ function Signup() {
   const navigate = useNavigate();
   return (
     <div className="mt-2 flex flex-col items-center">
-      <p className="text-text-black/70 text-center text-sm">
+      <p className="text-center text-sm text-text-black/70">
         Log in to start earning points with every sip of Amstel!
       </p>
       <form action="" className="mt-6 w-full space-y-5">
         <div className="flex flex-col gap-4">
-          <div className="bg-input focus-within:border-text-black/70 shadow-sm-blur flex justify-between rounded-xl px-4 py-3 duration-150 focus-within:border">
+          <div className="flex justify-between rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70">
             <input
               type="text"
               placeholder="Identifier"
-              className="text-text-black placeholder:text-text-black/70 flex-1 bg-inherit outline-none"
+              className="flex-1 bg-inherit text-text-black outline-none placeholder:text-text-black/70"
             />
             <svg
               width="24"
@@ -33,11 +33,11 @@ function Signup() {
               />
             </svg>
           </div>
-          <div className="bg-input focus-within:border-text-black/70 shadow-sm-blur flex justify-between rounded-xl px-4 py-3 duration-150 focus-within:border">
+          <div className="flex justify-between rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70">
             <input
               type="text"
               placeholder="Telephone"
-              className="text-text-black placeholder:text-text-black/70 flex-1 bg-inherit outline-none"
+              className="flex-1 bg-inherit text-text-black outline-none placeholder:text-text-black/70"
             />
             <svg
               width="24"
@@ -53,11 +53,11 @@ function Signup() {
             </svg>
           </div>
 
-          <div className="bg-input focus-within:border-text-black/70 shadow-sm-blur flex justify-between rounded-xl px-4 py-3 duration-150 focus-within:border">
+          <div className="flex justify-between rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70">
             <input
               type="password"
               placeholder="Password"
-              className="placeholder:text-text-black/70 text-text-black auto flex-1 bg-inherit outline-none"
+              className="auto flex-1 bg-inherit text-text-black outline-none placeholder:text-text-black/70"
             />
             <svg
               width="24"
@@ -94,8 +94,8 @@ function Signup() {
             text="Sign up"
           />
           <Link
-            to="/login"
-            className="text-text-black/70 self-end text-sm underline"
+            to="/"
+            className="self-end text-sm text-text-black/70 underline"
           >
             I already have an account
           </Link>
