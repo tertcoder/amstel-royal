@@ -7,7 +7,9 @@ function Overview() {
       <div className="flex items-center justify-between">
         <div>
           <div className="flex gap-2">
-            <span className="font-medium text-text-black/70">Your Point</span>
+            <span className="text-sm font-medium text-text-black/70">
+              Your Point
+            </span>
             <button className="w-6" onClick={() => setHide((hide) => !hide)}>
               {hide ? (
                 <svg
@@ -191,7 +193,9 @@ function Overview() {
               </filter>
             </defs>
           </svg>
-          <span className="font-medium text-text-black">Send points</span>
+          <span className="text-sm font-medium text-text-black">
+            Send points
+          </span>
         </button>
         <button className="flex flex-col items-center">
           <svg
@@ -262,7 +266,9 @@ function Overview() {
             </defs>
           </svg>
 
-          <span className="font-medium text-text-black">Receive points</span>
+          <span className="text-sm font-medium text-text-black">
+            Receive points
+          </span>
         </button>
         <button className="flex flex-col items-center">
           <svg
@@ -405,7 +411,7 @@ function Overview() {
             </defs>
           </svg>
 
-          <span className="font-medium text-text-black">Rewards</span>
+          <span className="text-sm font-medium text-text-black">Rewards</span>
         </button>
       </div>
     </div>
