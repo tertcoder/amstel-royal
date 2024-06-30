@@ -1,5 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import ProfileCard from "../features/profile/ProfileCard";
+import Activity from "../features/profile/Activity";
+import img1 from "../assets/small_glass.svg";
+import img2 from "../assets/userAct.svg";
 
 function Profile() {
   const navigate = useNavigate();
@@ -22,6 +25,37 @@ function Profile() {
         </svg>
       </button>
       <ProfileCard />
+      <div className="mt-10">
+        <h2 className="text-xl font-medium text-text-black">
+          Activity History
+        </h2>
+        <div className="mt-3 flex flex-col divide-y divide-text-black/30">
+          <Activity
+            activity="@user4"
+            time="sent, today"
+            image={img2}
+            sent={5}
+          />
+          <Activity
+            activity="claimed reward"
+            time="received, yesterday"
+            image={img1}
+            received={5}
+          />
+          <Activity
+            activity="claimed reward"
+            time="received, May 1st 2024"
+            image={img1}
+            received={5}
+          />
+          <Activity
+            activity="@user1"
+            time="received, April 28th 2024"
+            image={img2}
+            received={10}
+          />
+        </div>
+      </div>
     </div>
   );
 }
