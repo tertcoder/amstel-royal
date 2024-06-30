@@ -23,7 +23,7 @@ function Heading({ heading }: { heading: string }) {
           />
         </svg>
       </button>
-      <h2 className="text-2xl font-medium text-text-black">{heading}</h2>
+      <h2 className="text-xl font-medium text-text-black">{heading}</h2>
       <div></div>
     </div>
   );
