@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import ProfileCard from "../features/profile/ProfileCard";
 import Activity from "../features/profile/Activity";
-import img1 from "../assets/small_glass.svg";
+import img1 from "../assets/small_glass.png";
 import img2 from "../assets/userAct.svg";
 
 function Profile() {
