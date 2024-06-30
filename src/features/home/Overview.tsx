@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Overview() {
   const [hide, setHide] = useState(true);
+  const navigate = useNavigate();
   return (
     <div className="mt-12 w-full space-y-5 rounded-xl bg-input p-6 py-6 shadow-sm-blur">
       <div className="flex items-center justify-between">
@@ -125,7 +127,10 @@ function Overview() {
         </button>
       </div>
       <div className="flex justify-between">
-        <button className="flex flex-col items-center">
+        <button
+          className="flex flex-col items-center"
+          onClick={() => navigate("/send_points")}
+        >
           <svg
             width="77"
             height="76"

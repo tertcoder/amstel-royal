@@ -8,43 +8,60 @@ import AppLayout from "./ui/AppLayout";
 import Home from "./Screen/Home";
 import Bars from "./Screen/Bars";
 import Profile from "./Screen/Profile";
+import Authentication from "./ui/Authentication";
+import Application from "./ui/Application";
+import SendPoints from "./features/send/SendPoints";
 
 const router = createBrowserRouter([
   {
-    element: <AuthLayout />,
+    element: <Authentication />,
     children: [
       {
-        path: "/",
-        element: <Login />,
+        element: <AuthLayout />,
+        children: [
+          {
+            path: "/",
+            element: <Login />,
+          },
+          {
+            path: "/signup",
+            element: <Signup />,
+          },
+        ],
       },
       {
-        path: "/signup",
-        element: <Signup />,
+        path: "/otp_verification",
+        element: <OtpVerification />,
+      },
+      {
+        path: "/signup_success",
+        element: <SignupSuccess />,
       },
     ],
   },
   {
-    path: "/otp_verification",
-    element: <OtpVerification />,
-  },
-  {
-    path: "/signup_success",
-    element: <SignupSuccess />,
-  },
-  {
-    element: <AppLayout />,
+    element: <Application />,
     children: [
       {
-        path: "/home",
-        element: <Home />,
+        element: <AppLayout />,
+        children: [
+          {
+            path: "/home",
+            element: <Home />,
+          },
+          {
+            path: "/bars",
+            element: <Bars />,
+          },
+          {
+            path: "/profile",
+            element: <Profile />,
+          },
+        ],
       },
       {
-        path: "/bars",
-        element: <Bars />,
-      },
-      {
-        path: "/profile",
-        element: <Profile />,
+        path: "/send_points",
+        element: <SendPoints />,
       },
     ],
   },

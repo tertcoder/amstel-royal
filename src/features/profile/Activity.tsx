@@ -1,13 +1,14 @@
+import img1 from "../../assets/small_glass.png";
+import img2 from "../../assets/userAct.svg";
+
 function Activity({
   activity,
   time,
-  image,
   received,
   sent,
 }: {
   activity: string;
   time: string;
-  image: string;
   received?: number;
   sent?: number;
 }) {
@@ -15,7 +16,11 @@ function Activity({
     <div className="flex justify-between p-2">
       <div className="flex gap-3">
         <div className="flex h-10 w-10 items-center justify-center">
-          <img src={image} alt="Amstel Royal" />
+          <img
+            src={(received && img1) || (sent && img2) || ""}
+            alt="Amstel Royal"
+            className={`${sent ? "drop-shadow-sm-blur" : ""}`}
+          />
         </div>
         <div className="flex flex-col">
           <h3 className="font-medium">{activity}</h3>

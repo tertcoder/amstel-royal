@@ -19,6 +19,7 @@ export default {
       boxShadow: {
         "sm-blur": "0 0 10px rgba(44, 30, 14, 0.05)",
       },
+      dropShadow: { "sm-blur": "0 0 10px rgba(44, 30, 14, 0.05)" },
     },
   },
   plugins: [],

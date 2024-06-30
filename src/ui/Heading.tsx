@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-function GoBack({ heading }: { heading: string }) {
+function Heading({ heading }: { heading: string }) {
   const navigate = useNavigate();
 
   return (
@@ -29,4 +29,4 @@ function GoBack({ heading }: { heading: string }) {
   );
 }
 
-export default GoBack;
+export default Heading;

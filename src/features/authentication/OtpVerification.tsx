@@ -3,7 +3,7 @@ import otp_img from "../../assets/otp_illustration.png";
 import MainBtn from "../../ui/MainBtn";
 import OtpInput from "./OtpInput";
 import { useNavigate } from "react-router-dom";
-import GoBack from "../../ui/GoBack";
+import Heading from "../../ui/Heading";
 
 function OtpVerification() {
   const [otp, setOtp] = useState("");
@@ -11,8 +11,8 @@ function OtpVerification() {
   const handleOtpChange = (otp: string) => setOtp(otp);
   return (
     <div className="flex h-screen flex-col items-center px-4 pb-8">
-      <GoBack heading=" OTP Verification" />
-      <img src={otp_img} alt="Amstel Royal OTP Verification" />
+      <Heading heading=" OTP Verification" />
+      <img src={otp_img} alt="Amstel Royal OTP Verification" className="w-44" />
       <p className="font-medium text-text-black/70">
         Enter OTP sent to <span className="text-text-black">+257 65849761</span>
       </p>
