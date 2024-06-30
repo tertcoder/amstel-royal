@@ -28,14 +28,14 @@ function FeaturedAds() {
         <div className="h-48 max-w-screen-lg overflow-hidden rounded-xl bg-input">
           {/* Carrousel */}
           <div
-            className="flex transition-transform duration-300 ease-out"
+            className="flex h-full w-full transition-transform duration-300 ease-out"
             style={{ transform: `translateX(-${curr * 100}%)` }}
           >
             {ads.map((p) => (
               <img
                 src={p}
                 alt="Amstel Royal Ads"
-                className="h-full w-full bg-cover"
+                className="h-full w-full object-cover"
                 key={p}
               />
             ))}
