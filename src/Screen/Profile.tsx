@@ -5,7 +5,7 @@ function Profile() {
   const navigate = useNavigate();
   return (
     <div className="flex flex-col">
-      <button className="mt-4 self-end" onClick={() => navigate("/")}>
+      <button className="mb-6 mt-4 self-end" onClick={() => navigate("/")}>
         <svg
           width="32"
           height="32"

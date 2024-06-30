@@ -11,7 +11,7 @@ function AuthLayout() {
         className="w-full -translate-y-20"
         alt="Amstel Royal Login or Sign up"
       />
-      <div className="bg-bg-one absolute bottom-0 flex w-full flex-col items-center rounded-t-[30px] px-12 pb-8 pt-16">
+      <div className="absolute bottom-0 flex w-full flex-col items-center rounded-t-[30px] bg-bg-one px-8 pb-8 pt-16">
         <img
           src={logo}
           alt="Amstel Royal Logo"

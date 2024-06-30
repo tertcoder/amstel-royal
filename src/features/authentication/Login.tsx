@@ -4,7 +4,7 @@ import MainBtn from "../../ui/MainBtn";
 function Login() {
   const navigate = useNavigate();
   return (
-    <div className="mt-2 flex flex-col items-center">
+    <div className="mt-2 flex w-full flex-col items-center">
       <p className="text-center text-sm text-text-black/70">
         Log in to start earning points with every sip of Amstel!
       </p>

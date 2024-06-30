@@ -72,7 +72,10 @@ function ProfileCard() {
           <img src={qrcode} alt="Amstel Royal App" />
         </div>
       </div>
-
+      <span>Your points</span>
+      <h2>500.00</h2>
+      <span>Your level</span>
+      <h2>Gold</h2>
       {/* frame */}
       <img
         src={frame}
