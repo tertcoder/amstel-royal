@@ -32,7 +32,12 @@ function FeaturedAds() {
             style={{ transform: `translateX(-${curr * 100}%)` }}
           >
             {ads.map((p) => (
-              <img src={p} alt="Amstel Royal Ads" key={p} />
+              <img
+                src={p}
+                alt="Amstel Royal Ads"
+                className="h-full w-full bg-cover"
+                key={p}
+              />
             ))}
           </div>
         </div>
