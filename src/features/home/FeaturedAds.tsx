@@ -25,7 +25,7 @@ function FeaturedAds() {
     <div className="mt-8 space-y-4">
       <h2 className="text-xl font-medium text-text-black">Featured Ads</h2>
       <div className="flex flex-col gap-4">
-        <div className="h-48 max-w-screen-lg overflow-hidden rounded-xl bg-red-50">
+        <div className="h-48 max-w-screen-lg overflow-hidden rounded-xl bg-input">
           {/* Carrousel */}
           <div
             className="flex transition-transform duration-300 ease-out"
