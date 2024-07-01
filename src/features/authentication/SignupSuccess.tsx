@@ -6,14 +6,13 @@ function SignupSuccess() {
   const navigate = useNavigate();
   return (
     <div className="flex h-screen flex-col items-center px-4 pb-8">
-      <h2 className="mb-12 mt-16 text-2xl font-medium text-text-black">
+      <h2 className="mb-12 mt-4 text-xl font-medium text-text-black">
         Sign-Up Success
       </h2>
-      {/* <img src={cheers} alt="Amstel Royal Prost" /> */}
       <GlassProst />
 
       <div className="my-6 space-y-12">
-        <h3 className="text-center text-2xl font-medium text-text-black">
+        <h3 className="text-center text-xl font-medium text-text-black">
           Congratulations! You're all set up.
         </h3>
         <div>

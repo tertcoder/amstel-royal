@@ -14,7 +14,10 @@ function Welcome() {
         </div>
       </div>
       <div className="flex items-center gap-2">
-        <button className="relative p-1">
+        <button
+          className="relative p-1"
+          onClick={() => navigate("/notifications")}
+        >
           <span className="absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full bg-main-two text-center text-sm font-medium text-text-white">
             1
           </span>

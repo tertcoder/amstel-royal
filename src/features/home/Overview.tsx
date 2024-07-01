@@ -69,7 +69,7 @@ function Overview() {
             {hide ? "****" : " 500.00"}
           </h2>
         </div>
-        <button>
+        <button onClick={() => navigate("/receive_points")}>
           <svg
             width="32"
             height="32"
@@ -202,7 +202,11 @@ function Overview() {
             Send points
           </span>
         </button>
-        <button className="flex flex-col items-center">
+
+        <button
+          className="flex flex-col items-center"
+          onClick={() => navigate("/receive_points")}
+        >
           <svg
             width="77"
             height="76"
@@ -275,7 +279,10 @@ function Overview() {
             Receive points
           </span>
         </button>
-        <button className="flex flex-col items-center">
+        <button
+          className="flex flex-col items-center"
+          onClick={() => navigate("/rewards")}
+        >
           <svg
             width="76"
             height="76"

@@ -2,13 +2,18 @@ import { useState } from "react";
 import otp_img from "../../assets/otp_illustration.png";
 import MainBtn from "../../ui/MainBtn";
 import OtpInput from "./OtpInput";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Heading from "../../ui/Heading";
 
 function OtpVerification() {
   const [otp, setOtp] = useState("");
   const navigate = useNavigate();
+  const [paramVar] = useSearchParams();
+
+  const headTo = paramVar.get("action");
+
   const handleOtpChange = (otp: string) => setOtp(otp);
+
   return (
     <div className="flex h-screen flex-col items-center px-4 pb-8">
       <Heading heading=" OTP Verification" />
@@ -27,7 +32,9 @@ function OtpVerification() {
         onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
           e.preventDefault();
           console.log(`OTP: ${otp}`);
-          navigate("/signup_success");
+          navigate(
+            `${headTo === "verify_send_point" ? "/send_points_success" : "/signup_success"}`,
+          );
         }}
         text="Verify"
       />

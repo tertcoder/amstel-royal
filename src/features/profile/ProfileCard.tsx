@@ -1,4 +1,4 @@
-import qrcode from "../../assets/qrcode.svg";
+import qrcode from "../../assets/qr.png";
 import frame from "../../assets/frame.png";
 
 function ProfileCard() {
@@ -32,7 +32,7 @@ function ProfileCard() {
           </div>
         </div>
         {/* QR Code */}
-        <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-[10px] bg-bg-one">
+        <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-[10px] bg-bg-one p-1">
           <img src={qrcode} alt="Amstel Royal App" />
         </div>
       </div>

@@ -1,13 +1,22 @@
+import { twMerge } from "tailwind-merge";
+
 function MainBtn({
   text,
   onClick,
+  type = "primary",
 }: {
   text: string;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  type?: string;
 }) {
   return (
     <button
-      className="shadow-sm-blur text-bg-one bg-btn-color w-full rounded-lg py-3 font-medium"
+      //  "
+      // className="border border-text-black text-text-black"
+      className={twMerge(
+        "w-full rounded-lg py-3 font-medium shadow-sm-blur",
+        ` ${type === "primary" ? "bg-btn-color text-bg-one" : "border border-text-black text-text-black"}`,
+      )}
       onClick={onClick}
     >
       {text}

@@ -25,6 +25,14 @@
       #c59727 99.5%
     );
   }
+  .linear {
+    background: linear-gradient(
+      64.18deg,
+      #c59727 0%,
+      #b88409 55.86%,
+      #eed587 100%
+    );
+  }
 }
 
 @layer components {

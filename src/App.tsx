@@ -11,6 +11,10 @@ import Profile from "./Screen/Profile";
 import Authentication from "./ui/Authentication";
 import Application from "./ui/Application";
 import SendPoints from "./features/send/SendPoints";
+import SendPointsSuccess from "./features/send/SendPointsSuccess";
+import ReceivePoints from "./features/receive/ReceivePoints";
+import Rewards from "./features/rewards/Rewards";
+import Notifications from "./features/notifications/Notifications";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +66,22 @@ const router = createBrowserRouter([
       {
         path: "/send_points",
         element: <SendPoints />,
+      },
+      {
+        path: "/send_points_success",
+        element: <SendPointsSuccess />,
+      },
+      {
+        path: "/receive_points",
+        element: <ReceivePoints />,
+      },
+      {
+        path: "/rewards",
+        element: <Rewards />,
+      },
+      {
+        path: "/notifications",
+        element: <Notifications />,
       },
     ],
   },
