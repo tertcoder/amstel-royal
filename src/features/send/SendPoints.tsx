@@ -158,7 +158,7 @@ function SendPoints() {
             <div>
               <input
                 type=""
-                className="w-14 border-b-2 border-text-black/70 bg-inherit text-center text-2xl duration-150 focus:border-text-black focus:outline-none"
+                className="w-14 border-b border-text-black/70 bg-inherit text-center text-2xl duration-150 focus:border-text-black focus:outline-none"
                 defaultValue={0.0}
               />
               <span className="text-sm font-medium text-text-black/70">
