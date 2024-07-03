@@ -68,7 +68,7 @@ function Login() {
               </svg>
             </div>
             <Link
-              to=""
+              to="/step_1_phone"
               className="self-end text-sm text-text-black/70 underline"
             >
               forgot password?

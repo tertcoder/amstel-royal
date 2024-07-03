@@ -4,7 +4,7 @@ function Heading({ heading }: { heading: string }) {
   const navigate = useNavigate();
 
   return (
-    <div className="mb-10 mt-4 flex w-full items-center justify-between">
+    <div className="my-8 flex w-full items-center justify-between">
       <button onClick={() => navigate(-1)} className="flex items-center gap-1">
         <svg
           width="24"

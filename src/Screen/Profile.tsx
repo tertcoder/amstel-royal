@@ -6,7 +6,7 @@ function Profile() {
   const navigate = useNavigate();
   return (
     <div className="flex flex-col overflow-y-auto">
-      <button className="mb-6 mt-4 self-end" onClick={() => navigate("/")}>
+      <button className="mb-6 mt-8 self-end" onClick={() => navigate("/")}>
         <svg
           width="32"
           height="32"

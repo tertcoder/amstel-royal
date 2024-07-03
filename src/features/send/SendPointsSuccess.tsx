@@ -6,7 +6,7 @@ function SendPointsSuccess() {
   const navigate = useNavigate();
   return (
     <div className="flex h-screen flex-col items-center overflow-y-auto px-4 pb-8">
-      <h2 className="mb-16 mt-4 text-xl font-medium text-text-black">
+      <h2 className="mb-16 mt-8 text-xl font-medium text-text-black">
         Successful Transfer
       </h2>
       <GlassProst />

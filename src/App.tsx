@@ -15,6 +15,10 @@ import SendPointsSuccess from "./features/send/SendPointsSuccess";
 import ReceivePoints from "./features/receive/ReceivePoints";
 import Rewards from "./features/rewards/Rewards";
 import Notifications from "./features/notifications/Notifications";
+import Forgot from "./ui/Forgot";
+import ProvidePhone from "./features/forgotPassword/ProvidePhone";
+import OtpVerificationOnForgotPassword from "./features/forgotPassword/OtpVerification";
+import PasswordReset from "./features/forgotPassword/PasswordReset";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +44,23 @@ const router = createBrowserRouter([
       {
         path: "/signup_success",
         element: <SignupSuccess />,
+      },
+      {
+        element: <Forgot />,
+        children: [
+          {
+            path: "/step_1_phone",
+            element: <ProvidePhone/>,
+          },
+          {
+            path: "/step_2_otp_verification",
+            element: <OtpVerificationOnForgotPassword/>,
+          },
+          {
+            path: "/step_3_password_reset",
+            element: <PasswordReset/>,
+          },
+        ],
       },
     ],
   },

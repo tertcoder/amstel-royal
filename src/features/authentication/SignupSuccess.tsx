@@ -6,7 +6,7 @@ function SignupSuccess() {
   const navigate = useNavigate();
   return (
     <div className="flex h-screen flex-col items-center px-4 pb-8">
-      <h2 className="mb-12 mt-4 text-xl font-medium text-text-black">
+      <h2 className="8 mb-12 text-xl font-medium text-text-black">
         Sign-Up Success
       </h2>
       <GlassProst />
