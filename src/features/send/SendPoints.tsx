@@ -5,7 +5,7 @@ import MainBtn from "../../ui/MainBtn";
 function SendPoints() {
   const navigate = useNavigate();
   return (
-    <div className="h-screen px-4 pb-[70px]">
+    <div className="h-screen overflow-y-auto px-4 pb-14">
       <Heading heading="Send Points" />
       <div className="mt-16">
         <form className="flex flex-col items-center">

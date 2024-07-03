@@ -3,7 +3,7 @@ import Reward from "./Reward";
 
 function Rewards() {
   return (
-    <div className="h-screen px-4 pb-[70px]">
+    <div className="h-screen overflow-y-auto px-4 pb-14">
       <Heading heading="Rewards" />
       <div className="space-y-4">
         <Reward

@@ -4,7 +4,7 @@ import Heading from "../../ui/Heading";
 
 function ReceivePoints() {
   return (
-    <div className="h-screen px-4 pb-[70px]">
+    <div className="h-screen overflow-y-auto px-4 pb-14">
       <Heading heading="Receive Points" />
       <div className="mx-auto flex w-56 flex-col items-center">
         <span className="font-medium text-text-black/70">Your address</span>

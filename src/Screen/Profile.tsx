@@ -5,7 +5,7 @@ import Activity from "../features/profile/Activity";
 function Profile() {
   const navigate = useNavigate();
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col overflow-y-auto">
       <button className="mb-6 mt-4 self-end" onClick={() => navigate("/")}>
         <svg
           width="32"
