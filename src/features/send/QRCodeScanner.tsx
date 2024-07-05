@@ -12,7 +12,7 @@ function QRCodeScanner({ onScan }: QRCodeScannerProps) {
     console.error(err)
   }
   const previewStye = {
-    width: 320,
+    width: '100%',
     height: 240,
     borderRadius: '10px',
     marginTop: '20px',
