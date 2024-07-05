@@ -165,7 +165,7 @@ function SendPoints() {
               </svg>
             </button>
           </div>
-          {isScanning && <div className="w-80"> <QRCodeScanner onScan={handleScan} /></div>}
+          {isScanning && <QRCodeScanner onScan={handleScan} />}
           <div className="mb-16 mt-6 flex flex-col items-center">
             <h2 className="font-medium text-text-black/70">Amount</h2>
             <div>

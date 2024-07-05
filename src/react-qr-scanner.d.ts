@@ -5,7 +5,7 @@ declare module 'react-qr-scanner' {
     delay?: number;
     onError?: (error: any) => void;
     onScan?: (data: { text: string } | null) => void;
-    style?: React.CSSProperties;
+    className?:string;
     constraints?: MediaStreamConstraints; 
   }
 

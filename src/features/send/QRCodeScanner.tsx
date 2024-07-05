@@ -23,7 +23,7 @@ function QRCodeScanner({ onScan }: QRCodeScannerProps) {
     }
   };
   return (
-    <QrScanner delay={300} style={previewStye} onError={handleError} onScan={handleScan} constraints={constraints} />
+    <QrScanner delay={300} className="max-w-80 w-full overflow-hidden h-60 mt-4 rounded-xl" onError={handleError} onScan={handleScan} constraints={constraints} />
   )
 }
 
