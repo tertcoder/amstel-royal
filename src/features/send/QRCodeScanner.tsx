@@ -17,8 +17,13 @@ function QRCodeScanner({ onScan }: QRCodeScannerProps) {
     borderRadius: '10px',
     marginTop: '20px',
   }
+  const constraints = {
+    video: {
+      facingMode: { ideal: 'environment' }
+    }
+  };
   return (
-    <QrScanner delay={300} style={previewStye} onError={handleError} onScan={handleScan} />
+    <QrScanner delay={300} style={previewStye} onError={handleError} onScan={handleScan} constraints={constraints} />
   )
 }
 
