@@ -11,19 +11,13 @@ function QRCodeScanner({ onScan }: QRCodeScannerProps) {
   const handleError = (err: any) => {
     console.error(err)
   }
-  const previewStye = {
-    width: '100%',
-    height: 240,
-    borderRadius: '10px',
-    marginTop: '20px',
-  }
   const constraints = {
     video: {
       facingMode: { ideal: 'environment' }
     }
   };
   return (
-    <QrScanner delay={300} className="max-w-80 w-full overflow-hidden h-60 mt-4 rounded-xl" onError={handleError} onScan={handleScan} constraints={constraints} />
+    <QrScanner delay={300} className="qr-scanner-preview max-[480px]:h-48 max-w-80 w-full h-60 mt-4 rounded-xl" onError={handleError} onScan={handleScan} constraints={constraints} />
   )
 }
 

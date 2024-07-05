@@ -34,8 +34,22 @@
     );
   }
 }
+.qr-scanner-preview{
+    height:15rem;
+    max-width: 20rem;
+    width:100%;
+    border-radius:1.3rem;
+    overflow: hidden;
+  }
 
-@layer components {
+
+  @media (max-width: 480px) {
+    .qr-scanner-preview {
+      height: 12rem
+    }
+  }
+
+@layer components {  
   .link svg {
     @apply fill-text-black;
   }
