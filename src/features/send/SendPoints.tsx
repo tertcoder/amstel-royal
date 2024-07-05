@@ -1,9 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import Heading from "../../ui/Heading";
 import MainBtn from "../../ui/MainBtn";
+import { useState } from "react";
+import QRCodeScanner from "./QRCodeScanner";
 
 function SendPoints() {
+  const [identifier, setIdentifier] = useState<{ qrData: string }>({ qrData: '' })
+  const [isScanning, setIsScanning] = useState(false)
   const navigate = useNavigate();
+
+  const handleScan = (data: string | null) => {
+    if (data) {
+      setIdentifier({ qrData: data });
+      setIsScanning(false);
+    }
+  };
   return (
     <div className="h-screen overflow-y-auto px-4 pb-14">
       <Heading heading="Send Points" />
@@ -133,12 +144,13 @@ function SendPoints() {
                 <input
                   className="bg-inherit text-text-black outline-none placeholder:text-sm placeholder:text-text-black/70"
                   type="text"
+                  value={identifier.qrData} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setIdentifier({ qrData: e.target.value })}
                   placeholder="Receiver identifier..."
                   autoFocus
                 />
               </div>
             </div>
-            <button>
+            <button onClick={(e) => { e.preventDefault(); setIsScanning(s => !s); }}>
               <svg
                 width="32"
                 height="32"
@@ -153,6 +165,7 @@ function SendPoints() {
               </svg>
             </button>
           </div>
+          {isScanning && <QRCodeScanner onScan={handleScan} />}
           <div className="mb-16 mt-6 flex flex-col items-center">
             <h2 className="font-medium text-text-black/70">Amount</h2>
             <div>
