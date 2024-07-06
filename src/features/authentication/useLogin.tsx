@@ -6,8 +6,9 @@ import { loginApi } from "../../services/authApi";
 export function useLogin() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  // const 
 
-  const { mutate: login, isPending: isLoading } = useMutation({
+  const { mutate: login } = useMutation({
     mutationFn: ({ identifier, password }: { identifier: string, password: string }) => loginApi(identifier, password),
     onSuccess: (data) => {
       if (data.Message === 1) {
@@ -23,5 +24,5 @@ export function useLogin() {
       toast.error('Login failed');
     }
   });
-  return { login, isLoading }
+  return { login }
 }

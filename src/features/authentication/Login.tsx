@@ -8,7 +8,7 @@ type LoginDataType = {
   password: string;
 }
 function Login() {
-  const { login, isLoading } = useLogin();
+  const { login } = useLogin();
   const { register, handleSubmit, formState: { errors }, reset } = useForm<LoginDataType>();
   const onSubmit: SubmitHandler<LoginDataType> = (data) => {
     login(data, { onSettled: () => reset() });
