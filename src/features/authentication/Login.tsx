@@ -1,21 +1,35 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MainBtn from "../../ui/MainBtn";
+import { useLogin } from "./useLogin";
+import { SubmitHandler, useForm } from "react-hook-form";
 
+type LoginDataType = {
+  identifier: string;
+  password: string;
+}
 function Login() {
-  const navigate = useNavigate();
-  return (
-    <div className="mt-2 flex w-full flex-col items-center">
-      <p className="text-center text-sm text-text-black/70">
-        Log in to start earning points with every sip of Amstel!
-      </p>
-      <form action="" className="mt-6 w-full space-y-5">
-        <div className="flex flex-col gap-4">
+  const { login, isLoading } = useLogin();
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<LoginDataType>();
+  const onSubmit: SubmitHandler<LoginDataType> = (data) => {
+    login(data, { onSettled: () => reset() });
+  }
+  return <div className="mt-2 flex w-full flex-col items-center">
+    <p className="text-center text-sm text-text-black/70">
+      Log in to start earning points with every sip of Amstel!
+    </p>
+    <form onSubmit={handleSubmit(onSubmit)} className="mt-6 w-full space-y-5">
+      <div className="flex flex-col gap-4">
+        <div>
           <div className="flex justify-between rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70">
             <input
               type="text"
               placeholder="Identifier"
               className="flex-1 bg-inherit text-text-black outline-none placeholder:text-text-black/70"
               autoComplete="false"
+              id="identifier"
+              {...register("identifier", {
+                required: "You need to write your identifier",
+              })}
             />
             <svg
               width="24"
@@ -33,14 +47,24 @@ function Login() {
                 fill="#2C1E0E"
               />
             </svg>
-          </div>
 
-          <div className="flex flex-col space-y-2">
+          </div>
+          {errors?.identifier?.message && (
+            <span className="text-sm font-medium text-red-400">
+              *{errors?.identifier?.message}
+            </span>
+          )}
+        </div>
+        <div className="flex flex-col space-y-2">
+          <div>
             <div className="flex justify-between rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70">
               <input
                 type="password"
                 placeholder="Password"
                 className="auto flex-1 bg-inherit text-text-black outline-none placeholder:text-text-black/70"
+                id="password"
+                {...register("password", { required: "You need to provide your password" })}
+
               />
               <svg
                 width="24"
@@ -67,32 +91,34 @@ function Login() {
                 </defs>
               </svg>
             </div>
-            <Link
-              to="/step_1_phone"
-              className="self-end text-sm text-text-black/70 underline"
-            >
-              forgot password?
-            </Link>
+            {errors?.password?.message && (
+              <span className="text-sm font-medium text-red-400">
+                *{errors?.password?.message}
+              </span>
+            )}
           </div>
-        </div>
-        <div className="flex flex-col gap-2">
-          <MainBtn
-            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-              e.preventDefault();
-              navigate("/home");
-            }}
-            text="Log in"
-          />
           <Link
-            to="/signup"
+            to="/step_1_phone"
             className="self-end text-sm text-text-black/70 underline"
           >
-            I don’t have an account
+            forgot password?
           </Link>
         </div>
-      </form>
-    </div>
-  );
+      </div>
+      <div className="flex flex-col gap-2">
+        <MainBtn
+          text="Log in"
+        />
+        <Link
+          to="/signup"
+          className="self-end text-sm text-text-black/70 underline"
+        >
+          I don’t have an account
+        </Link>
+      </div>
+    </form>
+    <p className="mt-6 text-xs text-text-black/70 text-center">By signing in, you agree to Amstel Royal's <a href="#" className="text-text-black font-semibold">Terms of Conditions</a> Guideline and our <a href="" className="text-text-black font-semibold">Privacy Policy</a></p>
+  </div>
 }
 
 export default Login;

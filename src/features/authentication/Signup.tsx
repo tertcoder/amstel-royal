@@ -1,7 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import MainBtn from "../../ui/MainBtn";
+import { useState } from "react";
 
 function Signup() {
+  const [is18older, setIs18Older] = useState(false);
   const navigate = useNavigate();
   return (
     <div className="mt-2 flex w-full flex-col items-center">
@@ -84,9 +86,14 @@ function Signup() {
               </defs>
             </svg>
           </div>
+          <div className="flex items-center w-full gap-1 justify-center">
+            <input type="checkbox" id="adult" checked={is18older} onChange={(e) => setIs18Older(e.currentTarget.checked)} />
+            <label htmlFor="adult" className="text-sm text-text-black">Accept that you are 18 years old or older</label>
+          </div>
         </div>
         <div className="flex flex-col gap-2">
           <MainBtn
+            disabled={!is18older}
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               e.preventDefault();
               navigate("/otp_verification");
@@ -101,6 +108,7 @@ function Signup() {
           </Link>
         </div>
       </form>
+      <p className="mt-6 text-xs text-text-black/70 text-center">By signing up, you agree to Amstel Royal's <a href="#" className="text-text-black font-semibold">Terms of Conditions</a> Guideline and our <a href="" className="text-text-black font-semibold">Privacy Policy</a></p>
     </div>
   );
 }

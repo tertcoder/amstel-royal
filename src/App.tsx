@@ -19,6 +19,9 @@ import Forgot from "./ui/Forgot";
 import ProvidePhone from "./features/forgotPassword/ProvidePhone";
 import OtpVerificationOnForgotPassword from "./features/forgotPassword/OtpVerification";
 import PasswordReset from "./features/forgotPassword/PasswordReset";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const router = createBrowserRouter([
   {
@@ -50,15 +53,15 @@ const router = createBrowserRouter([
         children: [
           {
             path: "/step_1_phone",
-            element: <ProvidePhone/>,
+            element: <ProvidePhone />,
           },
           {
             path: "/step_2_otp_verification",
-            element: <OtpVerificationOnForgotPassword/>,
+            element: <OtpVerificationOnForgotPassword />,
           },
           {
             path: "/step_3_password_reset",
-            element: <PasswordReset/>,
+            element: <PasswordReset />,
           },
         ],
       },
@@ -108,8 +111,16 @@ const router = createBrowserRouter([
   },
 ]);
 
+const queryClient = new QueryClient();
 function App() {
-  return <RouterProvider router={router} />;
+
+  return <QueryClientProvider client={queryClient}>
+    <ReactQueryDevtools initialIsOpen />
+
+    <RouterProvider router={router} />;
+    <Toaster position="top-center" gutter={12}
+      containerStyle={{ margin: "8px" }} />
+  </QueryClientProvider>
 }
 
 export default App;

@@ -12,7 +12,7 @@ function AuthLayout() {
         alt="Amstel Royal Login or Sign up"
       />{" "}
       <div className="stops absolute inset-0 bg-gradient-to-t from-text-black"></div>
-      <div className="absolute bottom-0 flex w-full flex-col items-center rounded-t-[30px] bg-bg-one px-8 pb-8 pt-16">
+      <div className="absolute bottom-0 flex w-full flex-col items-center rounded-t-[30px] bg-bg-one px-8 pb-3 pt-16">
         <img
           src={logo}
           alt="Amstel Royal Logo"
