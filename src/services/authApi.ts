@@ -23,3 +23,8 @@ export const signupApi = async (Fname: string, Lname: string, email: string, pho
 
   return response.data;
 }
+
+export const logoutApi = async (id: number) => {
+  const response = await axios.post(`${API_URL}logout`, { id });
+  return response.data;
+}

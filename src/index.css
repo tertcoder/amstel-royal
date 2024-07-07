@@ -76,6 +76,11 @@
     width: 225px;
     height: 225px;
   }
+  .glass-container-small {
+    position: relative;
+    width: 135px;
+    height: 90px;
+  }
   .glass {
     position: absolute;
     transform-origin: bottom center;

@@ -6,6 +6,7 @@ import glass from "../assets/small_glass.png";
 function AuthLayout() {
   return (
     <div className="relative h-screen w-full">
+
       <img
         src={image}
         className="w-full -translate-y-20"

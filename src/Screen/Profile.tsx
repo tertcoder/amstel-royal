@@ -1,12 +1,12 @@
-import { useNavigate } from "react-router-dom";
 import ProfileCard from "../features/profile/ProfileCard";
 import Activity from "../features/profile/Activity";
+import useAuth from "../hooks/useAuth";
 
 function Profile() {
-  const navigate = useNavigate();
+  const { logout } = useAuth()
   return (
     <div className="flex flex-col overflow-y-auto">
-      <button className="mb-6 mt-8 self-end" onClick={() => navigate("/")}>
+      <button className="mb-6 mt-8 self-end" onClick={logout}>
         <svg
           width="32"
           height="32"

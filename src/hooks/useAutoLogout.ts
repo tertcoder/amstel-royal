@@ -4,7 +4,6 @@ import useAuth from "./useAuth";
 function useAutoLogout() {
   const { logout } = useAuth();
 
-
   useEffect(() => {
     const checkSessionTimeout = () => {
       const loginTimestamp = localStorage.getItem('loginTimestamp');

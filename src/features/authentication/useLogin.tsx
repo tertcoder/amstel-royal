@@ -18,12 +18,10 @@ export function useLogin() {
         setMessage(1);
         toast.success("Successfully logged in!");
         queryClient.setQueryData(["user"], data);
-        localStorage.setItem("loggedUser", JSON.stringify(data));
-
         setTimeout(() => {
           setMessage(null);
           settingLogin(data);
-        }, 1500);
+        }, 1000);
       } else {
         toast.error("Provided email or password is incorrect");
         setMessage(data[0].Message)

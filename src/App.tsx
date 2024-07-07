@@ -117,7 +117,7 @@ function App() {
     <ReactQueryDevtools initialIsOpen />
 
     <RouterProvider router={router} />
-    <Toaster position="top-center" gutter={12}
+    <Toaster toastOptions={{ duration: 3000 }} position="top-center" gutter={12}
       containerStyle={{ margin: "8px" }} />
   </QueryClientProvider>
 }
