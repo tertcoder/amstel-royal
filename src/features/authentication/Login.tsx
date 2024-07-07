@@ -13,10 +13,11 @@ function Login() {
   const onSubmit: SubmitHandler<LoginDataType> = (data) => {
     login(data, { onSettled: () => reset() });
   }
-  return <div className="mt-2 flex w-full flex-col items-center">
+  return (<div className="mt-2 flex w-full flex-col items-center">
     <p className="text-center text-sm text-text-black/70">
       Log in to start earning points with every sip of Amstel!
     </p>
+
     <form onSubmit={handleSubmit(onSubmit)} className="mt-6 w-full space-y-5">
       <div className="flex flex-col gap-4">
         <div>
@@ -118,7 +119,7 @@ function Login() {
       </div>
     </form>
     <p className="mt-6 text-xs text-text-black/70 text-center">By signing in, you agree to Amstel Royal's <a href="#" className="text-text-black font-semibold">Terms of Conditions</a> Guideline and our <a href="" className="text-text-black font-semibold">Privacy Policy</a></p>
-  </div>
+  </div>)
 }
 
 export default Login;
