@@ -16,18 +16,11 @@ function useAutoLogout() {
         }
       }
     }
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === 'hidden') {
-        logout()
-      }
-    }
 
     const intervalId = setInterval(checkSessionTimeout, 60000);
-    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     return () => {
       clearInterval(intervalId);
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
     }
   }, [logout]);
 
