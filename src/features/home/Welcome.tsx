@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo-2.webp";
+import useAuth from "../../hooks/useAuth";
 function Welcome() {
   const navigate = useNavigate();
+  const { logout } = useAuth();
   return (
     <div className="mt-8 flex justify-between">
       <div className="flex items-center gap-3">
@@ -9,7 +11,7 @@ function Welcome() {
         <div>
           <span className="font-medium text-text-black/70">Welcome back!</span>
           <h2 className="text-lg font-medium text-text-black">
-            Arnaud Mugisha
+            {/* {user_details[0].Fname} */} hola
           </h2>
         </div>
       </div>
@@ -36,7 +38,7 @@ function Welcome() {
             />
           </svg>
         </button>
-        <button className="p-1" onClick={() => navigate("/")}>
+        <button className="p-1" onClick={logout}>
           <svg
             width="28"
             height="28"

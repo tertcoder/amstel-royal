@@ -8,7 +8,8 @@ type LoginDataType = {
   password: string;
 }
 function Login() {
-  const { login } = useLogin();
+  // const { login, isLoading, message, errorMessage } = useLogin();
+  const { login, isLoading } = useLogin();
   const { register, handleSubmit, formState: { errors }, reset } = useForm<LoginDataType>();
   const onSubmit: SubmitHandler<LoginDataType> = (data) => {
     login(data, { onSettled: () => reset() });
@@ -18,11 +19,44 @@ function Login() {
       Log in to start earning points with every sip of Amstel!
     </p>
 
+    {/* {message !== null && (
+      <div className="message-toast">
+        {message === 0 && (
+          <div className="text-red-400">
+            <p>Verifier vos identifiants</p>
+          </div>
+        )}
+        {message === 2 && (
+          <div className="text-red-400">
+            <p>une erreur est apparu lors de l'enregistrement</p>
+          </div>
+        )}
+        {message === 4 && (
+          <div className="text-red-400">
+            <p>Les mot de passes ne sont pas identiques</p>
+          </div>
+        )}
+        {message === 1 && (
+          <div className="success_message">
+            <p>Connexion avec succès</p>
+          </div>
+        )}
+        {message === 5 && (
+          <div className="text-red-400">
+            <p>Le code et le mot de passe sont obligatoires</p>
+          </div>
+        )}
+      </div>
+    )}
+    {errorMessage && (
+      <p className="text-red-400">{errorMessage}</p>
+    )} */}
     <form onSubmit={handleSubmit(onSubmit)} className="mt-6 w-full space-y-5">
       <div className="flex flex-col gap-4">
         <div>
           <div className="flex justify-between rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70">
             <input
+              disabled={isLoading}
               type="text"
               placeholder="Identifier"
               className="flex-1 bg-inherit text-text-black outline-none placeholder:text-text-black/70"
@@ -60,6 +94,7 @@ function Login() {
           <div>
             <div className="flex justify-between rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70">
               <input
+                disabled={isLoading}
                 type="password"
                 placeholder="Password"
                 className="auto flex-1 bg-inherit text-text-black outline-none placeholder:text-text-black/70"
@@ -108,7 +143,8 @@ function Login() {
       </div>
       <div className="flex flex-col gap-2">
         <MainBtn
-          text="Log in"
+          disabled={isLoading}
+          text={isLoading ? "Wait..." : "Log in"}
         />
         <Link
           to="/signup"

@@ -9,7 +9,6 @@ import Home from "./Screen/Home";
 import Bars from "./Screen/Bars";
 import Profile from "./Screen/Profile";
 import Authentication from "./ui/Authentication";
-import Application from "./ui/Application";
 import SendPoints from "./features/send/SendPoints";
 import SendPointsSuccess from "./features/send/SendPointsSuccess";
 import ReceivePoints from "./features/receive/ReceivePoints";
@@ -22,6 +21,7 @@ import PasswordReset from "./features/forgotPassword/PasswordReset";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import ProtectedRoute from "./ui/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -68,7 +68,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    element: <Application />,
+    element: <ProtectedRoute />,
     children: [
       {
         element: <AppLayout />,
@@ -113,11 +113,10 @@ const router = createBrowserRouter([
 
 const queryClient = new QueryClient();
 function App() {
-
   return <QueryClientProvider client={queryClient}>
     <ReactQueryDevtools initialIsOpen />
 
-    <RouterProvider router={router} />;
+    <RouterProvider router={router} />
     <Toaster position="top-center" gutter={12}
       containerStyle={{ margin: "8px" }} />
   </QueryClientProvider>

@@ -1,16 +1,16 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import { loginApi } from "../../services/authApi";
 import { useState } from "react";
+import useAuth from "../../hooks/useAuth";
 
 export function useLogin() {
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
   const [message, setMessage] = useState<number | null>(null);
   const [errorMessage, setErrorMessage] = useState('');
+  const { login: settingLogin } = useAuth();
 
-  const { mutate: login, isPending: isLoading } = useMutation({
+  const { data: user_details, mutate: login, isPending: isLoading } = useMutation({
     mutationFn: ({ identifier, password }: { identifier: string, password: string }) => loginApi(identifier, password),
 
     onSuccess: (data) => {
@@ -18,17 +18,23 @@ export function useLogin() {
         setMessage(1);
         toast.success("Successfully logged in!");
         queryClient.setQueryData(["user"], data);
+        localStorage.setItem("loggedUser", JSON.stringify(data));
 
-        setTimeout(() => { setMessage(null); navigate("/home", { replace: true }) }, 1500);
+        setTimeout(() => {
+          setMessage(null);
+          settingLogin(data);
+        }, 1500);
       } else {
         toast.error("Provided email or password is incorrect");
         setMessage(data[0].Message)
       }
     },
     onError: (error) => {
-      if (error.message === 'Network error') toast.error("Vous n'êtes pas connecté au serveur");
-      else toast.error(error.message);
+      if (error.message === 'Network error') { toast.error("Vous n'êtes pas connecté au serveur"); setErrorMessage("Vous n'êtes pas connecté au serveur"); } else {
+        toast.error(error.message); setErrorMessage(error.message)
+      }
+      setMessage(2);
     }
   });
-  return { login, isLoading, errorMessage }
+  return { user_details, login, isLoading, message, errorMessage }
 }
