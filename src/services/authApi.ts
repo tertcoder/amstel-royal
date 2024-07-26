@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = 'https://seesternconsulting.com/royal/ajax.php?token=b5178d23b8ad8ffb9a711fef4da57b9b&action=';
+export const API_URL = 'https://seesternconsulting.com/royal/ajax.php?token=b5178d23b8ad8ffb9a711fef4da57b9b&action=';
 
 export const loginApi = async (identifier: string, password: string) => {
   const response = await axios.post(`${API_URL}login`, {

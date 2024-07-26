@@ -12,7 +12,6 @@ type LoginDataType = {
 function Login() {
   const { login, isLoading, message, errorMessage } = useLogin();
   // const { login, isLoading } = useLogin();
-  console.log(isLoading)
   const { register, handleSubmit, formState: { errors }, reset } = useForm<LoginDataType>();
   const onSubmit: SubmitHandler<LoginDataType> = (data) => {
     login(data, { onSettled: () => reset() });

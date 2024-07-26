@@ -31,7 +31,7 @@ function OtpVerification() {
       <MainBtn
         onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
           e.preventDefault();
-          console.log(`OTP: ${otp}`);
+          (`OTP: ${otp}`);
           navigate(
             `${headTo === "verify_send_point" ? "/send_points_success" : "/signup_success"}`,
           );

@@ -10,7 +10,7 @@ function useAutoLogout() {
       if (loginTimestamp) {
         const currentTime = Date.now()
         const sessionDuration = currentTime - parseInt(loginTimestamp, 10);
-        if (sessionDuration > 10000) { // 60 minutes
+        if (sessionDuration > 600000) { // 10 minutes
           logout();
         }
       }
