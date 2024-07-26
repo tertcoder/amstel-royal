@@ -4,7 +4,7 @@ import { LoggedUser } from "../../utils/data";
 
 export function Greeting() {
   const [loggedUser] = useLocalStorage<LoggedUser[]>('loggedUser', []);
-  const { data, isLoading, error } = useFetchName(loggedUser[0].code);
+  const { data } = useFetchName(loggedUser[0].code);
 
   return <div>
     <span className="font-medium text-text-black/70">Welcome back!</span>

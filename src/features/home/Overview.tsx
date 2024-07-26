@@ -9,7 +9,7 @@ function Overview() {
   const navigate = useNavigate();
   const [loggedUser] = useLocalStorage<LoggedUser[]>("loggedUser", [])
   console.log(loggedUser[0].code);
-  const { data, error, isLoading } = useFetchPoints(loggedUser[0].code)
+  const { data } = useFetchPoints(loggedUser[0].code)
   console.log(data)
 
   return (
