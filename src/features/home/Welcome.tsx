@@ -3,6 +3,7 @@ import logo from "../../assets/logo-2.webp";
 import useLogout from "../../hooks/useLogout";
 import GlassProstSmall from "../../ui/GlassProstSmall";
 import { twMerge } from "tailwind-merge";
+import { Greeting } from "./Greeting";
 function Welcome() {
   const navigate = useNavigate();
   const { logout, isLoggingout } = useLogout();
@@ -18,12 +19,7 @@ function Welcome() {
       <div className="mt-8 flex justify-between">
         <div className="flex items-center gap-3">
           <img src={logo} alt="Amstel Royal Logo" className="w-16" />
-          <div>
-            <span className="font-medium text-text-black/70">Welcome back!</span>
-            <h2 className="text-lg font-medium text-text-black">
-              {/* {user_details[0].Fname} */} hola
-            </h2>
-          </div>
+          <Greeting />
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -72,3 +68,5 @@ function Welcome() {
 }
 
 export default Welcome;
+
+
