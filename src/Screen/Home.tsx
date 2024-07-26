@@ -11,7 +11,7 @@ function Home() {
     <div className="h-full overflow-y-auto">
       <Welcome />
       <Overview />
-      <FeaturedAds ads={data} />
+      <FeaturedAds ads={data || []} />
       <SpecialPromotions />
     </div>
   );
