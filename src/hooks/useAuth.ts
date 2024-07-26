@@ -1,13 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import useLocalStorage from "./useLocalStorage";
+import { LoggedUser } from "../utils/data";
 
 function useAuth() {
   const navigate = useNavigate();
-  const [loggedUser, setLoggedUser] = useLocalStorage('loggedUser', null);
+  const [, setLoggedUser] = useLocalStorage<LoggedUser[]>('loggedUser', []);
 
 
-  const login = (userData: any) => {
+  const login = (userData: LoggedUser[]) => {
     // localStorage.setItem('loggedUser', JSON.stringify(userData));
+    console.log(userData);
     setLoggedUser(userData);
     localStorage.setItem('loginTimestamp', Date.now().toString());
 

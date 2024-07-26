@@ -1,17 +1,12 @@
 import { getName } from "../services/appApi";
-import { useMutation } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 
 export function useFetchName(code: string) {
 
-  const { data, isPending: isLoading, error } = useMutation({
-    mutationFn: () => getName(code),
-    onSuccess: (data) => {
-      console.log('data: ', data);
-    },
-    onError: (error) => {
-      console.error('Error fetching name:', error);
-    },
+  const { data, isPending: isLoading, error } = useQuery({
+    queryKey: ['name', code],
+    queryFn: () => getName(code),
   });
 
   return { isLoading, error, data };

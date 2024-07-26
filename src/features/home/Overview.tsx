@@ -1,9 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useLocalStorage from "../../hooks/useLocalStorage";
+import { LoggedUser } from "../../utils/data";
+import { useFetchPoints } from "../../data/useFetchPoints";
 
 function Overview() {
   const [hide, setHide] = useState(true);
   const navigate = useNavigate();
+  const [loggedUser] = useLocalStorage<LoggedUser[]>("loggedUser", [])
+  console.log(loggedUser[0].code);
+  const { data, error, isLoading } = useFetchPoints(loggedUser[0].code)
+  console.log(data)
+
   return (
     <div className="mt-12 w-full space-y-5 rounded-xl bg-input p-6 py-6 shadow-sm-blur">
       <div className="flex items-center justify-between">
@@ -66,7 +74,7 @@ function Overview() {
             </button>
           </div>
           <h2 className="text-2xl font-medium text-text-black">
-            {hide ? "****" : " 500.00"}
+            {hide ? "****" : `${data}`}
           </h2>
         </div>
         <button onClick={() => navigate("/receive_points")}>
