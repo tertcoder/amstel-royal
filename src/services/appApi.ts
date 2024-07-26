@@ -1,5 +1,6 @@
 import axios from "axios"
 import { API_URL } from "./authApi"
+import { Ad } from "../utils/data";
 
 export const getName = async (code: string) => {
   const response = await axios.post(`${API_URL}getName`, { code });
@@ -10,7 +11,7 @@ export const getPoints = async (code: string) => {
   const response = await axios.post(`${API_URL}getPoints`, { code });
   return response.data;
 }
-export const getAds = async () => {
+export const getAds = async (): Promise<Ad[]> => {
   const response = await axios.get(`${API_URL}getAds`);
   return response.data;
 }

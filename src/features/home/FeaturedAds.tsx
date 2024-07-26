@@ -1,25 +1,27 @@
-import { useEffect, useState } from "react";
-import ad1 from "../../assets/ads-1.webp";
-import ad2 from "../../assets/Ads-2.webp";
-import ad3 from "../../assets/Ads_3.webp";
-import ad4 from "../../assets/ads_4.webp";
+import { useCallback, useEffect, useState } from "react";
+// import ad1 from "../../assets/ads-1.webp";
+// import ad2 from "../../assets/Ads-2.webp";
+// import ad3 from "../../assets/Ads_3.webp";
+// import ad4 from "../../assets/ads_4.webp";
+import { Ad } from "../../utils/data";
 
-const ads: string[] = [ad1, ad2, ad3, ad4];
+// const ads: string[] = [ad1, ad2, ad3, ad4];
 
-function FeaturedAds() {
+function FeaturedAds({ ads = [] }: { ads: Ad[] }) {
   const [curr, setCurr] = useState(0);
 
-  // const prev = () => {
-  //   setCurr((curr) => (curr === 0 ? ads.length - 1 : curr - 1));
+
+  // const next = () => {
+  //   setCurr((curr) => (curr === ads.length - 1 ? 0 : curr + 1));
   // };
-  const next = () => {
+  const next = useCallback(() => {
     setCurr((curr) => (curr === ads.length - 1 ? 0 : curr + 1));
-  };
+  }, [ads]);
 
   useEffect(() => {
     const slideInterval = setInterval(next, 3000);
     return () => clearInterval(slideInterval);
-  }, []);
+  }, [next]);
 
   return (
     <div className="mt-8 space-y-4">
@@ -33,10 +35,10 @@ function FeaturedAds() {
           >
             {ads.map((p) => (
               <img
-                src={p}
+                src={p.img}
                 alt="Amstel Royal Ads"
                 className="object-cover"
-                key={p}
+                key={p.img}
               />
             ))}
           </div>
