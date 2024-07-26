@@ -1,14 +1,16 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { logoutApi } from "../services/authApi";
 import useAuth from "./useAuth";
 import toast from "react-hot-toast";
 
 function useLogout() {
   const { logout: settingLogout } = useAuth();
+  const queryClient = useQueryClient();
   const { mutate: logout, isPending: isLoggingout } = useMutation({
     mutationFn: ({ id }: { id: number }) => logoutApi(id),
     onSuccess: () => {
       toast.success("You are logged out!");
+      queryClient.removeQueries();
       settingLogout();
     },
     onError: () => {
