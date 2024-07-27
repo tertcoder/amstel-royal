@@ -1,45 +1,44 @@
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 // import qr from "../../assets/qr.png";
 import Heading from "../../ui/Heading";
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { useProfileData } from '../../hooks/useProfileData';
-import QRCodeStyling from 'qr-code-styling';
-
+import { QR } from "react-qr-rounded";
 function ReceivePoints() {
   const [copyStatus, setCopyStatus] = useState(false);
   const { code } = useProfileData();
 
-  const qrCodeRef = useRef<HTMLDivElement>(null);
+  // const qrCodeRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const qrCode = new QRCodeStyling({
-      width: 224,
-      height: 224,
-      data: code || "", // Ensure code is not undefined
-      backgroundOptions: {
-        color: "#E8E8E8",
-      },
-      dotsOptions: {
-        color: "#2C1E0E",
-        type: "rounded",
-      },
-      cornersSquareOptions: {
-        type: "extra-rounded",
-      },
-    });
+  // useEffect(() => {
+  //   const qrCode = new QRCodeStyling({
+  //     width: 224,
+  //     height: 224,
+  //     data: code || "", // Ensure code is not undefined
+  //     backgroundOptions: {
+  //       color: "#E8E8E8",
+  //     },
+  //     dotsOptions: {
+  //       color: "#2C1E0E",
+  //       type: "rounded",
+  //     },
+  //     cornersSquareOptions: {
+  //       type: "extra-rounded",
+  //     },
+  //   });
 
-    if (qrCodeRef.current) {
-      qrCode.append(qrCodeRef.current);
-    }
+  //   if (qrCodeRef.current) {
+  //     qrCode.append(qrCodeRef.current);
+  //   }
 
-    // Clean up QR code on unmount
-    return () => {
-      if (qrCodeRef.current) {
-        qrCodeRef.current.innerHTML = "";
-      }
-    };
-  }, [code]);
+  //   // Clean up QR code on unmount
+  //   return () => {
+  //     if (qrCodeRef.current) {
+  //       qrCodeRef.current.innerHTML = "";
+  //     }
+  //   };
+  // }, [code]);
 
   const onCopyText = () => {
     setCopyStatus(true);
@@ -54,9 +53,17 @@ function ReceivePoints() {
       <div className="mx-auto flex w-56 flex-col items-center">
         <span className="font-medium text-text-black/70">Your address</span>
         <div className="mt-2 
-        p-3 rounded-[20px] bg-input shadow-sm-blur overflow-hidden">
-          <div id="qrCodeContainer" ref={qrCodeRef} ></div>
-
+        p-3 rounded-[20px] bg-input shadow-sm-blur">
+          {/* <div id="qrCodeContainer" ref={qrCodeRef} ></div> */}
+          <QR
+            width={224}
+            color="#2C1E0E"
+            backgroundColor="#E8E8E8"
+            rounding={100}
+            errorCorrectionLevel="H"
+          >
+            {code}
+          </QR>
         </div>
         <p className="mt-5 block font-medium text-text-black">
           {codeAdresse}

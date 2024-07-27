@@ -8,6 +8,7 @@ export function useProfileData() {
   const [loggedUser] = useLocalStorage<LoggedUser[]>("loggedUser", []);
 
   const code = loggedUser[0]?.code;
+  const type = loggedUser[0]?.type;
 
   const { data: fullName, isLoading: isNameLoading, error: nameError } = useFetchName(code);
 
@@ -19,6 +20,7 @@ export function useProfileData() {
   const error = nameError || pointsError || levelError;
 
   return {
+    type,
     code,
     fullName,
     yourPoints,

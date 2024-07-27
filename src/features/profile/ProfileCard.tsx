@@ -3,6 +3,7 @@ import frame from "../../assets/frame.png";
 import QRCodeStyling from "qr-code-styling";
 import { useEffect, useRef } from "react";
 type profileDetailsTypes = {
+  type: number,
   code: string,
   fullName: string,
   yourPoints: number,
@@ -10,7 +11,7 @@ type profileDetailsTypes = {
   isLoading: boolean,
   error: Error | null,
 }
-function ProfileCard({ code, fullName, yourPoints, yourLevel }: profileDetailsTypes) {
+function ProfileCard({ type, code, fullName, yourPoints, yourLevel }: profileDetailsTypes) {
   // const ref = useRef<HTMLDivElement>(null);
 
   const qrCodeRef = useRef<HTMLDivElement>(null);
@@ -74,15 +75,15 @@ function ProfileCard({ code, fullName, yourPoints, yourLevel }: profileDetailsTy
       </div>
       <span className="text-text-white/90">Your points</span>
       <h2 className="text-xl font-semibold text-white">{yourPoints}</h2>
-      <span className="text-text-white/90">Your level</span>
-      <h2 className="text-xl font-semibold text-white">{yourLevel?.length && yourLevel.length > 5 ? "..." : yourLevel}</h2>
+      {type === 0 && <><span className="text-text-white/90">Your level</span>
+        <h2 className="text-xl font-semibold text-white">{yourLevel?.length && yourLevel.length > 5 ? "..." : yourLevel}</h2></>}
       {/* frame */}
       <img
         src={frame}
         alt="Amstel Royal App Frame"
         className="absolute -bottom-0.5 -right-0.5 w-52"
       />
-    </div>
+    </div >
   );
 }
 
