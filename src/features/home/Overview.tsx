@@ -72,7 +72,7 @@ function Overview() {
             </button>
           </div>
           <h2 className="text-2xl font-medium text-text-black">
-            {hide ? "****" : `${data}`}
+            {hide ? "****" : `${data * 1}`}
           </h2>
         </div>
         <button onClick={() => navigate("/receive_points")}>

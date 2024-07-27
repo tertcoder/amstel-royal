@@ -20,6 +20,10 @@ export const getPromotions = async () => {
   const response = await axios.get(`${API_URL}getPromotions`);
   return response.data;
 }
+// export const getSpecialPromotions = async () => {
+//   const response = await axios.get(`${API_URL}getPromotions`);
+//   return response.data;
+// }
 
 export const getBars = async (): Promise<Bar[]> => {
   const response = await axios.get(`${API_URL}getBar`);

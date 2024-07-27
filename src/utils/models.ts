@@ -61,3 +61,21 @@ export interface Notification {
   msg: string;
   titre: string;
 }
+
+export interface PromotionType {
+  5: string;
+  avenuBar: string;
+  bar: number;
+  communeBar: string;
+  description: string;
+  idBar: number;
+  idProm: number;
+  img: string;
+  map: string;
+  nameBar: string;
+  pointValue: number;
+  provinceBar: string;
+  qty: number;
+  quartierBar: string;
+  zoneBar: string;
+}

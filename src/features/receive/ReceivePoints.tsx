@@ -11,11 +11,12 @@ function ReceivePoints() {
   const { code } = useProfileData();
 
   const qrCodeRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const qrCode = new QRCodeStyling({
       width: 224,
       height: 224,
-      data: code,
+      data: code || "", // Ensure code is not undefined
       backgroundOptions: {
         color: "#E8E8E8",
       },
@@ -25,18 +26,24 @@ function ReceivePoints() {
       },
       cornersSquareOptions: {
         type: "extra-rounded",
-      }
+      },
     });
 
     if (qrCodeRef.current) {
-      qrCodeRef.current.innerHTML = ""; // Clear any existing QR code
       qrCode.append(qrCodeRef.current);
     }
+
+    // Clean up QR code on unmount
+    return () => {
+      if (qrCodeRef.current) {
+        qrCodeRef.current.innerHTML = "";
+      }
+    };
   }, [code]);
 
   const onCopyText = () => {
     setCopyStatus(true);
-    setTimeout(() => setCopyStatus(false), 2000)
+    setTimeout(() => setCopyStatus(false), 2000);
   }
 
   const codeAdresse = code || "";
