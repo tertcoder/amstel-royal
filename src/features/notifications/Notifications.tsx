@@ -1,32 +1,32 @@
-import { useFetchNotifications } from "../../data/useFetchNotifications";
-import { useProfileData } from "../../hooks/useProfileData";
+// import { useFetchNotifications } from "../../data/useFetchNotifications";
+// import { useProfileData } from "../../hooks/useProfileData";
 import Heading from "../../ui/Heading";
-import Notification from "./Notification";
+// import Notification from "./Notification";
 
-const notifications = [
-  {
-    title: "Point Sent",
-    description: "You’ve sent 30 points to your friend...",
-    time: "Today",
-  },
-  {
-    title: "Points Received",
-    description: "You’ve received 10 points from Cozy Bar.",
-    time: "Yesterday",
-  },
-];
+// const notifications = [
+//   {
+//     title: "Point Sent",
+//     description: "You’ve sent 30 points to your friend...",
+//     time: "Today",
+//   },
+//   {
+//     title: "Points Received",
+//     description: "You’ve received 10 points from Cozy Bar.",
+//     time: "Yesterday",
+//   },
+// ];
 function Notifications() {
-  const { code } = useProfileData();
-  const { data } = useFetchNotifications(code);
+  // const { code } = useProfileData();
+  // const { data } = useFetchNotifications(code);
 
   return (
     <div className="h-screen px-4 pb-14">
       <Heading heading="Notifications" />
-      <div>
+      {/* <div>
         {data.map((not) => (
           <Notification notif={not} key={not.description} />
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }
