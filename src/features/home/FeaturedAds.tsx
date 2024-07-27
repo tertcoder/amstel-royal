@@ -1,19 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
-// import ad1 from "../../assets/ads-1.webp";
-// import ad2 from "../../assets/Ads-2.webp";
-// import ad3 from "../../assets/Ads_3.webp";
-// import ad4 from "../../assets/ads_4.webp";
 import { Ad } from "../../utils/data";
-
-// const ads: string[] = [ad1, ad2, ad3, ad4];
 
 function FeaturedAds({ ads = [] }: { ads: Ad[] }) {
   const [curr, setCurr] = useState(0);
 
-
-  // const next = () => {
-  //   setCurr((curr) => (curr === ads.length - 1 ? 0 : curr + 1));
-  // };
   const next = useCallback(() => {
     setCurr((curr) => (curr === ads.length - 1 ? 0 : curr + 1));
   }, [ads]);

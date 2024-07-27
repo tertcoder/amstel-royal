@@ -6,7 +6,7 @@ import Welcome from "../features/home/Welcome";
 
 function Home() {
   const { data } = useFetchAds();
-  console.log(data);
+
   return (
     <div className="h-full overflow-y-auto">
       <Welcome />

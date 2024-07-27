@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
-import Promotion from "./Promotion";
+// import Promotion from "./Promotion";
 
 function SpecialPromotions() {
+
   return (
     <div className="mb-2 mt-8">
       <h2 className="text-xl font-medium text-text-black">
         Special Promotions
       </h2>
-      <div className="flex flex-col divide-y divide-text-black/30">
+      {/* Special Promotions are not yet available */}
+      {/* <div className="flex flex-col divide-y divide-text-black/30">
         <Promotion
           title="Cozy Bar"
           description="Buy 3 Beers and get 150 points!"
@@ -28,7 +30,7 @@ function SpecialPromotions() {
           title="Zanzi Bar"
           description="Buy 1 Beer and get 100 points"
         />
-      </div>
+      </div> */}
       <div className="mt-2 flex items-center gap-5 border-t border-text-black/10 p-3 pt-3">
         <p className="text-text-black">
           Explore the bars, where you can get these promotions (Partnering)
