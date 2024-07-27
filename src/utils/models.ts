@@ -53,3 +53,11 @@ export interface ProfileData {
   receivedPoints: number;
   history: PointHistory[];
 }
+
+export interface Notification {
+  customer: string;
+  dateNot: string;
+  idNot: number;
+  msg: string;
+  titre: string;
+}

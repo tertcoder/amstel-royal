@@ -3,12 +3,12 @@ import Activity from "../features/profile/Activity";
 import useAuth from "../hooks/useAuth";
 import { useProfileData } from "../hooks/useProfileData";
 import { useFetchPointHistory } from "../data/useFetchPointHistory";
-import { PointHistory } from "../utils/models";
 
 function Profile() {
   const { logout } = useAuth();
   const profileInfo = useProfileData();
-  const { data } = useFetchPointHistory(profileInfo.code);
+  const { data } = useFetchPointHistory(profileInfo.code || "");
+  console.log(data)
   return (
     <div className="flex flex-col overflow-y-auto">
       <button className="mb-6 mt-8 self-end" onClick={logout}>
@@ -33,7 +33,8 @@ function Profile() {
           Activity History
         </h2>
         <div className="mt-3 flex flex-col divide-y divide-text-black/30">
-          <Activity activity={ } time="sent, today" sent={5} />
+          {data?.map(h => (<Activity key={h.idHist} activity={`Envoyé à ${h.codeReceiver}`} time={h.dateSent} sent={h.sentPoints} />))}
+          {/* <Activity activity="@user4" time="sent, today" sent={5} />
           <Activity
             activity="claimed reward"
             time="received, yesterday"
@@ -48,7 +49,7 @@ function Profile() {
             activity="@user1"
             time="received, April 28th 2024"
             received={10}
-          />
+          /> */}
         </div>
       </div>
     </div>

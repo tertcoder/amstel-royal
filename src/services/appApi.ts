@@ -40,3 +40,13 @@ export const getPointHistory = async (code: string): Promise<PointHistory[]> => 
   const response = await axios.post(`${API_URL}getPointHistory`, { code });
   return response.data;
 }
+
+export const getNotifications = async (code: string) => {
+  const response = await axios.post(`${API_URL}getNotifications`, { code });
+  return response.data;
+};
+
+export const getCustomer = async (phone: string) => {
+  const response = await axios.post(`${API_URL}getCustomer`, { phone });
+  return response.data;
+};

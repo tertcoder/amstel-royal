@@ -1,115 +1,176 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MainBtn from "../../ui/MainBtn";
 import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import useLocalStorage from "../../hooks/useLocalStorage";
+import glass from "../../assets/small_glass.png";
 
+type SignUpDataType = {
+  Lname: string;
+  Fname: string;
+  phone: string;
+  password: string;
+  type: number;
+}
 function Signup() {
   const [is18older, setIs18Older] = useState(false);
-  const navigate = useNavigate();
-  return (
-    <div className="mt-2 flex w-full flex-col items-center">
-      <p className="text-center text-sm text-text-black/70">
-        Log in to start earning points with every sip of Amstel!
-      </p>
-      <form action="" className="mt-6 w-full space-y-5">
-        <div className="flex flex-col gap-4">
-          <div className="flex justify-between rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70">
-            <input
-              type="text"
-              placeholder="Identifier"
-              className="flex-1 bg-inherit text-text-black outline-none placeholder:text-text-black/70"
-            />
-            <svg
-              width="24"
-              height="25"
-              viewBox="0 0 24 25"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12 10.2402C14.2091 10.2402 16 8.44937 16 6.24023C16 4.0311 14.2091 2.24023 12 2.24023C9.79086 2.24023 8 4.0311 8 6.24023C8 8.44937 9.79086 10.2402 12 10.2402Z"
-                fill="#2C1E0E"
-              />
-              <path
-                d="M12 21.2402C15.866 21.2402 19 19.4494 19 17.2402C19 15.0311 15.866 13.2402 12 13.2402C8.13401 13.2402 5 15.0311 5 17.2402C5 19.4494 8.13401 21.2402 12 21.2402Z"
-                fill="#2C1E0E"
-              />
-            </svg>
-          </div>
-          <div className="flex justify-between rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70">
-            <input
-              type="text"
-              placeholder="Telephone"
-              className="flex-1 bg-inherit text-text-black outline-none placeholder:text-text-black/70"
-            />
-            <svg
-              width="24"
-              height="25"
-              viewBox="0 0 24 25"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M10.0376 5.5564L10.6866 6.71933C11.2723 7.76881 11.0372 9.14555 10.1147 10.068C10.1147 10.068 8.99588 11.187 11.0245 13.2157C13.0525 15.2437 14.1722 14.1255 14.1722 14.1255C15.0947 13.203 16.4714 12.9679 17.5209 13.5536L18.6838 14.2026C20.2686 15.087 20.4557 17.3094 19.0628 18.7024C18.2258 19.5394 17.2004 20.1907 16.0669 20.2336C14.1588 20.306 10.9183 19.8231 7.6677 16.5725C4.41713 13.3219 3.93421 10.0815 4.00655 8.17332C4.04952 7.03983 4.7008 6.01446 5.53781 5.17746C6.93076 3.78451 9.15317 3.97167 10.0376 5.5564Z"
-                fill="#2C1E0E"
-              />
-            </svg>
-          </div>
+  // const navigate = useNavigate();
+  const { register, handleSubmit, reset } = useForm<SignUpDataType>();
+  const [, setSignUpData] = useLocalStorage<SignUpDataType>("signup_data", {} as SignUpDataType)
+  const onSubmit: SubmitHandler<SignUpDataType> = (data) => {
+    console.log(data)
+    // login(data, { onSettled: () => reset() });
+    // signup(data, { onSettled: () => reset() })
 
-          <div className="flex justify-between rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70">
-            <input
-              type="password"
-              placeholder="Password"
-              className="auto flex-1 bg-inherit text-text-black outline-none placeholder:text-text-black/70"
-            />
-            <svg
-              width="24"
-              height="25"
-              viewBox="0 0 24 25"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g clipPath="url(#clip0_8_59)">
+    setSignUpData(data as SignUpDataType);
+
+    const otp = Math.floor(1000 + Math.random() * 9000);
+    localStorage.setItem('otp', JSON.stringify(otp));
+
+    reset()
+  }
+  return (
+    <>
+      <div className="flex items-center">
+        <h2 className="text-2xl font-medium">Inscription</h2>
+        <img src={glass} alt="Amstel Royal Glass" className="w-10" />
+      </div>
+      <div className="mt-2 flex w-full flex-col items-center">
+        <p className="text-center text-sm text-text-black/70">
+          Entrez dans la famille des amis d'Amstel Royale
+        </p>
+        <form onSubmit={handleSubmit(onSubmit)} className="mt-6 w-full space-y-5">
+          <div className="flex flex-col gap-4">
+            <div className="flex justify-between rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70">
+              <input
+                type="text"
+                placeholder="Nom"
+                className="flex-1 bg-inherit text-text-black outline-none placeholder:text-text-black/70"
+                {...register("Lname")}
+              />
+              <svg
+                width="24"
+                height="25"
+                viewBox="0 0 24 25"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
-                  d="M10.4377 4.8756C12.9761 2.3372 17.0917 2.3372 19.6301 4.8756C22.1685 7.41401 22.1685 11.5296 19.6301 14.068C17.7528 15.9453 15.0147 16.4329 12.6905 15.5361L12.4213 15.4264L12.4015 15.4215H11.7913V16.9999C11.7913 17.6472 11.2994 18.1795 10.6691 18.2435L10.5413 18.2499H8.96286V19.8284C8.96286 20.4756 8.47098 21.008 7.84066 21.072L7.71286 21.0784H3.73022C3.20968 21.0784 2.78098 20.6845 2.72614 20.1786L2.72021 20.0685V17.4571C2.72021 17.109 2.84121 16.7734 3.05991 16.5065L3.15956 16.3964L8.6602 10.8957L8.66937 10.8585C8.67195 10.8378 8.67242 10.8099 8.66583 10.7776C8.24427 8.71367 8.83365 6.47968 10.4377 4.8756ZM14.6804 7.70408C14.0946 8.28987 14.0946 9.23962 14.6804 9.8254C15.2662 10.4112 16.216 10.4112 16.8017 9.8254C17.3875 9.23962 17.3875 8.28987 16.8017 7.70408C16.216 7.1183 15.2662 7.1183 14.6804 7.70408Z"
+                  d="M12 10.2402C14.2091 10.2402 16 8.44937 16 6.24023C16 4.0311 14.2091 2.24023 12 2.24023C9.79086 2.24023 8 4.0311 8 6.24023C8 8.44937 9.79086 10.2402 12 10.2402Z"
                   fill="#2C1E0E"
                 />
-              </g>
-              <defs>
-                <clipPath id="clip0_8_59">
-                  <rect
-                    width="24"
-                    height="24"
-                    fill="white"
-                    transform="translate(0 0.507935)"
+                <path
+                  d="M12 21.2402C15.866 21.2402 19 19.4494 19 17.2402C19 15.0311 15.866 13.2402 12 13.2402C8.13401 13.2402 5 15.0311 5 17.2402C5 19.4494 8.13401 21.2402 12 21.2402Z"
+                  fill="#2C1E0E"
+                />
+              </svg>
+            </div>
+            <div className="flex justify-between rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70">
+              <input
+                type="text"
+                placeholder="Prénom"
+                className="flex-1 bg-inherit text-text-black outline-none placeholder:text-text-black/70"
+
+                {...register("Fname")}
+              />
+              <svg
+                width="24"
+                height="25"
+                viewBox="0 0 24 25"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 10.2402C14.2091 10.2402 16 8.44937 16 6.24023C16 4.0311 14.2091 2.24023 12 2.24023C9.79086 2.24023 8 4.0311 8 6.24023C8 8.44937 9.79086 10.2402 12 10.2402Z"
+                  fill="#2C1E0E"
+                />
+                <path
+                  d="M12 21.2402C15.866 21.2402 19 19.4494 19 17.2402C19 15.0311 15.866 13.2402 12 13.2402C8.13401 13.2402 5 15.0311 5 17.2402C5 19.4494 8.13401 21.2402 12 21.2402Z"
+                  fill="#2C1E0E"
+                />
+              </svg>
+            </div>
+            <div className="flex justify-between rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70">
+              <input
+                type="text"
+                placeholder="Téléphone"
+                className="flex-1 bg-inherit text-text-black outline-none placeholder:text-text-black/70"
+                {...register("phone")}
+              />
+              <svg
+                width="24"
+                height="25"
+                viewBox="0 0 24 25"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10.0376 5.5564L10.6866 6.71933C11.2723 7.76881 11.0372 9.14555 10.1147 10.068C10.1147 10.068 8.99588 11.187 11.0245 13.2157C13.0525 15.2437 14.1722 14.1255 14.1722 14.1255C15.0947 13.203 16.4714 12.9679 17.5209 13.5536L18.6838 14.2026C20.2686 15.087 20.4557 17.3094 19.0628 18.7024C18.2258 19.5394 17.2004 20.1907 16.0669 20.2336C14.1588 20.306 10.9183 19.8231 7.6677 16.5725C4.41713 13.3219 3.93421 10.0815 4.00655 8.17332C4.04952 7.03983 4.7008 6.01446 5.53781 5.17746C6.93076 3.78451 9.15317 3.97167 10.0376 5.5564Z"
+                  fill="#2C1E0E"
+                />
+              </svg>
+            </div>
+
+            <div className="flex justify-between rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70">
+              <input
+                type="password"
+                placeholder="Mot de passe"
+                className="auto flex-1 bg-inherit text-text-black outline-none placeholder:text-text-black/70"
+
+                {...register("password")}
+              />
+              <svg
+                width="24"
+                height="25"
+                viewBox="0 0 24 25"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clipPath="url(#clip0_8_59)">
+                  <path
+                    d="M10.4377 4.8756C12.9761 2.3372 17.0917 2.3372 19.6301 4.8756C22.1685 7.41401 22.1685 11.5296 19.6301 14.068C17.7528 15.9453 15.0147 16.4329 12.6905 15.5361L12.4213 15.4264L12.4015 15.4215H11.7913V16.9999C11.7913 17.6472 11.2994 18.1795 10.6691 18.2435L10.5413 18.2499H8.96286V19.8284C8.96286 20.4756 8.47098 21.008 7.84066 21.072L7.71286 21.0784H3.73022C3.20968 21.0784 2.78098 20.6845 2.72614 20.1786L2.72021 20.0685V17.4571C2.72021 17.109 2.84121 16.7734 3.05991 16.5065L3.15956 16.3964L8.6602 10.8957L8.66937 10.8585C8.67195 10.8378 8.67242 10.8099 8.66583 10.7776C8.24427 8.71367 8.83365 6.47968 10.4377 4.8756ZM14.6804 7.70408C14.0946 8.28987 14.0946 9.23962 14.6804 9.8254C15.2662 10.4112 16.216 10.4112 16.8017 9.8254C17.3875 9.23962 17.3875 8.28987 16.8017 7.70408C16.216 7.1183 15.2662 7.1183 14.6804 7.70408Z"
+                    fill="#2C1E0E"
                   />
-                </clipPath>
-              </defs>
-            </svg>
+                </g>
+                <defs>
+                  <clipPath id="clip0_8_59">
+                    <rect
+                      width="24"
+                      height="24"
+                      fill="white"
+                      transform="translate(0 0.507935)"
+                    />
+                  </clipPath>
+                </defs>
+              </svg>
+            </div>
+            <input type="hidden" value={0} {...register("type")} />
+            <div className="flex items-center w-full gap-1 justify-center">
+              <input type="checkbox" id="adult" checked={is18older} onChange={(e) => setIs18Older(e.currentTarget.checked)} />
+              <label htmlFor="adult" className="text-sm text-text-black">J'ai plus de 18 ans</label>
+            </div>
           </div>
-          <div className="flex items-center w-full gap-1 justify-center">
-            <input type="checkbox" id="adult" checked={is18older} onChange={(e) => setIs18Older(e.currentTarget.checked)} />
-            <label htmlFor="adult" className="text-sm text-text-black">Accept that you are 18 years old or older</label>
+          <div className="flex flex-col gap-2">
+            <MainBtn
+              disabled={!is18older}
+              // onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              //   e.preventDefault();
+              //   navigate("/otp_verification");
+              // }}
+              text="S'inscrire"
+            />
+            <Link
+              to="/"
+              className="self-end text-sm text-text-black/70 underline"
+            >
+              J'ai déjà un compte
+            </Link>
           </div>
-        </div>
-        <div className="flex flex-col gap-2">
-          <MainBtn
-            disabled={!is18older}
-            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-              e.preventDefault();
-              navigate("/otp_verification");
-            }}
-            text="Sign up"
-          />
-          <Link
-            to="/"
-            className="self-end text-sm text-text-black/70 underline"
-          >
-            I already have an account
-          </Link>
-        </div>
-      </form>
-      <p className="mt-6 text-xs text-text-black/70 text-center">By signing up, you agree to Amstel Royal's <a href="#" className="text-text-black font-semibold">Terms of Conditions</a> Guideline and our <a href="" className="text-text-black font-semibold">Privacy Policy</a></p>
-    </div>
+        </form>
+        <p className="mt-6 text-xs text-text-black/70 text-center">En vous inscrivant, vous acceptez<a href="#" className="text-text-black font-semibold"> les conditions générales</a> d'Amstel Royal et notre <a href="" className="text-text-black font-semibold">politique de confidentialité.</a></p>
+      </div>
+    </>
+
   );
 }
 

@@ -1,15 +1,60 @@
 import { useNavigate } from "react-router-dom"
 import MainBtn from "../../ui/MainBtn"
 import OtpInput from "../authentication/OtpInput";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import GlassProstSmall from "../../ui/GlassProstSmall";
+import { twMerge } from "tailwind-merge";
+import toast from "react-hot-toast";
 
 function OtpVerification() {
   const [otp, setOtp] = useState("");
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const handleOtpChange = (otp: string) => setOtp(otp);
+  const phone_to = localStorage.getItem("phone_verified")
+  const [isReloaded, setIsReloaded] = useState(false);
+
+
+
+  const [timer, setTimer] = useState(60);
+  const [buttonText, setButtonText] = useState('Renvoyer l\'OTP');
+  const [isDisabled, setIsDisabled] = useState(true);
+  let otp_verified = localStorage.getItem("otp");
+
+  useEffect(() => {
+    if (timer > 0) {
+      const interval = setInterval(() => {
+        setTimer(prevTimer => prevTimer - 1);
+      }, 1000);
+
+      return () => clearInterval(interval);
+    } else {
+      setIsDisabled(false);
+      setButtonText('Renvoyer l\'OTP');
+    }
+  }, [timer]);
+
+  const resettingOTP = () => {
+    setTimer(10);
+    setButtonText('Veuillez patienter...');
+    setIsDisabled(true);
+
+    const otp = Math.floor(1000 + Math.random() * 9000);
+    localStorage.setItem('otp', JSON.stringify(otp));
+    setIsReloaded(true);
+    setInterval(() => {
+      setIsReloaded(false);
+      otp_verified = localStorage.getItem("otp")
+    }, 3000)
+  }
 
   return (
     <div className="mt-8">
+      <div className={twMerge("inset-x-0 z-50 bg-bg-one/20 absolute flex items-center max-h-screen h-full justify-center duration-200 transition-opacity backdrop-blur-sm", `${isReloaded ? 'opacity-100 scale-100' : 'scale-0 opacity-0'}`)}>
+        <div className="flex flex-col items-center justify-center">
+          <GlassProstSmall />
+          <span className="text-text-black font-medium">We are connecting you...</span>
+        </div>
+      </div>
       <div className="space-y-6">
         <button className="" onClick={() => navigate('/step_1_phone')}>
           <svg
@@ -31,23 +76,34 @@ function OtpVerification() {
         </button>
         <h2 className="text-xl font-medium text-text-black">OTP Verification</h2>
       </div>
-    <p className="text-text-black/70 mt-2"> 
-        Enter OTP sent to <span className="font-medium text-text-black">+257 65849761</span>
-    
-    </p>
-    <div className="mt-5 space-y-10">
-    
-      <div className="flex flex-col items-center gap-3">
-        <OtpInput length={4} onChange={handleOtpChange} />
-        <p className="text-sm font-normal text-text-black/70">
-          Didn’t receive OTP?{" "}
-          <span className="font-medium text-text-black">Resend OTP</span>
-        </p>
+      <p>{otp_verified}</p>
+
+      <p className="text-text-black/70 mt-2">
+        Enter OTP sent to <span className="font-medium text-text-black">{phone_to}</span>
+
+      </p>
+      <div className="mt-5 space-y-10">
+
+        <div className="flex flex-col items-center gap-3">
+          <OtpInput length={4} onChange={handleOtpChange} />
+          <p className="text-sm font-normal text-text-black/70">
+            Didn’t receive OTP?{" "}
+            <button className="font-medium disabled:text-text-black/70 text-text-black" onClick={resettingOTP} disabled={isDisabled}>
+              {timer > 0 ? `Renvoyer l'OTP dans ${timer}s` : buttonText}
+            </button>
+          </p>
+        </div>
+        <MainBtn text="Verify" onClick={(e) => {
+          e.preventDefault();
+          if (otp_verified === otp) {
+            navigate("/step_3_password_reset")
+          } else {
+            toast.error("OTP Incorrect!")
+          }
+
+        }} />
       </div>
-      <MainBtn text="Verify" onClick={(e)=>{ e.preventDefault();
-          console.log(`OTP: ${otp}`);navigate("/step_3_password_reset")}}/>
     </div>
-  </div>
   )
 }
 

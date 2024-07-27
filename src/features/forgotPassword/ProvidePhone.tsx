@@ -1,10 +1,35 @@
 import { useNavigate } from "react-router-dom";
 import MainBtn from "../../ui/MainBtn";
+import { useFetchCustomer } from "../../data/useFetchCustomer";
+import GlassProstSmall from "../../ui/GlassProstSmall";
+import { twMerge } from "tailwind-merge";
+
+import { SubmitHandler, useForm } from "react-hook-form";
+
+type PassPhone = {
+  phone: string;
+}
 
 function ProvidePhone() {
   const navigate = useNavigate();
+  const { isLoading, sendOtp } = useFetchCustomer();
+
+  const { register, handleSubmit, reset } = useForm<PassPhone>();
+  // const [, setPhone] = useLocalStorage<PassPhone>("phone", {} as PassPhone)
+  const onSubmit: SubmitHandler<PassPhone> = (data) => {
+    sendOtp(data);
+    reset()
+  }
+
+
   return (
     <div className="mt-8">
+      <div className={twMerge("inset-x-0 z-50 bg-bg-one/20 absolute flex items-center max-h-screen h-full justify-center duration-200 transition-opacity backdrop-blur-sm", `${isLoading ? 'opacity-100 scale-100' : 'scale-0 opacity-0'}`)}>
+        <div className="flex flex-col items-center justify-center">
+          <GlassProstSmall />
+          <span className="text-text-black font-medium">We are connecting you...</span>
+        </div>
+      </div>
       <div className="space-y-6">
         <button className="" onClick={() => navigate(-1)}>
           <svg
@@ -24,19 +49,19 @@ function ProvidePhone() {
             />
           </svg>
         </button>
-        <h2 className="text-xl font-medium text-text-black">Forgot Password</h2>
+        <h2 className="text-xl font-medium text-text-black">Mot de passe oublié</h2>
       </div>
       <p className="text-text-black/70 mt-2">
-        Enter phone number of your account and we will send an OTP to confirm
-        your password reset
+        Entrez le numéro de téléphone de votre compte et nous vous enverrons un OTP pour confirmer la réinitialisation de votre mot de passe
       </p>
-      <form action="" className="mt-5 space-y-10">
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-5 space-y-10">
         <input
           type="text"
-          placeholder="Telephone"
+          placeholder="Téléphone"
           className="w-full bg-inherit text-text-black outline-none placeholder:text-text-black/70 rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70"
+          {...register("phone")}
         />
-        <MainBtn text="Send Code" onClick={()=>navigate("/step_2_otp_verification")}/>
+        <MainBtn text="Envoyer Code" />
       </form>
     </div>
   );

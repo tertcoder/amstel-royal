@@ -1,39 +1,35 @@
 import { useNavigate } from "react-router-dom";
 import MainBtn from "../../ui/MainBtn";
 import GlassProst from "../../ui/GlassProst";
+import { useProfileData } from "../../hooks/useProfileData";
 
 function SignupSuccess() {
   const navigate = useNavigate();
+  const { code } = useProfileData();
   return (
     <div className="flex h-screen flex-col items-center px-4 pb-8">
       <h2 className="8 mb-12 text-xl font-medium text-text-black">
-        Sign-Up Success
+        Inscription réussie
       </h2>
       <GlassProst />
 
       <div className="my-6 space-y-12">
         <h3 className="text-center text-xl font-medium text-text-black">
-          Congratulations! You're all set up.
+          Félicitations ! Vous êtes prêt.
         </h3>
         <div>
-          <p className="text-text-black/70">Here is your</p>
-          <p className="text-lg font-medium text-text-black">
-            Identifier: 24001
+          <p className="text-text-black/70">Voici ton</p>
+          <p className="text-4xl font-medium text-text-black">
+            Identifiant: {code}
           </p>
-          <p className="text-lg font-medium text-text-black">
-            Password: ****{" "}
-            <span className="text-sm font-normal text-text-black/70">
-              (the one you entered recently)
-            </span>
-          </p>
+
         </div>
         <p className="italic text-text-black">
-          Remember to keep your Client ID and Password in a safe place. You'll
-          need them to log in to the app.
+          N'oubliez pas de conserver votre identifiant client dans un endroit sûr. Vous en aurez besoin pour vous connecter à l'application.
         </p>
       </div>
       <MainBtn
-        text="Continue"
+        text="Continuer"
         onClick={(e) => {
           e.preventDefault();
           navigate("/home");

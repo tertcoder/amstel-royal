@@ -1,3 +1,5 @@
+import { useFetchNotifications } from "../../data/useFetchNotifications";
+import { useProfileData } from "../../hooks/useProfileData";
 import Heading from "../../ui/Heading";
 import Notification from "./Notification";
 
@@ -14,11 +16,14 @@ const notifications = [
   },
 ];
 function Notifications() {
+  const { code } = useProfileData();
+  const { data } = useFetchNotifications(code);
+
   return (
     <div className="h-screen px-4 pb-14">
       <Heading heading="Notifications" />
       <div>
-        {notifications.map((not) => (
+        {data.map((not) => (
           <Notification notif={not} key={not.description} />
         ))}
       </div>

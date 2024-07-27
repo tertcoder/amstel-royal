@@ -4,6 +4,7 @@ import { useLogin } from "./useLogin";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { twMerge } from "tailwind-merge";
 import GlassProstSmall from "../../ui/GlassProstSmall";
+import glass from "../../assets/small_glass.png";
 
 type LoginDataType = {
   identifier: string;
@@ -18,6 +19,10 @@ function Login() {
   }
   return (
     <>
+      <div className="flex items-center">
+        <h2 className="text-2xl font-medium">Connexion</h2>
+        <img src={glass} alt="Amstel Royal Glass" className="w-10" />
+      </div>
       <div className={twMerge("inset-x-0 z-50 bg-bg-one/20 absolute flex items-center -inset-y-full max-h-[1000px] justify-center duration-200 transition-opacity backdrop-blur-sm", `${isLoading ? 'opacity-100 scale-100' : 'scale-0 opacity-0'}`)}>
         <div className="flex flex-col items-center justify-center">
           <GlassProstSmall />
@@ -25,9 +30,9 @@ function Login() {
         </div>
       </div>
       <div className="mt-2 flex w-full flex-col items-center">
-        <p className="text-center text-sm text-text-black/70 mb-6">
-          Log in to start earning points with every sip of Amstel!
-        </p>
+        {/* <p className="text-center text-sm text-text-black/70 mb-6">
+          Connectez-vous pour commencer à gagner des points à chaque gorgée d'Amstel !
+        </p> */}
 
         {message !== null && (
           <div className="message-toast">
@@ -68,12 +73,12 @@ function Login() {
                 <input
                   disabled={isLoading}
                   type="text"
-                  placeholder="Identifier"
+                  placeholder="Téléphone ou code client"
                   className="flex-1 bg-inherit text-text-black outline-none placeholder:text-text-black/70"
                   autoComplete="false"
                   id="identifier"
                   {...register("identifier", {
-                    required: "You need to write your identifier",
+                    required: "Entrez votre numero de téléphone ou Code client",
                   })}
                 />
                 <svg
@@ -106,10 +111,10 @@ function Login() {
                   <input
                     disabled={isLoading}
                     type="password"
-                    placeholder="Password"
+                    placeholder="Mot de passe"
                     className="auto flex-1 bg-inherit text-text-black outline-none placeholder:text-text-black/70"
                     id="password"
-                    {...register("password", { required: "You need to provide your password" })}
+                    {...register("password", { required: "Entrez votre mot de passe" })}
 
                   />
                   <svg
@@ -147,24 +152,24 @@ function Login() {
                 to="/step_1_phone"
                 className="self-end text-sm text-text-black/70 underline"
               >
-                forgot password?
+                Mot de passe oublié?
               </Link>
             </div>
           </div>
           <div className="flex flex-col gap-2">
             <MainBtn
               disabled={isLoading}
-              text={isLoading ? "Wait..." : "Log in"}
+              text={isLoading ? "En attente..." : "Connexion"}
             />
             <Link
               to="/signup"
               className="self-end text-sm text-text-black/70 underline"
             >
-              I don’t have an account
+              Je n'ai pas de compte
             </Link>
           </div>
         </form>
-        <p className="mt-6 text-xs text-text-black/70 text-center">By signing in, you agree to Amstel Royal's <a href="#" className="text-text-black font-semibold">Terms of Conditions</a> Guideline and our <a href="" className="text-text-black font-semibold">Privacy Policy</a></p>
+        <p className="mt-6 text-xs text-text-black/70 text-center">En vous connectant, vous acceptez<a href="#" className="text-text-black font-semibold"> les conditions générales</a> d'Amstel Royal et notre <a href="" className="text-text-black font-semibold">politique de confidentialité.</a></p>
       </div>
     </>)
 }
