@@ -54,7 +54,7 @@ function OtpVerification() {
       <div className={twMerge("inset-x-0 z-50 bg-bg-one/20 absolute flex items-center max-h-screen h-full justify-center duration-200 transition-opacity backdrop-blur-sm", `${isLoading || isReloaded ? 'opacity-100 scale-100' : 'scale-0 opacity-0'}`)}>
         <div className="flex flex-col items-center justify-center">
           <GlassProstSmall />
-          <span className="text-text-black font-medium">We are connecting you...</span>
+          <span className="text-text-black font-medium">Chargement</span>
         </div>
       </div>
       <Heading heading=" Vérification OTP" />

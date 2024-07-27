@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MainBtn from "../../ui/MainBtn";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import glass from "../../assets/small_glass.png";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 type SignUpDataType = {
   Lname: string;
@@ -13,9 +14,10 @@ type SignUpDataType = {
   type: number;
 }
 function Signup() {
+  const [showPassword, setShowPassword] = useState(false);
   const [is18older, setIs18Older] = useState(false);
-  // const navigate = useNavigate();
-  const { register, handleSubmit, reset } = useForm<SignUpDataType>();
+  const navigate = useNavigate();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<SignUpDataType>();
   const [, setSignUpData] = useLocalStorage<SignUpDataType>("signup_data", {} as SignUpDataType)
   const onSubmit: SubmitHandler<SignUpDataType> = (data) => {
     console.log(data)
@@ -23,7 +25,7 @@ function Signup() {
     // signup(data, { onSettled: () => reset() })
 
     setSignUpData(data as SignUpDataType);
-
+    navigate('/otp_verification')
     const otp = Math.floor(1000 + Math.random() * 9000);
     localStorage.setItem('otp', JSON.stringify(otp));
 
@@ -92,6 +94,7 @@ function Signup() {
             </div>
             <div className="flex justify-between rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70">
               <input
+                inputMode="numeric"
                 type="text"
                 placeholder="Téléphone"
                 className="flex-1 bg-inherit text-text-black outline-none placeholder:text-text-black/70"
@@ -113,37 +116,35 @@ function Signup() {
 
             <div className="flex justify-between rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70">
               <input
-                type="password"
+                inputMode="numeric"
+                type={showPassword ? "text" : "password"}
                 placeholder="Mot de passe"
                 className="auto flex-1 bg-inherit text-text-black outline-none placeholder:text-text-black/70"
 
-                {...register("password")}
+                {...register("password", {
+                  required: "Mot de passe est requis",
+                  pattern: {
+                    value: /^\d{4}$/,
+                    message: "Le mot de passe doit être 4 chiffres"
+                  },
+                  maxLength: {
+                    value: 4,
+                    message: "Le mot de passe doit être 4 chiffres"
+                  }
+                })}
               />
-              <svg
-                width="24"
-                height="25"
-                viewBox="0 0 24 25"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+              <div
+                className=""
+                onClick={() => setShowPassword(!showPassword)}
               >
-                <g clipPath="url(#clip0_8_59)">
-                  <path
-                    d="M10.4377 4.8756C12.9761 2.3372 17.0917 2.3372 19.6301 4.8756C22.1685 7.41401 22.1685 11.5296 19.6301 14.068C17.7528 15.9453 15.0147 16.4329 12.6905 15.5361L12.4213 15.4264L12.4015 15.4215H11.7913V16.9999C11.7913 17.6472 11.2994 18.1795 10.6691 18.2435L10.5413 18.2499H8.96286V19.8284C8.96286 20.4756 8.47098 21.008 7.84066 21.072L7.71286 21.0784H3.73022C3.20968 21.0784 2.78098 20.6845 2.72614 20.1786L2.72021 20.0685V17.4571C2.72021 17.109 2.84121 16.7734 3.05991 16.5065L3.15956 16.3964L8.6602 10.8957L8.66937 10.8585C8.67195 10.8378 8.67242 10.8099 8.66583 10.7776C8.24427 8.71367 8.83365 6.47968 10.4377 4.8756ZM14.6804 7.70408C14.0946 8.28987 14.0946 9.23962 14.6804 9.8254C15.2662 10.4112 16.216 10.4112 16.8017 9.8254C17.3875 9.23962 17.3875 8.28987 16.8017 7.70408C16.216 7.1183 15.2662 7.1183 14.6804 7.70408Z"
-                    fill="#2C1E0E"
-                  />
-                </g>
-                <defs>
-                  <clipPath id="clip0_8_59">
-                    <rect
-                      width="24"
-                      height="24"
-                      fill="white"
-                      transform="translate(0 0.507935)"
-                    />
-                  </clipPath>
-                </defs>
-              </svg>
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </div>
             </div>
+            {errors?.password?.message ? (
+              <span className="text-sm font-medium text-red-400">
+                *{errors?.password?.message}
+              </span>
+            ) : <p className="text-sm font-medium text-text-black/70">*Le mot de passe doit être  4 chiffres</p>}
             <input type="hidden" value={0} {...register("type")} />
             <div className="flex items-center w-full gap-1 justify-center">
               <input type="checkbox" id="adult" checked={is18older} onChange={(e) => setIs18Older(e.currentTarget.checked)} />

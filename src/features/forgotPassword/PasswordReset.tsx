@@ -31,7 +31,7 @@ function PasswordReset() {
       <div className={twMerge("inset-x-0 z-50 bg-bg-one/20 absolute flex items-center max-h-screen h-full justify-center duration-200 transition-opacity backdrop-blur-sm", `${isLoading ? 'opacity-100 scale-100' : 'scale-0 opacity-0'}`)}>
         <div className="flex flex-col items-center justify-center">
           <GlassProstSmall />
-          <span className="text-text-black font-medium">We are connecting you...</span>
+          <span className="text-text-black font-medium">Chargement</span>
         </div>
       </div>
       <div className="space-y-6">
@@ -53,18 +53,29 @@ function PasswordReset() {
             />
           </svg>
         </button>
-        <h2 className="text-xl font-medium text-text-black">Create New Password</h2>
+        <h2 className="text-xl font-medium text-text-black">Créer un nouveau mot de passe</h2>
       </div>
       <p className="text-text-black/70 mt-2">
-        Create your new password. This should at least contain 8 characters
+        Créez votre nouveau mot de passe. Celui-ci doit être de 4 chiffres.
       </p>
       <form onSubmit={handleSubmit(onSubmit)} className="mt-5 space-y-10">
         <div className="space-y-4">
           <div className="relative">
             <input
+              inputMode="numeric"
               type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              {...register("password", { required: "Password is required" })}
+              placeholder="Nouveau mot de passe"
+              {...register("password", {
+                required: "Mot de passe est requis",
+                pattern: {
+                  value: /^\d{4}$/,
+                  message: "Le mot de passe doit être 4 chiffres"
+                },
+                maxLength: {
+                  value: 4,
+                  message: "Le mot de passe doit être 4 chiffres"
+                }
+              })}
               className="w-full bg-inherit text-text-black outline-none placeholder:text-text-black/70 rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70"
             />
             <div
@@ -78,11 +89,20 @@ function PasswordReset() {
 
           <div className="relative">
             <input
+              inputMode="numeric"
               type={showConfirmPassword ? "text" : "password"}
-              placeholder="Confirm New Password"
+              placeholder="Confirmer le nouveau mot de passe"
               {...register("confirmPassword", {
-                required: "Confirm Password is required",
-                validate: value => value === password || "Passwords do not match"
+                required: "Confirmer le mot de passe est requis",
+                validate: value => value === password || "Les mots de passe ne correspondent pas",
+                pattern: {
+                  value: /^\d{4}$/,
+                  message: "Le mot de passe doit être 4 chiffres"
+                },
+                maxLength: {
+                  value: 4,
+                  message: "Le mot de passe doit être 4 chiffres"
+                }
               })}
               className="w-full bg-inherit text-text-black outline-none placeholder:text-text-black/70 rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70"
             />
@@ -96,7 +116,7 @@ function PasswordReset() {
           </div>
         </div>
 
-        <MainBtn text="Reset Password" />
+        <MainBtn text="Réinitialiser le mot de passe" />
       </form>
       <div className={twMerge("inset-0 bg-bg-one/20 absolute flex items-center justify-center duration-200 transition-opacity backdrop-blur-sm", `${searchParam.get('reset') === 'true' ? 'opacity-100 scale-100' : 'scale-0 opacity-0'}`)}>
         <div className={twMerge("flex delay-300 duration-200 bg-input shadow-sm-blur rounded-xl mx-3 items-center justify-center flex-col gap-5 p-5", `${searchParam.get('reset') === 'true' ? 'scale-100' : 'scale-0'}`)}>
@@ -105,8 +125,8 @@ function PasswordReset() {
             <path d="M17.7833 31.7183C17.4658 32.0343 17.214 32.4098 17.0421 32.8234C16.8702 33.237 16.7817 33.6804 16.7817 34.1283C16.7817 34.5762 16.8702 35.0196 17.0421 35.4332C17.214 35.8468 17.4658 36.2223 17.7833 36.5383L25.011 43.7637C25.3269 44.0808 25.7023 44.3324 26.1156 44.5041C26.529 44.6758 26.9722 44.7641 27.4198 44.7641C27.8674 44.7641 28.3106 44.6758 28.724 44.5041C29.1373 44.3324 29.5128 44.0808 29.8287 43.7637L46.8554 26.7393C47.1728 26.4234 47.4247 26.0478 47.5965 25.6342C47.7684 25.2206 47.8569 24.7772 47.8569 24.3293C47.8569 23.8815 47.7684 23.438 47.5965 23.0244C47.4247 22.6108 47.1728 22.2353 46.8554 21.9193C46.5394 21.6019 46.1639 21.35 45.7503 21.1781C45.3367 21.0063 44.8932 20.9178 44.4454 20.9178C43.9975 20.9178 43.554 21.0063 43.1404 21.1781C42.7269 21.35 42.3513 21.6019 42.0354 21.9193L27.421 36.536L22.6033 31.7206C22.2873 31.4031 21.9118 31.1513 21.4982 30.9794C21.0846 30.8075 20.6411 30.719 20.1933 30.719C19.7454 30.719 19.3019 30.8075 18.8883 30.9794C18.4748 31.1513 18.0992 31.4009 17.7833 31.7183Z" fill="#EBE4D6" />
             <path d="M32 0C14.3396 0 0 14.3396 0 32C0 49.6604 14.3396 63.9999 32 63.9999C49.6604 63.9999 64 49.6604 64 32C64 14.3396 49.6604 0 32 0ZM32 2.27143C48.4338 2.27143 61.7286 15.5661 61.7286 32C61.7286 48.4338 48.4338 61.7285 32 61.7285C15.5662 61.7285 2.27143 48.4338 2.27143 32C2.27143 15.5661 15.5662 2.27143 32 2.27143ZM44.4452 19.791C43.28 19.791 42.1147 20.2339 41.2311 21.1175L27.4208 34.9324L23.4072 30.9165C22.5535 30.0681 21.3989 29.592 20.1954 29.592C18.9919 29.592 17.8372 30.0681 16.9836 30.9165C16.1345 31.7702 15.6579 32.9254 15.6579 34.1294C15.6579 35.3335 16.1345 36.4886 16.9836 37.3424L24.209 44.5678C25.0624 45.4167 26.2171 45.8932 27.4208 45.8932C28.6245 45.8932 29.7792 45.4167 30.6326 44.5678L47.657 27.5411C48.5053 26.6875 48.9815 25.5328 48.9815 24.3293C48.9815 23.1258 48.5053 21.9712 47.657 21.1175C47.2353 20.696 46.7344 20.3618 46.1833 20.1342C45.6321 19.9065 45.0415 19.7899 44.4452 19.791ZM44.4452 22.0443C45.0221 22.0443 45.5991 22.2714 46.0511 22.7234C46.2655 22.9323 46.436 23.182 46.5523 23.4578C46.6687 23.7336 46.7286 24.03 46.7286 24.3293C46.7286 24.6287 46.6687 24.925 46.5523 25.2008C46.436 25.4766 46.2655 25.7264 46.0511 25.9352L29.0267 42.9619C28.8178 43.1763 28.5681 43.3468 28.2923 43.4631C28.0165 43.5795 27.7202 43.6395 27.4208 43.6395C27.1215 43.6395 26.8251 43.5795 26.5493 43.4631C26.2735 43.3468 26.0238 43.1763 25.8149 42.9619L18.5895 35.7365C18.3747 35.5276 18.204 35.2777 18.0874 35.0017C17.9708 34.7256 17.9107 34.4291 17.9107 34.1294C17.9107 33.8298 17.9708 33.5332 18.0874 33.2572C18.204 32.9812 18.3747 32.7313 18.5895 32.5224C18.7984 32.308 19.048 32.1375 19.3238 32.0212C19.5996 31.9048 19.896 31.8448 20.1954 31.8448C20.4947 31.8448 20.791 31.9048 21.0668 32.0212C21.3427 32.1375 21.5924 32.308 21.8013 32.5224L26.6167 37.3424C26.7222 37.4482 26.8475 37.532 26.9855 37.5893C27.1235 37.6466 27.2714 37.6761 27.4208 37.6761C27.5702 37.6761 27.7181 37.6466 27.8561 37.5893C27.994 37.532 28.1194 37.4482 28.2249 37.3424L42.837 22.7234C43.0468 22.5095 43.297 22.3393 43.573 22.2227C43.8491 22.1061 44.1455 22.0455 44.4452 22.0443Z" fill="#B88409" />
           </svg>
-          <p className="font-medium text-text-black text-center">You’ve successfully changed your password. Sign in to continue</p>
-          <MainBtn text="Sign in" onClick={() => navigate("/")} />
+          <p className="font-medium text-text-black text-center">Vous avez modifié votre mot de passe avec succès. Connectez-vous pour continuer</p>
+          <MainBtn text="Se connecter" onClick={() => navigate("/")} />
         </div>
       </div>
 

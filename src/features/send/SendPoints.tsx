@@ -142,6 +142,7 @@ function SendPoints() {
                   To
                 </span>
                 <input
+
                   className="bg-inherit text-text-black outline-none placeholder:text-sm placeholder:text-text-black/70"
                   type="text"
                   value={identifier.qrData} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setIdentifier({ qrData: e.target.value })}
@@ -170,6 +171,7 @@ function SendPoints() {
             <h2 className="font-medium text-text-black/70">Amount</h2>
             <div>
               <input
+                inputMode="numeric"
                 type=""
                 className="w-14 border-b border-text-black/70 bg-inherit text-center text-2xl duration-150 focus:border-text-black focus:outline-none"
                 defaultValue={0.0}

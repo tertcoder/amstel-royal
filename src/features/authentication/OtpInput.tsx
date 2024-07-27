@@ -44,6 +44,7 @@ function OtpInput({ length, onChange }: OtpInputProps) {
           name="otp"
           maxLength={1}
           value={data}
+          inputMode="numeric"
           onChange={(e) => handleChange(e.target as HTMLInputElement, index)}
           onKeyDown={(e) => handleKeyDown(e, index)}
           className="border-text-black/70 focus:border-text-black h-12 w-12 border-b-2 bg-inherit text-center text-2xl duration-150 focus:outline-none"

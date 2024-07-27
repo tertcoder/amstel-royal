@@ -52,7 +52,7 @@ function OtpVerification() {
       <div className={twMerge("inset-x-0 z-50 bg-bg-one/20 absolute flex items-center max-h-screen h-full justify-center duration-200 transition-opacity backdrop-blur-sm", `${isReloaded ? 'opacity-100 scale-100' : 'scale-0 opacity-0'}`)}>
         <div className="flex flex-col items-center justify-center">
           <GlassProstSmall />
-          <span className="text-text-black font-medium">We are connecting you...</span>
+          <span className="text-text-black font-medium">Chargement</span>
         </div>
       </div>
       <div className="space-y-6">
@@ -74,12 +74,12 @@ function OtpVerification() {
             />
           </svg>
         </button>
-        <h2 className="text-xl font-medium text-text-black">OTP Verification</h2>
+        <h2 className="text-xl font-medium text-text-black">Vérification OTP</h2>
       </div>
       <p>{otp_verified}</p>
 
       <p className="text-text-black/70 mt-2">
-        Enter OTP sent to <span className="font-medium text-text-black">{phone_to}</span>
+        Entrez l'OTP envoyé au <span className="font-medium text-text-black">{phone_to}</span>
 
       </p>
       <div className="mt-5 space-y-10">
@@ -87,18 +87,18 @@ function OtpVerification() {
         <div className="flex flex-col items-center gap-3">
           <OtpInput length={4} onChange={handleOtpChange} />
           <p className="text-sm font-normal text-text-black/70">
-            Didn’t receive OTP?{" "}
+            Vous n'avez pas reçu d'OTP?{" "}
             <button className="font-medium disabled:text-text-black/70 text-text-black" onClick={resettingOTP} disabled={isDisabled}>
               {timer > 0 ? `Renvoyer l'OTP dans ${timer}s` : buttonText}
             </button>
           </p>
         </div>
-        <MainBtn text="Verify" onClick={(e) => {
+        <MainBtn text="Vérifier" onClick={(e) => {
           e.preventDefault();
           if (otp_verified === otp) {
             navigate("/step_3_password_reset")
           } else {
-            toast.error("OTP Incorrect!")
+            toast.error("OTP Incorrecte!")
           }
 
         }} />
