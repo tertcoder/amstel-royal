@@ -1,29 +1,58 @@
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import qr from "../../assets/qr.png";
+// import qr from "../../assets/qr.png";
 import Heading from "../../ui/Heading";
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
+import { useProfileData } from '../../hooks/useProfileData';
+import QRCodeStyling from 'qr-code-styling';
 
 function ReceivePoints() {
   const [copyStatus, setCopyStatus] = useState(false);
+  const { code } = useProfileData();
+
+  const qrCodeRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const qrCode = new QRCodeStyling({
+      width: 224,
+      height: 224,
+      data: code,
+      backgroundOptions: {
+        color: "#E8E8E8",
+      },
+      dotsOptions: {
+        color: "#2C1E0E",
+        type: "rounded",
+      },
+      cornersSquareOptions: {
+        type: "extra-rounded",
+      }
+    });
+
+    if (qrCodeRef.current) {
+      qrCodeRef.current.innerHTML = ""; // Clear any existing QR code
+      qrCode.append(qrCodeRef.current);
+    }
+  }, [code]);
 
   const onCopyText = () => {
     setCopyStatus(true);
     setTimeout(() => setCopyStatus(false), 2000)
   }
 
-  const codeAdresse = "24001cjwbagecskenfhsyefshsk";
+  const codeAdresse = code || "";
 
   return (
     <div className="h-screen overflow-y-auto px-4 pb-14">
       <Heading heading="Receive Points" />
       <div className="mx-auto flex w-56 flex-col items-center">
         <span className="font-medium text-text-black/70">Your address</span>
-        <div className="mt-2 h-56 w-56 rounded-[20px] bg-input p-3 shadow-sm-blur">
-          <img src={qr} />
+        <div className="mt-2 
+        p-3 rounded-[20px] bg-input shadow-sm-blur overflow-hidden">
+          <div id="qrCodeContainer" ref={qrCodeRef} ></div>
+
         </div>
         <p className="mt-5 block font-medium text-text-black">
-          24001cjwbagecske...
+          {codeAdresse}
         </p>
         <CopyToClipboard text={codeAdresse} onCopy={onCopyText}>
           <button className={twMerge("mt-3 flex items-center justify-center gap-2 rounded-full duration-150 px-3 py-1.5 shadow-sm-blur", `${copyStatus ? "bg-btn-color" : "bg-input "}`)}>
