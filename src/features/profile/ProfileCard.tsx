@@ -1,7 +1,41 @@
-import qrcode from "../../assets/qr.png";
+// import qrcode from "../../assets/qr.png";
 import frame from "../../assets/frame.png";
+import QRCodeStyling from "qr-code-styling";
+import { useEffect, useRef } from "react";
+type profileDetailsTypes = {
+  code: string,
+  fullName: string,
+  yourPoints: number,
+  yourLevel: string | undefined,
+  isLoading: boolean,
+  error: Error | null,
+}
+function ProfileCard({ code, fullName, yourPoints, yourLevel }: profileDetailsTypes) {
+  // const ref = useRef<HTMLDivElement>(null);
 
-function ProfileCard() {
+  const qrCodeRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const qrCode = new QRCodeStyling({
+      width: 80,
+      height: 80,
+      data: code,
+      backgroundOptions: {
+        color: "#EBE4D6",
+      },
+      dotsOptions: {
+        color: "#2C1E0E",
+        type: "rounded",
+      },
+      cornersSquareOptions: {
+        type: "extra-rounded",
+      }
+    });
+
+    if (qrCodeRef.current) {
+      qrCodeRef.current.innerHTML = ""; // Clear any existing QR code
+      qrCode.append(qrCodeRef.current);
+    }
+  }, [code]);
   return (
     <div className="gold-gradient relative h-56 w-full overflow-hidden rounded-xl p-5">
       <div className="flex justify-between">
@@ -27,19 +61,21 @@ function ProfileCard() {
           </div>
 
           <div className="flex flex-col justify-center">
-            <h3 className="font-semibold text-text-white">Arnaud Mugisha</h3>
-            <p className="text-sm text-text-white/90">24001</p>
+            <h3 className="font-semibold text-text-white">{fullName}</h3>
+            <p className="text-sm text-text-white/90">{code}</p>
           </div>
         </div>
         {/* QR Code */}
-        <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-[10px] bg-bg-one p-1">
-          <img src={qrcode} alt="Amstel Royal App" />
+        <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-[10px] overflow-hidden bg-bg-one ">
+          {/* <img src={qrcode} alt="Amstel Royal App" /> */}
+
+          <div id="qrCodeContainer" ref={qrCodeRef} ></div>
         </div>
       </div>
       <span className="text-text-white/90">Your points</span>
-      <h2 className="text-xl font-semibold text-white">500.00</h2>
+      <h2 className="text-xl font-semibold text-white">{yourPoints}</h2>
       <span className="text-text-white/90">Your level</span>
-      <h2 className="text-xl font-semibold text-white">Gold</h2>
+      <h2 className="text-xl font-semibold text-white">{yourLevel?.length && yourLevel.length > 5 ? "..." : yourLevel}</h2>
       {/* frame */}
       <img
         src={frame}

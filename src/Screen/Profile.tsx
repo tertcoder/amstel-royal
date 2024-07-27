@@ -1,9 +1,12 @@
 import ProfileCard from "../features/profile/ProfileCard";
 import Activity from "../features/profile/Activity";
 import useAuth from "../hooks/useAuth";
+import { useProfileData } from "../hooks/useProfileData";
 
 function Profile() {
-  const { logout } = useAuth()
+  const { logout } = useAuth();
+  const profileInfo = useProfileData();
+
   return (
     <div className="flex flex-col overflow-y-auto">
       <button className="mb-6 mt-8 self-end" onClick={logout}>
@@ -22,7 +25,7 @@ function Profile() {
           />
         </svg>
       </button>
-      <ProfileCard />
+      <ProfileCard {...profileInfo} />
       <div className="mt-10">
         <h2 className="text-xl font-medium text-text-black">
           Activity History

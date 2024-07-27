@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Ad } from "../../utils/data";
+import { Ad } from "../../utils/models";
 
 function FeaturedAds({ ads = [] }: { ads: Ad[] }) {
   const [curr, setCurr] = useState(0);

@@ -1,6 +1,6 @@
 import { useFetchName } from "../../data/useFetchName";
 import useLocalStorage from "../../hooks/useLocalStorage";
-import { LoggedUser } from "../../utils/data";
+import { LoggedUser } from "../../utils/models";
 
 export function Greeting() {
   const [loggedUser] = useLocalStorage<LoggedUser[]>('loggedUser', []);

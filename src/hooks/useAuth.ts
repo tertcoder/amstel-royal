@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import useLocalStorage from "./useLocalStorage";
-import { LoggedUser } from "../utils/data";
+import { LoggedUser } from "../utils/models";
 
 function useAuth() {
   const navigate = useNavigate();
