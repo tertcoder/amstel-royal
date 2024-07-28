@@ -9,7 +9,7 @@ import { useProfileData } from "../../hooks/useProfileData";
 function SendPoints() {
   const { fullName: full_name, yourPoints } = useProfileData()
   const { fullName, name } = useName();
-  // const [identifier, setIdentifier] = useState<{ qrData: string }>({ qrData: '' });
+  const [identifier, setIdentifier] = useState<string>("");
   const [isScanning, setIsScanning] = useState(false)
   const navigate = useNavigate();
 
@@ -149,8 +149,8 @@ function SendPoints() {
 
                   className="bg-inherit text-text-black outline-none placeholder:text-sm placeholder:text-text-black/70"
                   type="text"
-                  value={fullName || ""}
-                  placeholder="Receiver identifier..."
+                  value={fullName ? fullName : identifier}
+                  onChange={e => setIdentifier(e.target.value)}
                   autoFocus
                 />
               </div>

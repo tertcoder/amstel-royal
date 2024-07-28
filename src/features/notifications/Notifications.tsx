@@ -1,7 +1,7 @@
-// import { useFetchNotifications } from "../../data/useFetchNotifications";
-// import { useProfileData } from "../../hooks/useProfileData";
+import { useFetchNotifications } from "../../data/useFetchNotifications";
+import { useProfileData } from "../../hooks/useProfileData";
 import Heading from "../../ui/Heading";
-// import Notification from "./Notification";
+import Notification from "./Notification";
 
 // const notifications = [
 //   {
@@ -16,17 +16,17 @@ import Heading from "../../ui/Heading";
 //   },
 // ];
 function Notifications() {
-  // const { code } = useProfileData();
-  // const { data } = useFetchNotifications(code);
-
+  const { code } = useProfileData();
+  const { data } = useFetchNotifications(code);
+  console.log(data)
   return (
     <div className="h-screen px-4 pb-14">
       <Heading heading="Notifications" />
-      {/* <div>
-        {data.map((not) => (
-          <Notification notif={not} key={not.description} />
+      <div>
+        {data && data.map((not) => (
+          <Notification notif={{ description: not.msg, title: not.titre, time: not.dateNot }} key={not.idNot} />
         ))}
-      </div> */}
+      </div>
     </div>
   );
 }
