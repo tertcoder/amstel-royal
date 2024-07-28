@@ -8,11 +8,12 @@ type profileDetailsTypes = {
   code: string,
   fullName: string,
   yourPoints: number,
+  receivedPoints: number,
   yourLevel: string | undefined,
   isLoading: boolean,
   error: Error | null,
 }
-function ProfileCard({ type, code, fullName, yourPoints, yourLevel, isLoading }: profileDetailsTypes) {
+function ProfileCard({ type, code, fullName, yourPoints, receivedPoints, yourLevel, isLoading }: profileDetailsTypes) {
   return (
     <div className="gold-gradient relative h-56 w-full overflow-hidden rounded-xl p-5">
       <div className="flex justify-between">
@@ -48,10 +49,20 @@ function ProfileCard({ type, code, fullName, yourPoints, yourLevel, isLoading }:
           {isLoading ? <Skeleton animation="wave" variant='rounded' width={80} height={80} /> : <QRCode size={64} bgColor='#EBE4D6' ecLevel='H' fgColor='#2C1E0E' eyeColor="#2C1E0E" eyeRadius={20} value={code} />}
         </div>
       </div>
-      <span className="text-text-white/90">Vos points</span>
-      {isLoading ? <Skeleton animation="wave" variant="rounded" height={14} width={72} /> : <h2 className="text-xl font-semibold text-white">{yourPoints}</h2>}
+      <div className='flex max-w-60 justify-between w-full'>
+        <div>
+          <span className="text-text-white/90">Vos points</span>
+
+          {isLoading ? <Skeleton animation="wave" variant="rounded" height={14} width={72} /> : <h2 className="text-xl font-semibold text-white">{yourPoints * 1}</h2>}
+        </div>
+        <div>
+          <span className="text-text-white/90">Points Reçu</span>
+
+          {isLoading ? <Skeleton animation="wave" variant="rounded" height={14} width={72} /> : <h2 className="text-xl font-semibold text-white">{receivedPoints * 1}</h2>}
+        </div>
+      </div>
       {type === 0 && <><span className="text-text-white/90">Votre niveau</span>
-        {isLoading ? <Skeleton animation="wave" variant="rounded" height={14} width={72} /> : <h2 className="text-xl font-semibold text-white">{yourLevel?.length && yourLevel.length > 5 ? "..." : yourLevel}</h2>}</>}
+        {isLoading ? <Skeleton animation="wave" variant="rounded" height={14} width={72} /> : <h2 className="text-xl font-semibold text-white">{yourLevel}</h2>}</>}
       {/* frame */}
       <img
         src={frame}
