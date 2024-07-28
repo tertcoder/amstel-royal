@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { getRewards } from "../services/appApi";
+import { RewardType } from "../utils/models";
 
-export function useFetchRewards(code: string) {
-  const { data, isLoading, error } = useQuery({
+export function useFetchRewards(code: string, type: number) {
+  const { data, isLoading, error } = useQuery<RewardType[]>({
     queryKey: ['rewards'],
-    queryFn: () => getRewards(code),
+    queryFn: () => getRewards(code, type),
 
   })
 

@@ -4,10 +4,14 @@ import useLogout from "../../hooks/useLogout";
 import GlassProstSmall from "../../ui/GlassProstSmall";
 import { twMerge } from "tailwind-merge";
 import { Greeting } from "./Greeting";
+import { useFetchNotifNumber } from "../notifications/useFetchNotifications";
+import { useProfileData } from "../../hooks/useProfileData";
 function Welcome() {
   const navigate = useNavigate();
+  const { code } = useProfileData()
   const { logout, isLoggingout } = useLogout();
   const userData = JSON.parse(localStorage.getItem('loggedUser')!)[0];
+  const { data } = useFetchNotifNumber(code);
   return (
     <>
       <div className={twMerge("inset-0 z-50 bg-bg-one/20 absolute flex items-center justify-center duration-200 transition-opacity backdrop-blur-sm", `${isLoggingout ? 'opacity-100 scale-100' : 'scale-0 opacity-0'}`)}>
@@ -26,9 +30,9 @@ function Welcome() {
             className="relative p-1"
             onClick={() => navigate("/notifications")}
           >
-            <span className="absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full bg-main-two text-center text-sm font-medium text-text-white">
-              1
-            </span>
+            {!(data == 0) && <span className="absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full bg-main-two text-center text-sm font-medium text-text-white">
+              {data}
+            </span>}
             <svg
               width="32"
               height="32"

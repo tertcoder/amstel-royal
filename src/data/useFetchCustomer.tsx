@@ -10,7 +10,6 @@ export function useFetchCustomer() {
 
     mutationFn: ({ phone }: { phone: string }) => getCustomer(phone),
     onSuccess: (data) => {
-      console.log(data)
       if (data[0].Message === 1) {
         localStorage.setItem("phone_verified", data[0].phone);
         const otp = Math.floor(1000 + Math.random() * 9000);

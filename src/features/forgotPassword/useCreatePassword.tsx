@@ -8,7 +8,6 @@ export function useCreatePassword() {
   const { mutate: createPassword, isPending: isLoading, error } = useMutation({
     mutationFn: ({ phone, password }: { phone: string, password: string }) => forgotPassword(phone, password),
     onSuccess: (data) => {
-      console.log(data)
       if (data[0].Message === 1) {
         toast.success("Mot de Passe modifié avec succés");
         setSearchParam("?reset=true")

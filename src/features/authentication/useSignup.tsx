@@ -14,7 +14,7 @@ export function useSignup() {
 
       if (data[0].Message === 1) {
         toast.success("Successfully signed up!");
-        console.log(data);
+
 
         localStorage.setItem("loggedUser", JSON.stringify(data));
 
@@ -25,7 +25,6 @@ export function useSignup() {
       else { toast.error(data[0].Message) }
     },
     onError: (error) => {
-      console.log(error);
       if (error.message) {
         toast.error(error.message);
       }

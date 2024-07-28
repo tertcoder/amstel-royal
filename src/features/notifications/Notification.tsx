@@ -1,12 +1,22 @@
+import { twMerge } from "tailwind-merge";
+import { useProfileData } from "../../hooks/useProfileData";
+
 type notifType = {
   title: string;
   description: string;
   time: string;
+  customer: string[];
+  vue: number;
+  allCust: number;
 };
 function Notification({ notif }: { notif: notifType }) {
+  const { code } = useProfileData();
+  const seen = (notif.vue === 0 && notif.allCust === 0) || (notif.allCust === 1 && !notif.customer.includes(code)) ? "bg-btn-color/25" : "";
+  // console.log(notif)
+  // console.log(notif.customer.includes(code))
   return (
     // bg-text-black/5
-    <div className="flex items-center gap-3 border-b border-text-black/70 p-2">
+    <div className={twMerge("flex items-center gap-3 border-b border-text-black/70 p-2", seen)}>
       <svg
         width="48"
         height="48"

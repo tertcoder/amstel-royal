@@ -7,7 +7,7 @@ import Promotion from "./Promotion";
 
 function SpecialPromotions() {
   const { data, isLoading } = useFetchPromotions();
-  console.log(data)
+
   return (
     <div className="mb-2 mt-8">
       <h2 className="text-xl font-medium text-text-black">

@@ -55,11 +55,13 @@ export interface ProfileData {
 }
 
 export interface Notification {
-  customer: string;
+  customer: string[];
   dateNot: string;
   idNot: number;
   msg: string;
   titre: string;
+  allCust: number;
+  vue: number;
 }
 
 export interface PromotionType {
@@ -78,4 +80,13 @@ export interface PromotionType {
   qty: number;
   quartierBar: string;
   zoneBar: string;
+}
+
+export interface RewardType {
+  5: string;
+  description: string;
+  idRew: number;
+  img: string;
+  level: number;
+  titre: string;
 }

@@ -20,7 +20,7 @@ function Signup() {
   const { register, handleSubmit, reset, formState: { errors } } = useForm<SignUpDataType>();
   const [, setSignUpData] = useLocalStorage<SignUpDataType>("signup_data", {} as SignUpDataType)
   const onSubmit: SubmitHandler<SignUpDataType> = (data) => {
-    console.log(data)
+
     // login(data, { onSettled: () => reset() });
     // signup(data, { onSettled: () => reset() })
 

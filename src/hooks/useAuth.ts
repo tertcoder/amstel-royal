@@ -6,10 +6,9 @@ function useAuth() {
   const navigate = useNavigate();
   const [, setLoggedUser] = useLocalStorage<LoggedUser[]>('loggedUser', []);
 
-
   const login = (userData: LoggedUser[]) => {
     // localStorage.setItem('loggedUser', JSON.stringify(userData));
-    console.log(userData);
+
     setLoggedUser(userData);
     localStorage.setItem('loginTimestamp', Date.now().toString());
 
