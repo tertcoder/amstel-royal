@@ -1,3 +1,5 @@
+import Skeleton from '@mui/material/Skeleton';
+
 import { useNavigate } from "react-router-dom";
 import Heading from "../../ui/Heading";
 import MainBtn from "../../ui/MainBtn";
@@ -7,8 +9,8 @@ import { useName } from "../../data/useFetchName";
 import { useProfileData } from "../../hooks/useProfileData";
 
 function SendPoints() {
-  const { fullName: full_name, yourPoints } = useProfileData()
-  const { fullName, name } = useName();
+  const { fullName: full_name, yourPoints, type } = useProfileData()
+  const { fullName, name, isLoading } = useName();
   const [identifier, setIdentifier] = useState<string>("");
   const [isScanning, setIsScanning] = useState(false)
   const navigate = useNavigate();
@@ -145,14 +147,14 @@ function SendPoints() {
                 <span className="text-sm font-medium text-text-black/70">
                   To
                 </span>
-                <input
-
+                {isLoading ? <Skeleton variant='rounded' width={72} height={14} animation="wave" /> : <input
+                  placeholder="identifier"
                   className="bg-inherit text-text-black outline-none placeholder:text-sm placeholder:text-text-black/70"
                   type="text"
                   value={fullName ? fullName : identifier}
                   onChange={e => setIdentifier(e.target.value)}
-                  autoFocus
-                />
+
+                />}
               </div>
             </div>
             <button onClick={(e) => { e.preventDefault(); setIsScanning(s => !s); }}>
@@ -171,7 +173,25 @@ function SendPoints() {
             </button>
           </div>
           {isScanning && <QRCodeScanner onScan={handleScan} />}
-          <div className="mb-16 mt-6 flex flex-col items-center">
+          {type === 1 ? <div className="flex max-w-60 w-full my-6 flex-col gap-4">
+            <input
+              placeholder="Entrez les points ici..."
+              className="bg-input px-2 rounded-md shadow-sm-blur text-text-black outline-none placeholder:text-sm placeholder:text-text-black/70 py-1"
+              type="text"
+            />
+            <input inputMode="numeric"
+              placeholder="Entrez la quantite"
+              className="bg-input px-2 rounded-md shadow-sm-blur text-text-black outline-none placeholder:text-sm placeholder:text-text-black/70 py-1"
+              type="text"
+            />
+            <div className="flex flex-col border border-input px-2 rounded-md shadow-sm-blur">
+              <label className="text-sm font-medium text-text-black/70 mb-1">Choose File</label>
+              <input inputMode="numeric"
+                type="file"
+                className="text-text-black p-2"
+              />
+            </div>
+          </div> : <div className="mb-16 mt-6 flex flex-col items-center">
             <h2 className="font-medium text-text-black/70">Amount</h2>
             <div>
               <input
@@ -184,7 +204,7 @@ function SendPoints() {
                 points
               </span>
             </div>
-          </div>
+          </div>}
 
           <MainBtn
             text="Send"
