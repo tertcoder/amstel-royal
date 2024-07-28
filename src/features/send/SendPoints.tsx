@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form"; import Skeleton from '@mui/material/Skeleton';
-import Heading from "../../ui/Heading";
 import MainBtn from "../../ui/MainBtn";
 import QRCodeScanner from "./QRCodeScanner";
 import { useName } from "../../data/useFetchName";
@@ -10,6 +9,7 @@ import { twMerge } from "tailwind-merge";
 import PopupPassword from "./PopupPassword";
 import { useSendPointAgent } from "./useSendPointAgent";
 import GlassProstSmall from "../../ui/GlassProstSmall";
+import Heading from "./Heading";
 
 interface FormData {
 
@@ -27,6 +27,7 @@ function SendPoints() {
   const [showPassword, setShowPassword] = useState(false);
 
   const { fullName, name, isLoading } = useName();
+  const [isThere, setIsThere] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
   const [codeReceiver, setCodeReceiver] = useState("");
   const [dataToSend, setDataToSend] = useState<{
@@ -44,20 +45,32 @@ function SendPoints() {
     qty: number | null,
     invoice: null,
   });
-  const { control, handleSubmit, setValue, } = useForm<FormData>();
+  const { control, handleSubmit, setValue, watch, formState: { errors } } = useForm<FormData>();
+  const watchFields = watch();
+  // const isFormComplete = Object.values(watchAllFields).every(value => value)
+  const isFormComplete = () => {
+    if (type === 1) {
+      return watchFields.identifier && watchFields.points && watchFields.amount;
+    } else {
+      return watchFields.identifier && watchFields.points;
+    }
+  };
   const { isLoading: sending } = useSendPointAgent();
 
   const handleScan = (data: string | null) => {
-    if (data) {
+    if (data && ((data.startsWith("A") || data.startsWith("R")) && data.length === 3)) {
       name({ code: data });
       setIsScanning(false);
       setCodeReceiver(data);
       setValue('identifier', data);
+      setIsThere(true);
+    } else {
+      setIsThere(false);
+      setValue('identifier', "Code invalide");
+      setIsScanning(false);
+
     }
   };
-
-
-
   const onSubmit = (data: FormData) => {
     const toSend = {
       ...data, codeSender: code,
@@ -68,8 +81,6 @@ function SendPoints() {
       // invoice: data.file ? data.file[0] : null,
       invoice: null,
     }
-    console.log("Default: ", toSend);
-
     setDataToSend(toSend as {
       identifier: string,
       codeSender: string,
@@ -79,10 +90,7 @@ function SendPoints() {
       qty: number,
       invoice: null,
     })
-
-
-
-
+    localStorage.setItem("last_sent", JSON.stringify({ receiver: data.identifier, points: data.points }))
   };
 
   useEffect(() => {
@@ -91,17 +99,16 @@ function SendPoints() {
     }
   }, [fullName, setValue]);
 
-
   return (
     <div className="h-screen overflow-y-auto px-4 pb-14">
 
-      <div className={twMerge("inset-x-0 z-50 bg-bg-one/20 absolute flex items-center max-h-screen h-full justify-center duration-200 transition-opacity backdrop-blur-sm", `${sendingPoints ? 'opacity-100 scale-100' : 'scale-0 opacity-0'}`)}>
+      <div className={twMerge("inset-x-0 z-50 bg-bg-one/20 absolute flex items-center max-h-screen h-full justify-center duration-200 transition-opacity backdrop-blur-sm", `${sendingPoints || sending ? 'opacity-100 scale-100' : 'scale-0 opacity-0'}`)}>
         <div className="flex flex-col items-center justify-center">
           <GlassProstSmall />
           <span className="text-text-black font-medium">Chargement</span>
         </div>
       </div>
-      <Heading heading="Send Points" />
+      <Heading to="/home" heading="Send Points" />
       <div className="mt-16">
         <form className="flex flex-col items-center" onSubmit={handleSubmit(onSubmit)}>
           {/* <input type="number" hidden value={type} {...register("type")} /> */}
@@ -234,20 +241,24 @@ function SendPoints() {
                     control={control}
                     rules={{ required: 'Scanner le qr code!' }}
                     render={({ field }) => (
-                      <input
-                        // onChange={(e) => setTypedCode(e.target.value)}
-                        id="qr_input"
-                        placeholder="Scan Code"
-                        className="bg-inherit text-text-black outline-none placeholder:text-sm placeholder:text-text-black/70"
-                        type="text"
-                        {...field}
-                      />
+                      <div>
+                        <input
+                          id="qr_input"
+                          placeholder="Scan Code"
+                          className={twMerge("bg-inherit text-text-black outline-none placeholder:text-sm placeholder:text-text-black/70", `${!isThere ? 'text-red-500' : ''}`)}
+                          type="text"
+                          {...field}
+                        />
+                        {errors.identifier && (
+                          <span className="text-red-500 text-sm">{errors.identifier.message}</span>
+                        )}
+                      </div>
                     )}
                   />
                 )}
               </div>
             </div>
-            <button onClick={(e) => { e.preventDefault(); setIsScanning(s => !s); }}>
+            <button type="button" onClick={(e) => { e.preventDefault(); setIsScanning(s => !s); }}>
               <svg
                 width="32"
                 height="32"
@@ -263,6 +274,7 @@ function SendPoints() {
             </button>
           </div>
           {isScanning && <QRCodeScanner onScan={handleScan} />}
+
           {type === 1 ? (
             <div className="flex max-w-60 w-full my-6 flex-col gap-4">
               <Controller
@@ -270,47 +282,38 @@ function SendPoints() {
                 control={control}
                 rules={{ required: "Completez les points à envoyer " }}
                 render={({ field }) => (
-                  <input
-                    placeholder="Entrez les points ici..."
-                    className="bg-input px-2 rounded-md shadow-sm-blur text-text-black outline-none placeholder:text-sm placeholder:text-text-black/70 py-1"
-                    type="number"
-                    {...field}
-                  />
+                  <div>
+                    <input
+                      placeholder="Entrez les points ici..."
+                      className="bg-input px-2 rounded-md shadow-sm-blur text-text-black outline-none placeholder:text-sm placeholder:text-text-black/70 py-1"
+                      type="number"
+                      {...field}
+                    />
+                    {errors.points && (
+                      <span className="text-red-500 text-sm">{errors.points.message}</span>
+                    )}
+                  </div>
                 )}
               />
               <Controller
                 name="amount"
                 control={control}
-                rules={{ required: 'Compléter la quantité commandé' }}
+                rules={{ required: 'Compléter la quantité commandée' }}
                 render={({ field }) => (
-                  <input
-                    inputMode="numeric"
-                    placeholder="Entrez la quantite"
-                    className="bg-input px-2 rounded-md shadow-sm-blur text-text-black outline-none placeholder:text-sm placeholder:text-text-black/70 py-1"
-                    type="number"
-                    {...field}
-                  />
-                )}
-              />
-              {/* <Controller
-                name="file"
-                control={control}
-                render={({ field }) => (
-                  <div className="flex flex-col border border-input px-2 rounded-md shadow-sm-blur">
-                    <label className="text-sm font-medium text-text-black/70 mb-1">Choose File</label>
+                  <div>
                     <input
-                      type="file"
-                      className="text-text-black p-2"
-                      onChange={(e) => {
-                        const fileList = e.target.files;
-                        if (fileList) {
-                          field.onChange(fileList);
-                        }
-                      }}
+                      inputMode="numeric"
+                      placeholder="Entrez la quantité"
+                      className="bg-input px-2 rounded-md shadow-sm-blur text-text-black outline-none placeholder:text-sm placeholder:text-text-black/70 py-1"
+                      type="number"
+                      {...field}
                     />
+                    {errors.amount && (
+                      <span className="text-red-500 text-sm">{errors.amount.message}</span>
+                    )}
                   </div>
                 )}
-              /> */}
+              />
             </div>
           ) : (
             <div className="mb-16 mt-6 flex flex-col items-center">
@@ -328,19 +331,25 @@ function SendPoints() {
                       {...field}
                     />
                     <span className="text-sm font-medium text-text-black/70"> points</span>
+                    {errors.points && (
+                      <span className="text-red-500 text-sm">{errors.points.message}</span>
+                    )}
                   </div>
                 )}
               />
             </div>
           )}
-          <MainBtn text="Send" onClick={() => { setSearchParam("?confirm=true"); }} />
+          {/* <button type="submit" disabled={!isFormComplete()} className={`btn ${!isFormComplete() ? 'btn-disabled' : ''}`}>
+            Send
+          </button> */}
+          <MainBtn disabled={!isFormComplete() || !isThere} text="Send" onClick={() => { setSearchParam("?confirm=true"); }} />
         </form>
       </div>
 
       <div className={twMerge("inset-0 bg-bg-one/20 absolute flex items-center justify-center duration-200 transition-opacity backdrop-blur-sm", `${searchParam.get('confirm') === 'true' ? 'opacity-100 scale-100' : 'scale-0 opacity-0'}`)}>
         <div className="relative">
 
-          <button className="w-12 absolute -top-1 right-0 rounded-full h-12 z-10 bg-red- border border-text-black text-text-black text-lg font-medium flex items-center justify-center" onClick={() => setSearchParam("?confirm=false")}> <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM8.96963 8.96965C9.26252 8.67676 9.73739 8.67676 10.0303 8.96965L12 10.9393L13.9696 8.96967C14.2625 8.67678 14.7374 8.67678 15.0303 8.96967C15.3232 9.26256 15.3232 9.73744 15.0303 10.0303L13.0606 12L15.0303 13.9696C15.3232 14.2625 15.3232 14.7374 15.0303 15.0303C14.7374 15.3232 14.2625 15.3232 13.9696 15.0303L12 13.0607L10.0303 15.0303C9.73742 15.3232 9.26254 15.3232 8.96965 15.0303C8.67676 14.7374 8.67676 14.2625 8.96965 13.9697L10.9393 12L8.96963 10.0303C8.67673 9.73742 8.67673 9.26254 8.96963 8.96965Z" fill="#2C1E0E"></path> </g></svg></button>
+          <button className="w-12 absolute -top-1 right-0 rounded-full h-12 z-10 bg-red- border border-text-black flex items-center justify-center" onClick={() => setSearchParam("?confirm=false")}> <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM8.96963 8.96965C9.26252 8.67676 9.73739 8.67676 10.0303 8.96965L12 10.9393L13.9696 8.96967C14.2625 8.67678 14.7374 8.67678 15.0303 8.96967C15.3232 9.26256 15.3232 9.73744 15.0303 10.0303L13.0606 12L15.0303 13.9696C15.3232 14.2625 15.3232 14.7374 15.0303 15.0303C14.7374 15.3232 14.2625 15.3232 13.9696 15.0303L12 13.0607L10.0303 15.0303C9.73742 15.3232 9.26254 15.3232 8.96965 15.0303C8.67676 14.7374 8.67676 14.2625 8.96965 13.9697L10.9393 12L8.96963 10.0303C8.67673 9.73742 8.67673 9.26254 8.96963 8.96965Z" fill="#2c1e0eac"></path> </g></svg></button>
           <PopupPassword setSearchParam={setSearchParam} searchParam={searchParam}
             showPassword={showPassword}
             setShowPassword={setShowPassword}
@@ -355,3 +364,23 @@ function SendPoints() {
 
 export default SendPoints;
 
+
+{/* <Controller
+              name="file"
+              control={control}
+              render={({ field }) => (
+                <div className="flex flex-col border border-input px-2 rounded-md shadow-sm-blur">
+                  <label className="text-sm font-medium text-text-black/70 mb-1">Choose File</label>
+                  <input
+                    type="file"
+                    className="text-text-black p-2"
+                    onChange={(e) => {
+                      const fileList = e.target.files;
+                      if (fileList) {
+                        field.onChange(fileList);
+                      }
+                    }}
+                  />
+                </div>
+              )}
+            /> */}
