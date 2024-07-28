@@ -23,9 +23,7 @@ export function useVerifyPassword(dataToSend: {
   const { data, mutate: verify, isPending: isLoading, error } = useMutation({
     mutationFn: ({ password, code }: { password: string, code: string }) => verifyPassword(password, code),
     onSuccess: (data) => {
-      console.log(data);
       if (data === 1) {
-        toast.success("Password Test Success")
         setSearchParam("?confirm=false");
         sendPoint(dataToSend as {
           identifier: string,
@@ -36,8 +34,9 @@ export function useVerifyPassword(dataToSend: {
           qty: number,
           invoice: File
         });
+
       } else {
-        toast.error("Password Test Failed")
+        toast.error("Mot de Passe Incorrect")
       }
     }
   })

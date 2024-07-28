@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
-import { useForm, Controller } from "react-hook-form";
-// import { useNavigate } from "react-router-dom";
-import Skeleton from '@mui/material/Skeleton';
+import { useForm, Controller } from "react-hook-form"; import Skeleton from '@mui/material/Skeleton';
 import Heading from "../../ui/Heading";
 import MainBtn from "../../ui/MainBtn";
 import QRCodeScanner from "./QRCodeScanner";
 import { useName } from "../../data/useFetchName";
 import { useProfileData } from "../../hooks/useProfileData";
-// import { PointsToSendType } from "../../utils/models";
-// import useLocalStorage from "../../hooks/useLocalStorage";
 import { useSearchParams } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 import PopupPassword from "./PopupPassword";
@@ -236,10 +232,11 @@ function SendPoints() {
                   <Controller
                     name="identifier"
                     control={control}
-                    rules={{ required: 'Identifier is required' }}
+                    rules={{ required: 'Scanner le qr code!' }}
                     render={({ field }) => (
                       <input
                         // onChange={(e) => setTypedCode(e.target.value)}
+                        id="qr_input"
                         placeholder="Scan Code"
                         className="bg-inherit text-text-black outline-none placeholder:text-sm placeholder:text-text-black/70"
                         type="text"
@@ -271,6 +268,7 @@ function SendPoints() {
               <Controller
                 name="points"
                 control={control}
+                rules={{ required: "Completez les points à envoyer " }}
                 render={({ field }) => (
                   <input
                     placeholder="Entrez les points ici..."
@@ -283,7 +281,7 @@ function SendPoints() {
               <Controller
                 name="amount"
                 control={control}
-                rules={{ required: 'Amount is required' }}
+                rules={{ required: 'Compléter la quantité commandé' }}
                 render={({ field }) => (
                   <input
                     inputMode="numeric"
@@ -320,7 +318,7 @@ function SendPoints() {
               <Controller
                 name="points"
                 control={control}
-                rules={{ required: 'Amount is required' }}
+                rules={{ required: 'Complétez les points à envoyer' }}
                 render={({ field }) => (
                   <div>
                     <input

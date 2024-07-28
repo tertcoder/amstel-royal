@@ -16,14 +16,14 @@ export function useLogin() {
     onSuccess: (data) => {
       if (data[0].Message === 1) {
         setMessage(1);
-        toast.success("Successfully logged in!");
+        toast.success(" vous êtes maintenant connectés!");
         queryClient.setQueryData(["user"], data);
         setTimeout(() => {
           setMessage(null);
           settingLogin(data);
         }, 1000);
       } else {
-        toast.error("Provided email or password is incorrect");
+        toast.error("Téléphone, Code ou mot de passse incorrect");
         setMessage(data[0].Message)
       }
     },

@@ -68,7 +68,7 @@ export const verifyPassword = async (password: string, code: string) => {
 }
 export const sendPointAgent = async (invoice: File | null, codeSender: string, codeReceiver: string, points: number, type: number, qty: number | null) => {
 
-  const api1 = "https://seesternconsulting.com/royal/agentSend";
+  const api1 = `${API_URL}sendPointsAgent`
   const api2 = `${API_URL}sendPoints`;
   const response = await axios.post(type === 1 ? api1 : api2, {
     invoice,
@@ -77,11 +77,8 @@ export const sendPointAgent = async (invoice: File | null, codeSender: string, c
     points,
     type,
     qty
-  }, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
   }
+ 
   );
 
   return response.data;
