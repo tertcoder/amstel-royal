@@ -5,13 +5,13 @@ import SpecialPromotions from "../features/home/SpecialPromotions";
 import Welcome from "../features/home/Welcome";
 
 function Home() {
-  const { data } = useFetchAds();
+  const { data, isLoading } = useFetchAds();
 
   return (
     <div className="h-full overflow-y-auto">
       <Welcome />
       <Overview />
-      <FeaturedAds ads={data || []} />
+      <FeaturedAds isLoading={isLoading} ads={data || []} />
       <SpecialPromotions />
     </div>
   );

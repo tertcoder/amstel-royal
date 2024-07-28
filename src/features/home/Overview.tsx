@@ -1,3 +1,6 @@
+import Skeleton from '@mui/material/Skeleton';
+
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
@@ -8,7 +11,7 @@ function Overview() {
   const [hide, setHide] = useState(true);
   const navigate = useNavigate();
   const [loggedUser] = useLocalStorage<LoggedUser[]>("loggedUser", [])
-  const { data } = useFetchPoints(loggedUser[0].code)
+  const { data, isLoading } = useFetchPoints(loggedUser[0].code)
 
   return (
     <div className="mt-12 w-full space-y-5 rounded-xl bg-input p-6 py-6 shadow-sm-blur">
@@ -16,7 +19,7 @@ function Overview() {
         <div>
           <div className="flex gap-2">
             <span className="text-sm font-medium text-text-black/70">
-              Your Point
+              Vos Points
             </span>
             <button className="w-6" onClick={() => setHide((hide) => !hide)}>
               {hide ? (
@@ -71,9 +74,9 @@ function Overview() {
               )}
             </button>
           </div>
-          <h2 className="text-2xl font-medium text-text-black">
+          {isLoading ? <Skeleton animation="wave" /> : <h2 className="text-2xl font-medium text-text-black">
             {hide ? "****" : `${data * 1}`}
-          </h2>
+          </h2>}
         </div>
         <button onClick={() => navigate("/receive_points")}>
           <svg
@@ -205,7 +208,7 @@ function Overview() {
             </defs>
           </svg>
           <span className="text-sm font-medium text-text-black">
-            Send points
+            Envoyer points
           </span>
         </button>
 
@@ -282,7 +285,7 @@ function Overview() {
           </svg>
 
           <span className="text-sm font-medium text-text-black">
-            Receive points
+            Recevoir points
           </span>
         </button>
         <button
@@ -429,7 +432,7 @@ function Overview() {
             </defs>
           </svg>
 
-          <span className="text-sm font-medium text-text-black">Rewards</span>
+          <span className="text-sm font-medium text-text-black">Prix</span>
         </button>
       </div>
     </div>

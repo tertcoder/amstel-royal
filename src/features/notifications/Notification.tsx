@@ -24,11 +24,11 @@ function Notification({ notif }: { notif: notifType }) {
         />
       </svg>
       <div className="flex-1">
-        <div className="flex items-center justify-between">
-          <h3 className="font-medium text-text-black">{notif.title}</h3>
-          <span className="text-xs text-text-black/70">{notif.time}</span>
-        </div>
+        {/* <div className="flex items-center justify-between"> */}
+        <h3 className="font-medium text-text-black">{notif.title}</h3>
+        {/* </div> */}
         <p className="text-sm text-text-black/70">{notif.description}</p>
+        <span className="text-xs text-text-black/70">{notif.time}</span>
       </div>
     </div>
   );

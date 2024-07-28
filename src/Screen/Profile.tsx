@@ -1,3 +1,6 @@
+import Skeleton from '@mui/material/Skeleton';
+
+
 import ProfileCard from "../features/profile/ProfileCard";
 import Activity from "../features/profile/Activity";
 import useAuth from "../hooks/useAuth";
@@ -7,8 +10,8 @@ import { useFetchPointHistory } from "../data/useFetchPointHistory";
 function Profile() {
   const { logout } = useAuth();
   const profileInfo = useProfileData();
-  const { data } = useFetchPointHistory(profileInfo.code || "");
-  console.log(data)
+  const { data, isLoading } = useFetchPointHistory(profileInfo.code || "");
+
   return (
     <div className="flex flex-col overflow-y-auto">
       <button className="mb-6 mt-8 self-end" onClick={logout}>
@@ -30,26 +33,32 @@ function Profile() {
       <ProfileCard {...profileInfo} />
       <div className="mt-10">
         <h2 className="text-xl font-medium text-text-black">
-          Activity History
+          Historique des activités
         </h2>
         <div className="mt-3 flex flex-col divide-y divide-text-black/30">
-          {data?.map(h => (<Activity key={h.idHist} activity={`Envoyé à ${h.codeReceiver}`} time={h.dateSent} sent={h.sentPoints} />))}
-          {/* <Activity activity="@user4" time="sent, today" sent={5} />
-          <Activity
-            activity="claimed reward"
-            time="received, yesterday"
-            received={5}
-          />
-          <Activity
-            activity="claimed reward"
-            time="received, May 1st 2024"
-            received={5}
-          />
-          <Activity
-            activity="@user1"
-            time="received, April 28th 2024"
-            received={10}
-          /> */}
+          {isLoading ? <>
+            <div className="flex justify-between p-2">
+              <div className="flex gap-3">
+                <Skeleton variant="circular" width={40} height={40} />
+                <div className="w-60">
+                  <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+                  <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+                </div>
+              </div>
+              <Skeleton variant="rounded" width={48} height={14} />
+            </div>
+            <div className="flex justify-between p-2">
+              <div className="flex gap-3">
+                <Skeleton variant="circular" width={40} height={40} />
+                <div className="w-60">
+                  <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+                  <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+                </div>
+              </div>
+              <Skeleton variant="rounded" width={48} height={14} />
+            </div>
+          </> : data!.map(h => (<Activity key={h.idHist} activity={`Envoyé à ${h.codeReceiver}`} time={h.dateSent} sent={h.sentPoints} />))}
+
         </div>
       </div>
     </div>

@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
+import Skeleton from '@mui/material/Skeleton';
+
 import { Ad } from "../../utils/models";
 
-function FeaturedAds({ ads = [] }: { ads: Ad[] }) {
+function FeaturedAds({ ads = [], isLoading }: { ads: Ad[], isLoading: boolean }) {
   const [curr, setCurr] = useState(0);
 
   const next = useCallback(() => {
@@ -15,26 +17,27 @@ function FeaturedAds({ ads = [] }: { ads: Ad[] }) {
 
   return (
     <div className="mt-8 space-y-4">
-      <h2 className="text-xl font-medium text-text-black">Featured Ads</h2>
-      <div className="flex flex-col gap-4">
+      <h2 className="text-xl font-medium text-text-black">Annonces en vedette</h2>
+      <div className="flex flex-col items-center gap-4">
         <div className="w-full max-w-screen-lg overflow-hidden rounded-xl bg-input">
           {/* Carrousel */}
-          <div
-            className="flex transition-transform duration-300 ease-out"
-            style={{ transform: `translateX(-${curr * 100}%)` }}
-          >
-            {ads.map((p) => (
-              <img
-                src={p.img}
-                alt="Amstel Royal Ads"
-                className="object-cover"
-                key={p.img}
-              />
-            ))}
-          </div>
+          {(isLoading || ads.length < 1) ?
+            <Skeleton variant="rectangular" animation="wave" height={194} /> : <div
+              className="flex transition-transform duration-300 ease-out"
+              style={{ transform: `translateX(-${curr * 100}%)` }}
+            >
+              {ads.map((p) => (
+                <img
+                  src={p.img}
+                  alt="Amstel Royal Ads"
+                  className="object-cover"
+                  key={p.img}
+                />
+              ))}
+            </div>}
         </div>
         {/* Dots */}
-        <div className="flex items-center justify-center gap-2 justify-self-center">
+        {(isLoading || ads.length < 1) ? <Skeleton animation="wave" variant="rounded" height={18} width={72} /> : <div className="flex items-center justify-center gap-2 justify-self-center">
           {ads.map((_, i) => (
             <button
               onClick={() => setCurr(i)}
@@ -42,7 +45,7 @@ function FeaturedAds({ ads = [] }: { ads: Ad[] }) {
               key={i}
             ></button>
           ))}
-        </div>
+        </div>}
       </div>
     </div>
   );

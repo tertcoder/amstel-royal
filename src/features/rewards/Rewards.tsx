@@ -1,7 +1,12 @@
+import { useFetchRewards } from "../../data/useFetchReward";
+import { useProfileData } from "../../hooks/useProfileData";
 import Heading from "../../ui/Heading";
 import Reward from "./Reward";
 
 function Rewards() {
+  const { code } = useProfileData();
+  const { data } = useFetchRewards(code);
+  console.log(data)
   return (
     <div className="h-screen overflow-y-auto px-4 pb-14">
       <Heading heading="Rewards" />

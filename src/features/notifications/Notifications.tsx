@@ -1,4 +1,4 @@
-import { useFetchNotifications } from "../../data/useFetchNotifications";
+import { useFetchNotifications } from "./useFetchNotifications";
 import { useProfileData } from "../../hooks/useProfileData";
 import Heading from "../../ui/Heading";
 import Notification from "./Notification";

@@ -1,50 +1,58 @@
 import { Link } from "react-router-dom";
+import Skeleton from '@mui/material/Skeleton';
+
 import { useFetchPromotions } from "../../data/useFetchPromotions";
 import { PromotionType } from "../../utils/models";
 import Promotion from "./Promotion";
-// import Promotion from "./Promotion";
 
 function SpecialPromotions() {
-  const { data } = useFetchPromotions();
+  const { data, isLoading } = useFetchPromotions();
   console.log(data)
   return (
     <div className="mb-2 mt-8">
       <h2 className="text-xl font-medium text-text-black">
-        Special Promotions
+        Promotions spéciales
       </h2>
       {/* Special Promotions are not yet available */}
       <div className="flex flex-col divide-y divide-text-black/30">
-        {
+        {isLoading ? <>
+          <div className="flex items-center gap-3 p-3">
+
+            <Skeleton variant="circular" width={64} height={64} />
+            <div className="w-60">
+              <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+              <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+            </div>
+          </div>
+          <div className="flex items-center gap-3 p-3">
+
+            <Skeleton variant="circular" width={64} height={64} />
+            <div className="w-60">
+              <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+              <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+            </div>
+          </div>
+        </>
+          :
           (data || [] as PromotionType[]).map((promotion: PromotionType) => <Promotion key={promotion.idProm} image={promotion[5]} title={promotion.nameBar} description={promotion.description} />)
-
         }
+        {!isLoading && data.length === 0 && (
+          <div className="mt-6 text-center text-sm text-text-black/70">
+            No special promotions available at the moment.
+          </div>
+        )}
 
-        {/* <Promotion
-          title="Arena Bar"
-          description="Buy 3 Beers and get 150 points!"
-        />
-        <Promotion
-          title="Kiriri Light Bar"
-          description="Buy 1 Beer and get 100 points"
-        />
-        <Promotion
-          title="Cozy Bar"
-          description="Get 1 free beer for 100 points"
-        />
-        <Promotion
-          title="Zanzi Bar"
-          description="Buy 1 Beer and get 100 points"
-        /> */}
       </div>
       <div className="mt-2 flex items-center gap-5 border-t border-text-black/10 p-3 pt-3">
         <p className="text-text-black">
-          Explore the bars, where you can get these promotions (Partnering)
+          Découvrez les bars où vous pouvez obtenir ces promotions (Partenariat)
         </p>
         <Link
           to="/bars"
           className="flex shrink-0 items-center font-medium underline"
         >
-          <span>Explore Bars</span>
+          <span>
+            Découvrir les bars</span>
           <svg
             width="18"
             height="18"

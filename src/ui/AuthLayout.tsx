@@ -1,8 +1,13 @@
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import image from "../assets/auth_img.webp";
 import logo from "../assets/logo-1.webp";
 
 function AuthLayout() {
+  // const navigate = useNavigate()
+  const loggedUser = JSON.parse(localStorage.getItem('loggedUser') || 'null');
+  if (loggedUser) {
+    return <Navigate to="/home" />;
+  }
   return (
     <div className="relative h-screen w-full">
 

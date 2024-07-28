@@ -49,6 +49,10 @@ export const getNotifications = async (code: string) => {
   const response = await axios.post(`${API_URL}getNotifications`, { code });
   return response.data;
 };
+export const getRewards = async (code: string) => {
+  const response = await axios.post(`${API_URL}getRewards`, { code });
+  return response.data;
+};
 
 export const getCustomer = async (phone: string) => {
   const response = await axios.post(`${API_URL}getCustomer`, { phone });
