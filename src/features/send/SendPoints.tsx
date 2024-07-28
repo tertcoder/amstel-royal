@@ -3,15 +3,19 @@ import Heading from "../../ui/Heading";
 import MainBtn from "../../ui/MainBtn";
 import { useState } from "react";
 import QRCodeScanner from "./QRCodeScanner";
+import { useName } from "../../data/useFetchName";
+import { useProfileData } from "../../hooks/useProfileData";
 
 function SendPoints() {
-  const [identifier, setIdentifier] = useState<{ qrData: string }>({ qrData: '' })
+  const { fullName: full_name, yourPoints } = useProfileData()
+  const { fullName, name } = useName();
+  // const [identifier, setIdentifier] = useState<{ qrData: string }>({ qrData: '' });
   const [isScanning, setIsScanning] = useState(false)
   const navigate = useNavigate();
 
   const handleScan = (data: string | null) => {
     if (data) {
-      setIdentifier({ qrData: data });
+      name({ code: data });
       setIsScanning(false);
     }
   };
@@ -46,7 +50,7 @@ function SendPoints() {
                   From
                 </span>
                 <h2 className="font-semibold text-text-black">
-                  Arnaud Mugisha
+                  {full_name}
                 </h2>
               </div>
             </div>
@@ -54,7 +58,7 @@ function SendPoints() {
               <span className="text-sm font-medium text-text-black/70">
                 Points
               </span>
-              <h2 className="font-semibold text-text-black">500.00</h2>
+              <h2 className="font-semibold text-text-black">{yourPoints}</h2>
             </div>
           </div>
           <div className="relative mx-2 w-full max-w-80">
@@ -145,7 +149,7 @@ function SendPoints() {
 
                   className="bg-inherit text-text-black outline-none placeholder:text-sm placeholder:text-text-black/70"
                   type="text"
-                  value={identifier.qrData} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setIdentifier({ qrData: e.target.value })}
+                  value={fullName || ""}
                   placeholder="Receiver identifier..."
                   autoFocus
                 />
