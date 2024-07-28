@@ -29,10 +29,10 @@ function Activity({
           <p className="text-sm text-text-black/70">{time}</p>
         </div>
       </div>
-      {received && (
+      {sent && (
         <span className="font-medium text-main-two">-{amount}pts</span>
       )}
-      {sent && <span className="font-medium text-main-one">+{amount}pts</span>}
+      {received && <span className="font-medium text-main-one">+{amount}pts</span>}
     </div>
   );
 }
