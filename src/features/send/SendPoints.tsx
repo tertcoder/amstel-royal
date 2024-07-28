@@ -39,14 +39,14 @@ function SendPoints() {
     points: number,
     type: number,
     qty: number | null,
-    invoice: File | null,
+    invoice: null,
   }>({} as {
     codeSender: string,
     codeReceiver: string,
     points: number,
     type: number,
     qty: number | null,
-    invoice: File | null,
+    invoice: null,
   });
   const { control, handleSubmit, setValue, } = useForm<FormData>();
   const { isLoading: sending } = useSendPointAgent();
@@ -66,10 +66,11 @@ function SendPoints() {
     const toSend = {
       ...data, codeSender: code,
       codeReceiver: codeReceiver,
-      points: data.points || 0,//
+      points: data.points || 0,
       type: type,
-      qty: data.amount || null,//
-      invoice: data.file ? data.file[0] : null,
+      qty: data.amount || null,
+      // invoice: data.file ? data.file[0] : null,
+      invoice: null,
     }
     console.log("Default: ", toSend);
 
@@ -80,7 +81,7 @@ function SendPoints() {
       points: number,
       type: number,
       qty: number,
-      invoice: File,
+      invoice: null,
     })
 
 
@@ -293,7 +294,7 @@ function SendPoints() {
                   />
                 )}
               />
-              <Controller
+              {/* <Controller
                 name="file"
                 control={control}
                 render={({ field }) => (
@@ -311,7 +312,7 @@ function SendPoints() {
                     />
                   </div>
                 )}
-              />
+              /> */}
             </div>
           ) : (
             <div className="mb-16 mt-6 flex flex-col items-center">

@@ -14,6 +14,7 @@ export function useProfileData() {
   const { data: fullName, isLoading: isNameLoading, error: nameError } = useFetchName(code);
 
   const { data: yourPoints, isLoading: isPointsLoading, error: pointsError } = useFetchPoints(code);
+
   const { data: receivedPoints, isLoading: isReceivedPointsLoading, error: receivedPointsError } = useFetchReceivedPoints(code);
 
   const { data: yourLevel, isLoading: isLevelLoading, error: levelError } = useFetchLevel(code);

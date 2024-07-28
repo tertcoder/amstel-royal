@@ -8,7 +8,7 @@ type profileDetailsTypes = {
   code: string,
   fullName: string,
   yourPoints: number,
-  receivedPoints: number,
+  receivedPoints: number | undefined,
   yourLevel: string | undefined,
   isLoading: boolean,
   error: Error | null,
@@ -55,11 +55,11 @@ function ProfileCard({ type, code, fullName, yourPoints, receivedPoints, yourLev
 
           {isLoading ? <Skeleton animation="wave" variant="rounded" height={14} width={72} /> : <h2 className="text-xl font-semibold text-white">{yourPoints * 1}</h2>}
         </div>
-        <div>
+        {type === 0 && <div>
           <span className="text-text-white/90">Points Reçu</span>
 
-          {isLoading ? <Skeleton animation="wave" variant="rounded" height={14} width={72} /> : <h2 className="text-xl font-semibold text-white">{receivedPoints * 1}</h2>}
-        </div>
+          {isLoading ? <Skeleton animation="wave" variant="rounded" height={14} width={72} /> : <h2 className="text-xl font-semibold text-white">{receivedPoints! * 1}</h2>}
+        </div>}
       </div>
       {type === 0 && <><span className="text-text-white/90">Votre niveau</span>
         {isLoading ? <Skeleton animation="wave" variant="rounded" height={14} width={72} /> : <h2 className="text-xl font-semibold text-white">{yourLevel}</h2>}</>}
