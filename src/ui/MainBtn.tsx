@@ -13,8 +13,6 @@ function MainBtn({
 }) {
   return (
     <button
-      //  "
-      // className="border border-text-black text-text-black"
       disabled={disabled}
       className={twMerge(
         "w-full rounded-lg py-3 duration-200 font-medium shadow-sm-blur",

@@ -6,11 +6,13 @@ function Activity({
   time,
   received,
   sent,
+  amount,
 }: {
   activity: string;
   time: string;
-  received?: number;
-  sent?: number;
+  received: boolean;
+  sent: boolean;
+  amount: number
 }) {
   return (
     <div className="flex justify-between p-2">
@@ -28,9 +30,9 @@ function Activity({
         </div>
       </div>
       {received && (
-        <span className="font-medium text-main-two">-{received}pts</span>
+        <span className="font-medium text-main-two">-{amount}pts</span>
       )}
-      {sent && <span className="font-medium text-main-one">+{sent}pts</span>}
+      {sent && <span className="font-medium text-main-one">+{amount}pts</span>}
     </div>
   );
 }

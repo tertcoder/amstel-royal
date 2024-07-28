@@ -62,3 +62,40 @@ export const getCustomer = async (phone: string) => {
   const response = await axios.post(`${API_URL}getCustomer`, { phone });
   return response.data;
 };
+export const verifyPassword = async (password: string, code: string) => {
+  const response = await axios.post(`${API_URL}verifyPassword`, { password, code });
+  return response.data;
+}
+export const sendPointAgent = async (invoice: File | null, codeSender: string, codeReceiver: string, points: number, type: number, qty: number | null) => {
+  console.log(invoice, " - ",
+    codeSender, " - ",
+    codeReceiver, " - ",
+    points, " - ",
+    type, " - ",
+    qty);
+  const api1 = "https://seesternconsulting.com/royal/agentSend";
+  const api2 = `${API_URL}sendPoints`;
+  const response = await axios.post(type === 1 ? api1 : api2, {
+    invoice,
+    codeSender,
+    codeReceiver,
+    points,
+    type,
+    qty
+  }
+  );
+
+  return response.data;
+}
+export const sendPoint = async (codeSender: string, codeReceiver: string, points: number, type: number) => {
+
+  const response = await axios.post(`${API_URL}sendPoints`, {
+    codeSender,
+    codeReceiver,
+    points,
+    type,
+  }
+
+  );
+  return response.data;
+}

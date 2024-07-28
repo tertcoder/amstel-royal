@@ -11,7 +11,7 @@ function Profile() {
   const { logout } = useAuth();
   const profileInfo = useProfileData();
   const { data, isLoading } = useFetchPointHistory(profileInfo.code || "");
-
+  console.log(data)
   return (
     <div className="flex flex-col overflow-y-auto">
       <button className="mb-6 mt-8 self-end" onClick={logout}>
@@ -62,7 +62,7 @@ function Profile() {
               </div>
               <Skeleton variant="rounded" width={48} height={14} />
             </div>
-          </> : data!.map(h => (<Activity key={h.idHist} activity={`Envoyé à ${h.codeReceiver}`} time={h.dateSent} sent={h.sentPoints} />))}
+          </> : data!.map(h => (<Activity key={h.idHist} activity={`${profileInfo.code === h.codeReceiver ? `reçu de ${h.codeSender}` : `Envoyé à ${h.codeReceiver}`}`} time={h.dateSent} sent={profileInfo.code === h.codeSender} received={profileInfo.code === h.codeReceiver} amount={h.sentPoints} />))}
 
         </div>
       </div>

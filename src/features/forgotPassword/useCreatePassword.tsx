@@ -10,7 +10,8 @@ export function useCreatePassword() {
     onSuccess: (data) => {
       if (data[0].Message === 1) {
         toast.success("Mot de Passe modifié avec succés");
-        setSearchParam("?reset=true")
+        setSearchParam("?reset=true");
+
         localStorage.clear()
       }
     }

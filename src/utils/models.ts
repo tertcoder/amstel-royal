@@ -90,3 +90,12 @@ export interface RewardType {
   level: number;
   titre: string;
 }
+
+export interface PointsToSendType {
+  codeSender: string,
+  codeReceiver: string,
+  points?: number,
+  type?: number,
+  qty: number,
+  invoice?: File | null,
+}
