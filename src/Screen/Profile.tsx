@@ -62,7 +62,7 @@ function Profile() {
               </div>
               <Skeleton variant="rounded" width={48} height={14} />
             </div>
-          </> : data!.map(h => (<Activity key={h.idHist} activity={`${profileInfo.code === h.codeReceiver ? `reçu de ${h.codeSender}` : `Envoyé à ${h.codeReceiver}`}`} time={h.dateSent} sent={profileInfo.code === h.codeSender} received={profileInfo.code === h.codeReceiver} amount={h.sentPoints} />))}
+          </> : data!.map(h => (<Activity key={h.idHist} activity={`${profileInfo.code === h.codeReceiver ? `Reçu de ${h.codeSender}` : `Envoyé à ${h.codeReceiver}`}`} time={h.dateSent} sent={profileInfo.code === h.codeSender} received={profileInfo.code === h.codeReceiver} amount={h.sentPoints} />))}
 
         </div>
       </div>
