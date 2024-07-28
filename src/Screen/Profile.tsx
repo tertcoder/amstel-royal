@@ -36,6 +36,11 @@ function Profile() {
           Historique des activités
         </h2>
         <div className="mt-3 flex flex-col divide-y divide-text-black/30">
+          {!isLoading && !data && data!.length === 0 && (
+            <div className="mt-6 text-center text-sm text-text-black/70">
+              Aucune activité trouvée.
+            </div>
+          )}
           {isLoading ? <>
             <div className="flex justify-between p-2">
               <div className="flex gap-3">

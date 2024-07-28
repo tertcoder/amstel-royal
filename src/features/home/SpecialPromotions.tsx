@@ -38,7 +38,7 @@ function SpecialPromotions() {
         }
         {!isLoading && data.length === 0 && (
           <div className="mt-6 text-center text-sm text-text-black/70">
-            No special promotions available at the moment.
+            Aucune promotion spéciale disponible pour le moment.
           </div>
         )}
 
