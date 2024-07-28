@@ -1,7 +1,5 @@
-// import qrcode from "../../assets/qr.png";
 import frame from "../../assets/frame.png";
-import QRCodeStyling from "qr-code-styling";
-import { useEffect, useRef } from "react";
+import { QRCode } from "react-qrcode-logo";
 type profileDetailsTypes = {
   type: number,
   code: string,
@@ -12,31 +10,7 @@ type profileDetailsTypes = {
   error: Error | null,
 }
 function ProfileCard({ type, code, fullName, yourPoints, yourLevel }: profileDetailsTypes) {
-  // const ref = useRef<HTMLDivElement>(null);
 
-  const qrCodeRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const qrCode = new QRCodeStyling({
-      width: 80,
-      height: 80,
-      data: code,
-      backgroundOptions: {
-        color: "#EBE4D6",
-      },
-      dotsOptions: {
-        color: "#2C1E0E",
-        type: "rounded",
-      },
-      cornersSquareOptions: {
-        type: "extra-rounded",
-      }
-    });
-
-    if (qrCodeRef.current) {
-      qrCodeRef.current.innerHTML = ""; // Clear any existing QR code
-      qrCode.append(qrCodeRef.current);
-    }
-  }, [code]);
   return (
     <div className="gold-gradient relative h-56 w-full overflow-hidden rounded-xl p-5">
       <div className="flex justify-between">
@@ -67,10 +41,9 @@ function ProfileCard({ type, code, fullName, yourPoints, yourLevel }: profileDet
           </div>
         </div>
         {/* QR Code */}
-        <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-[10px] overflow-hidden bg-bg-one ">
-          {/* <img src={qrcode} alt="Amstel Royal App" /> */}
+        <div className="flex h-20 w-20  shrink-0 items-center justify-center rounded-[10px] overflow-hidden bg-bg-one ">
 
-          <div id="qrCodeContainer" ref={qrCodeRef} ></div>
+          <QRCode size={64} bgColor='#EBE4D6' ecLevel='H' fgColor='#2C1E0E' eyeColor="#2C1E0E" eyeRadius={20} value={code} />
         </div>
       </div>
       <span className="text-text-white/90">Your points</span>

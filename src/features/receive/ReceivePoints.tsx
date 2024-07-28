@@ -4,42 +4,11 @@ import Heading from "../../ui/Heading";
 import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { useProfileData } from '../../hooks/useProfileData';
-import { QR } from "react-qr-rounded";
+// import { QR } from "react-qr-rounded";
+import { QRCode } from 'react-qrcode-logo';
 function ReceivePoints() {
   const [copyStatus, setCopyStatus] = useState(false);
   const { code } = useProfileData();
-
-  // const qrCodeRef = useRef<HTMLDivElement>(null);
-
-  // useEffect(() => {
-  //   const qrCode = new QRCodeStyling({
-  //     width: 224,
-  //     height: 224,
-  //     data: code || "", // Ensure code is not undefined
-  //     backgroundOptions: {
-  //       color: "#E8E8E8",
-  //     },
-  //     dotsOptions: {
-  //       color: "#2C1E0E",
-  //       type: "rounded",
-  //     },
-  //     cornersSquareOptions: {
-  //       type: "extra-rounded",
-  //     },
-  //   });
-
-  //   if (qrCodeRef.current) {
-  //     qrCode.append(qrCodeRef.current);
-  //   }
-
-  //   // Clean up QR code on unmount
-  //   return () => {
-  //     if (qrCodeRef.current) {
-  //       qrCodeRef.current.innerHTML = "";
-  //     }
-  //   };
-  // }, [code]);
-
   const onCopyText = () => {
     setCopyStatus(true);
     setTimeout(() => setCopyStatus(false), 2000);
@@ -55,7 +24,7 @@ function ReceivePoints() {
         <div className="mt-2 
         p-3 rounded-[20px] bg-input shadow-sm-blur">
           {/* <div id="qrCodeContainer" ref={qrCodeRef} ></div> */}
-          <QR
+          {/* <QR
             width={224}
             color="#2C1E0E"
             backgroundColor="#E8E8E8"
@@ -63,7 +32,8 @@ function ReceivePoints() {
             errorCorrectionLevel="H"
           >
             {code}
-          </QR>
+          </QR> */}
+          <QRCode size={224} bgColor='#E8E8E8' ecLevel='H' fgColor='#2C1E0E' eyeRadius={20} value={code} />
         </div>
         <p className="mt-5 block font-medium text-text-black">
           {codeAdresse}
