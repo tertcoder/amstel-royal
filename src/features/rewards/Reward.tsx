@@ -27,7 +27,11 @@ function Reward({ idReward, title, description, img }: RewardProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedBar, setSelectedBar] = useState<number | null>(null);
   const [barError, setBarError] = useState<string | null>(null);
-  const { control, handleSubmit, formState: { errors }, reset } = useForm<FormData>();
+  const { control, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
+    defaultValues: {
+      code: code || "",
+    }
+  });
   const handleModalToggle = () => {
     setSelectedBar(null);
     reset();
@@ -111,7 +115,6 @@ function Reward({ idReward, title, description, img }: RewardProps) {
                       {...field}
                       type="text"
                       id="code"
-                      defaultValue={code}
                       className="w-full bg-inherit text-text-black outline-none placeholder:text-text-black/70 rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70"
                     />
                   )}
