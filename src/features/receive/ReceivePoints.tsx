@@ -18,9 +18,9 @@ function ReceivePoints() {
 
   return (
     <div className="h-screen overflow-y-auto px-4 pb-14">
-      <Heading heading="Receive Points" />
+      <Heading heading="Recevoir des points" />
       <div className="mx-auto flex w-56 flex-col items-center">
-        <span className="font-medium text-text-black/70">Your address</span>
+        <span className="font-medium text-text-black/70">Votre adresse</span>
         <div className="mt-2 
         p-3 rounded-[20px] bg-input shadow-sm-blur">
           {/* <div id="qrCodeContainer" ref={qrCodeRef} ></div> */}
@@ -40,7 +40,7 @@ function ReceivePoints() {
         </p>
         <CopyToClipboard text={codeAdresse} onCopy={onCopyText}>
           <button className={twMerge("mt-3 flex items-center justify-center gap-2 rounded-full duration-150 px-3 py-1.5 shadow-sm-blur", `${copyStatus ? "bg-btn-color" : "bg-input "}`)}>
-            <span className={twMerge("text-text-black", `${copyStatus ? "text-text-white" : ""}`)}>{copyStatus ? "Copied" : "Copy"}</span>
+            <span className={twMerge("text-text-black", `${copyStatus ? "text-text-white" : ""}`)}>{copyStatus ? "Copied" : "Copiez votre Code"}</span>
             {copyStatus ? (
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" clipRule="evenodd" d="M12 21C16.9706 21 21 16.9706 21 12C21 10.1666 20.4518 8.46124 19.5103 7.03891L12.355 14.9893C11.6624 15.7589 10.4968 15.8726 9.66844 15.2513L6.4 12.8C5.95817 12.4686 5.86863 11.8418 6.2 11.4C6.53137 10.9582 7.15817 10.8686 7.6 11.2L10.8684 13.6513L18.214 5.48955C16.5986 3.94717 14.4099 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" fill="#EBE4D6" />
@@ -67,27 +67,14 @@ function ReceivePoints() {
       </div>
       <div className="mt-16">
         <h2 className="text-lg font-medium text-text-black">
-          Receiving Points Guide
+        Guide de réception des points 
         </h2>
         <div className="mt-3">
-          <h3 className="font-medium text-text-black">1. QR Code Method</h3>
+          <h3 className="font-medium text-text-black">1. Méthode du code QR</h3>
           <ul className="list-disc pl-12 font-medium text-text-black/70">
-            <li>Share your unique QR Code with the sender</li>
+            <li>Partagez votre code QR unique avec l'expéditeur</li>
             <li>
-              They can scan your QR Code using their app to send points directly
-              to your account
-            </li>
-          </ul>
-          <h3 className="mt-3 font-medium text-text-black">
-            2. Address Method
-          </h3>
-          <ul className="list-disc pl-12 font-medium text-text-black/70">
-            <li>
-              Alternatively, share your receiving address with the sender.
-            </li>
-            <li>
-              They can enter your address manually in their app to send points
-              to your account.
+            Ils peuvent scanner votre code QR à l'aide de leur application pour envoyer des points directement sur votre compte
             </li>
           </ul>
         </div>

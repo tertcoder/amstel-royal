@@ -5,6 +5,7 @@ import { Bar } from "../../utils/models";
 import { useForm, Controller } from "react-hook-form";
 import { useProfileData } from "../../hooks/useProfileData";
 import useClaimReward from "./useClaimReward";
+import { useNavigate } from "react-router-dom";
 
 interface RewardProps {
   idReward: number;
@@ -18,6 +19,8 @@ interface FormData {
 }
 
 function Reward({ idReward, title, description, img }: RewardProps) {
+
+  const navigate = useNavigate()
   const { code } = useProfileData();
   const { data } = useFetchBars();
   const bars = data || [] as Bar[];
@@ -60,7 +63,6 @@ function Reward({ idReward, title, description, img }: RewardProps) {
       idBar: selectedBar,
       code: data.code,
     };
-    console.log("FORM DATA:", formData);
     claim(formData);
     reset();
     setSelectedBar(null);

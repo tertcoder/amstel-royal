@@ -17,8 +17,6 @@ export function useVerifyPassword(dataToSend: {
 }) {
   const { sendPoint, isLoading: sendingPoints } = useSendPointAgent();
   const [, setSearchParam] = useSearchParams();
-  // const [sendPointDetails] = useLocalStorage<PointsToSendType>("points_sent", {} as PointsToSendType)
-  // console.log(sendPointDetails)
 
   const { data, mutate: verify, isPending: isLoading, error } = useMutation({
     mutationFn: ({ password, code }: { password: string, code: string }) => verifyPassword(password, code),

@@ -11,7 +11,7 @@ function Profile() {
   const { logout } = useAuth();
   const profileInfo = useProfileData();
   const { data, isLoading } = useFetchPointHistory(profileInfo.code || "");
-  console.log(data)
+
   return (
     <div className="flex flex-col overflow-y-auto">
       <button className="mb-6 mt-8 self-end" onClick={logout}>

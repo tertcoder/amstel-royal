@@ -67,7 +67,7 @@ function ProfileCard({ type, code, fullName, yourPoints, receivedPoints, yourLev
       <img
         src={frame}
         alt="Amstel Royal App Frame"
-        className="absolute -bottom-0.5 -right-0.5 w-52"
+        className="absolute -bottom-0.5 -right-0.5 w-40"
       />
     </div >
   );

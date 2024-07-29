@@ -12,7 +12,6 @@ function useLogout() {
       toast.success("You are logged out!");
       queryClient.removeQueries();
       settingLogout();
-      localStorage.clear();
     },
     onError: () => {
       toast.error("An error occurred while logging out.");

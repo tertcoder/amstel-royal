@@ -13,7 +13,7 @@ function Bars() {
       </h2>
       <div className="mt-6 w-full space-y-5">
         {isLoading ? <><Skeleton animation="wave" variant="rounded" width="100%" height={208} className=' rounded-xl' /><Skeleton animation="wave" variant="rounded" width="100%" height={208} /> </> : (bars || []).map((bar) => (
-          <Bar name={bar.nameBar} key={bar.nameBar} location={`${bar.communeBar}, ${bar.zoneBar}, ${bar.quartierBar}, ${bar.avenuBar}`} />
+          <Bar name={bar.nameBar} key ={bar.idBar} num={bar.idBar} location={`${bar.communeBar}, ${bar.zoneBar}, ${bar.quartierBar}, ${bar.avenuBar}`} />
         ))}
 
       </div>
