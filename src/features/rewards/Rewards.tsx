@@ -14,7 +14,7 @@ function Rewards() {
     <div className="h-screen overflow-y-auto px-4 pb-14">
       <Heading heading="Rewards" />
       <div className="space-y-4">
-        {isLoading ? <>
+        {isLoading || (data || []).length < 1 ? <>
           <div className="flex items-center gap-3 p-3">
 
             <Skeleton variant="circular" width={64} height={64} />
@@ -33,6 +33,7 @@ function Rewards() {
           </div>
         </> : (data || [] as RewardType[]).map(reward => <Reward
           key={reward.idRew}
+          idReward={reward.idRew}
           title={reward.titre}
           description={reward.description}
           img={reward.img}

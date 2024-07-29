@@ -1,16 +1,31 @@
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
+import { useFetchBars } from "../../data/useFetchBars";
+import { Bar } from "../../utils/models";
 
 function Reward({
+  idReward,
   title,
   description,
   img
 }: {
+  idReward: number;
   title: string;
   description: string;
   img: string;
 }) {
-
+  const { data } = useFetchBars();
+  const bars = data || [] as Bar[];
+  /*
+  export interface Bar {
+  idBar: number;
+  nameBar: string;
+  communeBar: string;
+  zoneBar: string;
+  quartierBar: string;
+  avenuBar: string;
+}
+  */
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModalToggle = () => {
