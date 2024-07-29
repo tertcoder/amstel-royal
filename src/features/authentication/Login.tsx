@@ -26,7 +26,7 @@ function Login() {
         <h2 className="text-2xl font-medium">Connexion</h2>
         <img src={glass} alt="Amstel Royal Glass" className="w-10" />
       </div>
-      <div className={twMerge("inset-x-0 z-50 bg-bg-one/20 absolute flex items-center -inset-y-full max-h-[1000px] justify-center duration-200 transition-opacity backdrop-blur-sm", `${isLoading ? 'opacity-100 scale-100' : 'scale-0 opacity-0'}`)}>
+      <div className={twMerge("inset-x-0 z-50 bg-bg-one/20 absolute top-0 flex items-center -inset-y-full max-h-[1000px] justify-center duration-200 transition-opacity backdrop-blur-sm", `${isLoading ? 'opacity-100 scale-100' : 'scale-0 opacity-0'}`)}>
         <div className="flex flex-col items-center justify-center">
           <GlassProstSmall />
           <span className="text-text-black font-medium">Connexion...</span>

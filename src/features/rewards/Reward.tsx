@@ -68,7 +68,7 @@ function Reward({ idReward, title, description, img }: RewardProps) {
   return (
     <>
       {isModalOpen && (
-        <div className={twMerge("fixed inset-0  z-50 flex items-center backdrop-blur-sm justify-center bg-black/75 transition-opacity duration-300", isModalOpen ? "opacity-100" : "opacity-0")}>
+        <div className={twMerge("fixed inset-0 top-0 z-50 flex items-center backdrop-blur-sm justify-center bg-black/75 transition-opacity duration-300", isModalOpen ? "opacity-100" : "opacity-0")}>
 
           <div className="relative w-full mx-5 bg-bg-one p-6 rounded-lg ">
             <h2 className="text-xl font-semibold mb-4 text-text-black">{title}</h2>

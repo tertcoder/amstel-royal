@@ -15,7 +15,7 @@ function Welcome() {
   return (
     <>
       <div className={twMerge("inset-0 z-50 bg-bg-one/20 absolute flex items-center justify-center duration-200 transition-opacity backdrop-blur-sm", `${isLoggingout ? 'opacity-100 scale-100' : 'scale-0 opacity-0'}`)}>
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex top-0 flex-col items-center justify-center">
           <GlassProstSmall />
           <span className="text-text-black font-medium">Deconnexion...</span>
         </div>
