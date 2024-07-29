@@ -115,6 +115,7 @@ function Reward({ idReward, title, description, img }: RewardProps) {
                       {...field}
                       type="text"
                       id="code"
+                      disabled={code ? true : false}
                       className="w-full bg-inherit text-text-black outline-none placeholder:text-text-black/70 rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70"
                     />
                   )}
