@@ -57,6 +57,10 @@ export const getRewards = async (code: string, type: number) => {
   const response = await axios.post(`${API_URL}getRewards`, { code, type });
   return response.data;
 };
+export const claimReward = async (idReward: number, idBar: number, code: string) => {
+  const response = await axios.post(`${API_URL}claimReward`, { idReward, idBar, code });
+  return response.data;
+};
 
 export const getCustomer = async (phone: string) => {
   const response = await axios.post(`${API_URL}getCustomer`, { phone });
@@ -78,7 +82,7 @@ export const sendPointAgent = async (invoice: File | null, codeSender: string, c
     type,
     qty
   }
- 
+
   );
 
   return response.data;
