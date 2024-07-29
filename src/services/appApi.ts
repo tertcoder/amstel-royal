@@ -59,6 +59,7 @@ export const getRewards = async (code: string, type: number) => {
 };
 export const claimReward = async (idReward: number, idBar: number, code: string) => {
   const response = await axios.post(`${API_URL}claimReward`, { idReward, idBar, code });
+  console.log({ idReward, idBar, code })
   return response.data;
 };
 
