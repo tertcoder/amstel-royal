@@ -58,7 +58,7 @@ function SendPoints() {
   const { isLoading: sending } = useSendPointAgent();
 
   const handleScan = (data: string | null) => {
-    if (data && ((data.startsWith("A") || data.startsWith("R")) && data.length === 3)) {
+    if (data && (data.startsWith("A") || data.startsWith("R"))) {
       name({ code: data });
       setIsScanning(false);
       setCodeReceiver(data);
