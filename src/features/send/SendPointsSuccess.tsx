@@ -27,7 +27,7 @@ function SendPointsSuccess() {
       </div>
       <div className="mt-16 w-full space-y-3">
         <MainBtn
-          text="Retournez dans Home"
+          text="Retournez à la Page d'Accueil"
           onClick={(e) => {
             e.preventDefault();
             navigate("/home");

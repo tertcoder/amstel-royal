@@ -27,7 +27,7 @@ export function useSendPointAgent() {
     ,
 
     onSuccess: (data) => {
-
+      console.log(data)
       if (data[0].Message === 1 || data[0].Message === "Points envoyés avec succés") {
         toast.success("Point envoyé avec success!");
         navigate("/send_points_success")

@@ -20,14 +20,14 @@ function OtpVerification() {
   const [isDisabled, setIsDisabled] = useState(true);
 
   const signup_details = JSON.parse(localStorage.getItem("signup_data")!);
-  const otp_verified = localStorage.getItem("otp");
+  let otp_verified = localStorage.getItem("otp") || ""; // Ensure it's a string
   const phone = signup_details.phone.length === 8
     ? "+257" + signup_details.phone
     : signup_details.phone.length === 11
-      ? signup_details.phone
-      : signup_details.phone.length === 10
-        ? "+" + signup_details.phone
-        : signup_details.phone;
+    ? signup_details.phone
+    : signup_details.phone.length === 10
+    ? "+" + signup_details.phone
+    : signup_details.phone;
 
   useEffect(() => {
     if (timer > 0) {
@@ -43,13 +43,10 @@ function OtpVerification() {
   }, [timer]);
 
   useEffect(() => {
-
     sendSMS(phone, otp_verified);
+  }, [phone, otp_verified]); // Adding dependencies
 
-  }, []);
-
-
-  const sendSMS = async (phone: string, otp: string) => {
+  const sendSMS = async (phone: string, otp: string) => { // Use string instead of String
     const msg = "Amstel Royal OTP: " + otp;
 
     const options = {
@@ -57,8 +54,7 @@ function OtpVerification() {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + "yJLzKjkHHMDUA3a3JcGJnMJ2DyEyWL47cBHE3ZZhSy7sY2azReTkjPsMxAxO8U4C"
-
+        "Authorization": "Bearer "+"blbcSZ2Fc1WvdJVWEQgXuxrj0b0nYCbXa38pfDoiGzfBjrFKAB4LwrLGX60R6bzv"
       },
       data: {
         'phone_number': phone,
@@ -68,17 +64,13 @@ function OtpVerification() {
 
     try {
       const response = await axios(options);
-
+      console.log('SMS sent successfully:', response.data);
       return response.data; // Optionally return data if needed
     } catch (error) {
-
+      console.error('Error sending SMS:', error);
       throw new Error('Failed to send SMS');
-      // Handle error gracefully or throw to propagate
     }
   };
-
-
-
 
   const handleOtpChange = (otp: string) => setOtp(otp);
   const resettingOTP = () => {
@@ -86,15 +78,17 @@ function OtpVerification() {
     setButtonText('Veuillez patienter...');
     setIsDisabled(true);
 
-    const otp = Math.floor(1000 + Math.random() * 9000);
-    localStorage.setItem('otp', JSON.stringify(otp));
-    sendSMS(phone, otp);
+    const otpNumber = Math.floor(1000 + Math.random() * 9000);
+    const otpString = otpNumber.toString(); // Convert number to string
+    localStorage.setItem('otp', otpString);
+    sendSMS(phone, otpString); // Pass as string
     setIsReloaded(true);
     setInterval(() => {
       setIsReloaded(false);
-      otp_verified = localStorage.getItem("otp")
-    }, 3000)
-  }
+      otp_verified = localStorage.getItem("otp") || "";
+    }, 3000);
+  };
+
   return (
     <div className="flex h-screen flex-col items-center px-4 pb-8">
       <div className={twMerge("inset-x-0 z-50 bg-bg-one/20 absolute flex items-center max-h-screen h-full justify-center duration-200 transition-opacity backdrop-blur-sm", `${isLoading || isReloaded ? 'opacity-100 scale-100' : 'scale-0 opacity-0'}`)}>
@@ -121,7 +115,7 @@ function OtpVerification() {
       <MainBtn
         onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
           e.preventDefault();
-
+          
           if (otp_verified === otp) {
             signup(signup_details);
           } else {

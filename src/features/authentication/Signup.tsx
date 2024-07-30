@@ -168,7 +168,7 @@ function Signup() {
             </Link>
           </div>
         </form>
-        <p className="mt-6 text-xs text-text-black/70 text-center">En vous inscrivant, vous acceptez<a href="#" className="text-text-black font-semibold"> les conditions générales</a> d'Amstel Royal et notre <a href="" className="text-text-black font-semibold">politique de confidentialité.</a></p>
+        <p className="mt-6 text-xs text-text-black/70 text-center">En vous inscrivant, vous acceptez<a href="https://www.heineken.com/global/en/terms-and-conditions" className="text-text-black font-semibold"> les conditions générales</a> et <a href="https://www.heineken.com/global/en/privacy-policy" className="text-text-black font-semibold">politique de confidentialité.</a></p>
       </div>
     </>
 

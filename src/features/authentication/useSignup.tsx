@@ -13,7 +13,7 @@ export function useSignup() {
     onSuccess: (data) => {
 
       if (data[0].Message === 1) {
-        toast.success("Successfully signed up!");
+        toast.success("Compte crée avec succés!");
 
 
         localStorage.setItem("loggedUser", JSON.stringify(data));

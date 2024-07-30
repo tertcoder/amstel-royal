@@ -5,7 +5,6 @@ import { Bar } from "../../utils/models";
 import { useForm, Controller } from "react-hook-form";
 import { useProfileData } from "../../hooks/useProfileData";
 import useClaimReward from "./useClaimReward";
-import { useNavigate } from "react-router-dom";
 
 interface RewardProps {
   idReward: number;
@@ -20,8 +19,7 @@ interface FormData {
 
 function Reward({ idReward, title, description, img }: RewardProps) {
 
-  const navigate = useNavigate()
-  const { code } = useProfileData();
+  const { code,type } = useProfileData();
   const { data } = useFetchBars();
   const bars = data || [] as Bar[];
 
@@ -36,6 +34,7 @@ function Reward({ idReward, title, description, img }: RewardProps) {
     }
   });
   const handleModalToggle = () => {
+    
     setSelectedBar(null);
     reset();
 
@@ -138,7 +137,7 @@ function Reward({ idReward, title, description, img }: RewardProps) {
           </div >
         </div >
       )}
-      <div className="linear flex items-center gap-3 rounded-xl p-3 shadow-sm-blur cursor-pointer" onClick={handleModalToggle}>
+      <div className="linear flex items-center gap-3 rounded-xl p-3 shadow-sm-blur cursor-pointer" onClick={type==0?handleModalToggle:undefined}>
         <img
           src={img}
           alt="Reward"

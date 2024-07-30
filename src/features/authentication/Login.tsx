@@ -46,7 +46,7 @@ function Login() {
             )}
             {message === 2 && (
               <div className="text-red-400">
-                <p>Votre connexion est lente</p>
+                <p>Vérifier connexion internet</p>
               </div>
             )}
             {message === 4 && (
@@ -166,8 +166,9 @@ function Login() {
             </Link>
           </div>
         </form>
-        <p className="mt-6 text-xs text-text-black/70 text-center">En vous connectant, vous acceptez<a href="#" className="text-text-black font-semibold"> les conditions générales</a> d'Amstel Royal et notre <a href="" className="text-text-black font-semibold">politique de confidentialité.</a></p>
-      </div>
+        <p className="mt-6 text-xs text-text-black/70 text-center">En vous inscrivant, vous acceptez<a href="https://www.heineken.com/global/en/terms-and-conditions" className="text-text-black font-semibold"> les conditions générales</a> et <a href="https://www.heineken.com/global/en/privacy-policy" className="text-text-black font-semibold">politique de confidentialité </a> de HEINEKEN .</p>
+      
+        </div>
     </>)
 }
 

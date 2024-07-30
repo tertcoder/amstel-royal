@@ -15,7 +15,7 @@ function Rewards() {
 
   return (
     <div className="h-screen overflow-y-auto px-4 pb-14">
-      <Heading heading="Rewards" />
+      <Heading heading="Prix" />
       {((!toClaim || (toClaim || []).length < 1) && !loadingRewards) && <div className="mt-6 text-center text-sm text-text-black/70">
         Aucun Prix à réclamer pour le moment.
       </div>}
@@ -46,7 +46,7 @@ function Rewards() {
             img={reward.img}
           />)}
         </div></>}
-      {((claimed || []).length > 0) && <><h2 className='text-xl mt-8 text-text-black/70 font-medium mb-2'>Prix déjà réclamer</h2>
+      {((claimed || []).length > 0) && <><h2 className='text-xl mt-8 text-text-black/70 font-medium mb-2'>Prix déjà réclamés</h2>
         <div className="space-y-4">
           {loadingClaimed || (claimed || []).length < 1 ? <>
             <div className="flex items-center gap-3 p-3">

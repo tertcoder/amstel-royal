@@ -9,7 +9,7 @@ export function Greeting() {
   const { data, error, isLoading } = useFetchName(loggedUser[0].code);
 
   return <div>
-    <span className="font-medium text-text-black/70">Content de te revoir!</span>
+    <span className="font-medium text-text-black/70">Bienvenu!</span>
     {isLoading ? <Skeleton animation="wave" /> : error ? "" : <h2 className="text-lg font-medium text-text-black"> {data ? `${data}` : "No Name Found!"}
     </h2>
     }

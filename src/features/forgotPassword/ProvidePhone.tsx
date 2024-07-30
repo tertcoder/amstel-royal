@@ -52,7 +52,7 @@ function ProvidePhone() {
         <h2 className="text-xl font-medium text-text-black">Mot de passe oublié</h2>
       </div>
       <p className="text-text-black/70 mt-2">
-        Entrez le numéro de téléphone de votre compte et nous vous enverrons un OTP pour confirmer la réinitialisation de votre mot de passe
+        Entrez votre numero de téléphone et Vous aller recevoir un code OTP pour vérification
       </p>
       <form onSubmit={handleSubmit(onSubmit)} className="mt-5 space-y-10">
         <input

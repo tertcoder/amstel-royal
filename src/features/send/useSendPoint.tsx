@@ -19,7 +19,7 @@ export function useSendPoint() {
     ),
     onSuccess: (data) => {
       toast.success("Point envoyé avec success!");
-
+      console.log(data);
     }
 
   })

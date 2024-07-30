@@ -108,7 +108,7 @@ function SendPoints() {
           <span className="text-text-black font-medium">Chargement</span>
         </div>
       </div>
-      <Heading to="/home" heading="Send Points" />
+      <Heading to="/home" heading="Envoyer Points" />
       <div className="mt-16">
         <form className="flex flex-col items-center" onSubmit={handleSubmit(onSubmit)}>
           {/* <input type="number" hidden value={type} {...register("type")} /> */}
@@ -135,7 +135,7 @@ function SendPoints() {
               </div>
               <div>
                 <span className="text-sm font-medium text-text-black/70">
-                  From
+                  De
                 </span>
                 <h2 className="font-semibold text-text-black">
                   {full_name}
@@ -231,7 +231,7 @@ function SendPoints() {
               </div>
               <div className="flex flex-1 flex-col">
                 <span className="text-sm font-medium text-text-black/70">
-                  To
+                  A
                 </span>
                 {isLoading ? (
                   <Skeleton variant='rounded' width={72} height={14} animation="wave" />
@@ -244,9 +244,10 @@ function SendPoints() {
                       <div>
                         <input
                           id="qr_input"
-                          placeholder="Scan Code"
+                          placeholder="Scanner QrCode"
                           className={twMerge("bg-inherit text-text-black outline-none placeholder:text-sm placeholder:text-text-black/70", `${!isThere ? 'text-red-500' : ''}`)}
                           type="text"
+                          readOnly
                           {...field}
                         />
                         {errors.identifier && (
@@ -317,7 +318,7 @@ function SendPoints() {
             </div>
           ) : (
             <div className="mb-16 mt-6 flex flex-col items-center">
-              <h2 className="font-medium text-text-black/70">Amount</h2>
+              <h2 className="font-medium text-text-black/70">Points à envoyer</h2>
               <Controller
                 name="points"
                 control={control}
@@ -342,7 +343,7 @@ function SendPoints() {
           {/* <button type="submit" disabled={!isFormComplete()} className={`btn ${!isFormComplete() ? 'btn-disabled' : ''}`}>
             Send
           </button> */}
-          <MainBtn disabled={!isFormComplete() || !isThere} text="Send" onClick={() => { setSearchParam("?confirm=true"); }} />
+          <MainBtn disabled={!isFormComplete() || !isThere} text="Envoyer" onClick={() => { setSearchParam("?confirm=true"); }} />
         </form>
       </div>
 

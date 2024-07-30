@@ -28,7 +28,8 @@ export function useLogin() {
       }
     },
     onError: (error) => {
-      if (error.message === 'Network error') { toast.error("Vous n'êtes pas connecté au serveur"); setErrorMessage("Vous n'êtes pas connecté au serveur"); } else {
+      if (error.message === 'Erreur de Conexion Internet') { toast.error("Vous n'êtes pas connecté au serveur"); 
+      setErrorMessage("Vous n'êtes pas connecté au serveur"); } else {
         toast.error(error.message); setErrorMessage(error.message)
       }
       setMessage(2);

@@ -3,8 +3,8 @@ import frame from "../../assets/frame.svg";
 function Bar({ name, location,num }: { name: string; location: string;num:number }) {
 
  const back = num%2==0?"gold-gradient relative h-32 w-full overflow-hidden rounded-xl pt-10 text-center":"bg-silver-gradient relative h-32 w-full overflow-hidden rounded-xl pt-10 text-center";
-  const textColor1 = num%2==0?" text-nowrap text-[18px] font-bold text-white" :" text-nowrap text-[18px] font-bold text-gold";
-  const textColor2 = num%2==0?" text-sm font-medium text-[10px] text-white" :" text-sm font-medium text-[10px] text-gold";
+  const textColor1 = num%2==0?" text-nowrap text-[18px] font-bold text-white" :" text-nowrap text-[18px] font-bold text-black";
+  const textColor2 = num%2==0?" text-sm font-medium text-[10px] text-white" :" text-sm font-medium text-[10px] text-black";
 
   return (
     <div className={back}>
