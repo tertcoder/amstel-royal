@@ -9,7 +9,7 @@ function useLogout() {
   const { mutate: logout, isPending: isLoggingout } = useMutation({
     mutationFn: ({ id }: { id: number }) => logoutApi(id),
     onSuccess: () => {
-      toast.success("You are logged out!");
+      
       queryClient.removeQueries();
       settingLogout();
     },

@@ -1,4 +1,13 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import React from "react";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  RouteObject,
+} from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
 import Login from "./features/authentication/Login";
 import AuthLayout from "./ui/AuthLayout";
 import Signup from "./features/authentication/Signup";
@@ -18,51 +27,30 @@ import Forgot from "./ui/Forgot";
 import ProvidePhone from "./features/forgotPassword/ProvidePhone";
 import OtpVerificationOnForgotPassword from "./features/forgotPassword/OtpVerification";
 import PasswordReset from "./features/forgotPassword/PasswordReset";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "react-hot-toast";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ProtectedRoute from "./ui/ProtectedRoute";
 
-const router = createBrowserRouter([
+// Define routes as RouteObject
+const routes: RouteObject[] = [
   {
+    path: "/",
     element: <Authentication />,
     children: [
       {
         element: <AuthLayout />,
         children: [
-          {
-            path: "/",
-            element: <Login />,
-          },
-          {
-            path: "/signup",
-            element: <Signup />,
-          },
+          { path: "/", element: <Login /> },
+          { path: "/signup", element: <Signup /> },
+          { path: "/polit", element: <Signup /> },
         ],
       },
-      {
-        path: "/otp_verification",
-        element: <OtpVerification />,
-      },
-      {
-        path: "/signup_success",
-        element: <SignupSuccess />,
-      },
+      { path: "/otp_verification", element: <OtpVerification /> },
+      { path: "/signup_success", element: <SignupSuccess /> },
       {
         element: <Forgot />,
         children: [
-          {
-            path: "/step_1_phone",
-            element: <ProvidePhone />,
-          },
-          {
-            path: "/step_2_otp_verification",
-            element: <OtpVerificationOnForgotPassword />,
-          },
-          {
-            path: "/step_3_password_reset",
-            element: <PasswordReset />,
-          },
+          { path: "/step_1_phone", element: <ProvidePhone /> },
+          { path: "/step_2_otp_verification", element: <OtpVerificationOnForgotPassword /> },
+          { path: "/step_3_password_reset", element: <PasswordReset /> },
         ],
       },
     ],
@@ -73,53 +61,39 @@ const router = createBrowserRouter([
       {
         element: <AppLayout />,
         children: [
-          {
-            path: "/home",
-            element: <Home />,
-          },
-          {
-            path: "/bars",
-            element: <Bars />,
-          },
-          {
-            path: "/profile",
-            element: <Profile />,
-          },
+          { path: "/home", element: <Home /> },
+          { path: "/bars", element: <Bars /> },
+          { path: "/profile", element: <Profile /> },
         ],
       },
-      {
-        path: "/send_points",
-        element: <SendPoints />,
-      },
-      {
-        path: "/send_points_success",
-        element: <SendPointsSuccess />,
-      },
-      {
-        path: "/receive_points",
-        element: <ReceivePoints />,
-      },
-      {
-        path: "/rewards",
-        element: <Rewards />,
-      },
-      {
-        path: "/notifications",
-        element: <Notifications />,
-      },
+      { path: "/send_points", element: <SendPoints /> },
+      { path: "/send_points_success", element: <SendPointsSuccess /> },
+      { path: "/receive_points", element: <ReceivePoints /> },
+      { path: "/rewards", element: <Rewards /> },
+      { path: "/notifications", element: <Notifications /> },
     ],
   },
-]);
+];
 
+// Create the router
+const router = createBrowserRouter(routes);
+
+// Initialize QueryClient for React Query
 const queryClient = new QueryClient();
-function App() {
-  return <QueryClientProvider client={queryClient}>
-    <ReactQueryDevtools initialIsOpen />
 
-    <RouterProvider router={router} />
-    <Toaster toastOptions={{ duration: 5000 }} position="top-center" gutter={12}
-      containerStyle={{ margin: "8px" }} />
-  </QueryClientProvider>
-}
+const App: React.FC = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <RouterProvider router={router} />
+      <Toaster
+        toastOptions={{ duration: 5000 }}
+        position="top-center"
+        gutter={12}
+        containerStyle={{ margin: "8px" }}
+      />
+    </QueryClientProvider>
+  );
+};
 
 export default App;

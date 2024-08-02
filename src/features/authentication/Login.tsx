@@ -33,9 +33,6 @@ function Login() {
         </div>
       </div>
       <div className="mt-2 flex w-full flex-col items-center">
-        {/* <p className="text-center text-sm text-text-black/70 mb-6">
-          Connectez-vous pour commencer à gagner des points à chaque gorgée d'Amstel !
-        </p> */}
 
         {message !== null && (
           <div className="message-toast">
@@ -167,8 +164,8 @@ function Login() {
           </div>
         </form>
         <p className="mt-6 text-xs text-text-black/70 text-center">En vous inscrivant, vous acceptez<a href="https://www.heineken.com/global/en/terms-and-conditions" className="text-text-black font-semibold"> les conditions générales</a> et <a href="https://www.heineken.com/global/en/privacy-policy" className="text-text-black font-semibold">politique de confidentialité </a> de HEINEKEN .</p>
-      
-        </div>
+
+      </div>
     </>)
 }
 

@@ -28,6 +28,7 @@
     "react-hook-form": "^7.52.1",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^5.2.1",
+    "react-phone-input-2": "^2.15.1",
     "react-qr-rounded": "^1.0.0",
     "react-qr-scanner": "^1.0.0-alpha.11",
     "react-qrcode-logo": "^3.0.0",
@@ -48,6 +49,7 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
     "postcss": "^8.4.38",
+    "sass": "^1.77.8",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.2.2",
     "vite": "^5.3.1"

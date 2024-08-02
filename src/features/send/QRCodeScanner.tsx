@@ -1,4 +1,5 @@
-import QrReader  from "react-qr-scanner";
+import QrScanner from "react-qr-scanner";
+import './Scanner.scss';
 
 interface QRCodeScannerProps {
   onScan: (data: string) => void;
@@ -6,25 +7,28 @@ interface QRCodeScannerProps {
 }
 
 function QRCodeScanner({ onScan, onError }: QRCodeScannerProps) {
-
-  
   const handleScan = (data: { text: string } | null) => {
     if (data) {
       onScan(data.text);
     }
   };
 
-
+  const constraints = {
+    video: {
+      facingMode: { ideal: 'environment' },
+    },
+  };
 
   return (
-    <QrReader
+    <div className="videoWrapper">
+    <QrScanner
       delay={300}
-      className="qr-scanner-preview max-[480px]:h-48 max-w-80 w-full h-60 mt-4 rounded-xl"
+      className="qrVideo"
       onError={onError || console.error} // Default error handler if not provided
       onScan={handleScan}
+      constraints={constraints}
     />
-
-    
+    </div>
   );
 }
 

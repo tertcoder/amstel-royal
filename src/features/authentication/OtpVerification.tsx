@@ -8,6 +8,7 @@ import { useSignup } from "./useSignup";
 import GlassProstSmall from "../../ui/GlassProstSmall";
 import { twMerge } from "tailwind-merge";
 import axios from "axios";
+import { API_URL } from "../../services/authApi";
 
 function OtpVerification() {
   const { isLoading, signup } = useSignup();
@@ -49,21 +50,13 @@ function OtpVerification() {
   const sendSMS = async (phone: string, otp: string) => { // Use string instead of String
     const msg = "Amstel Royal OTP: " + otp;
 
-    const options = {
-      url: 'https://textflow.me/api/send-sms',
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer "+"blbcSZ2Fc1WvdJVWEQgXuxrj0b0nYCbXa38pfDoiGzfBjrFKAB4LwrLGX60R6bzv"
-      },
-      data: {
-        'phone_number': phone,
-        'text': msg
-      }
-    };
+  
 
     try {
-      const response = await axios(options);
+      const response = await axios.post(`${API_URL}sendOTP`, {
+        phone: phone,
+        msg: msg
+      });
       console.log('SMS sent successfully:', response.data);
       return response.data; // Optionally return data if needed
     } catch (error) {
@@ -102,7 +95,7 @@ function OtpVerification() {
       <p className="font-medium text-text-black/70">
         Entrez l'OTP envoyé au <span className="text-text-black">{phone}</span>
       </p>
-      <p>{otp_verified}</p>
+      
       <div className="mb-10 flex flex-col items-center gap-3">
         <OtpInput length={4} onChange={handleOtpChange} />
         <p className="self-end text-sm font-normal text-text-black/70">

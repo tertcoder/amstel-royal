@@ -5,20 +5,30 @@ import { useEffect, useState } from "react";
 import GlassProstSmall from "../../ui/GlassProstSmall";
 import { twMerge } from "tailwind-merge";
 import toast from "react-hot-toast";
+import axios from "axios";
+import { API_URL } from "../../services/authApi";
 
 function OtpVerification() {
   const [otp, setOtp] = useState("");
   const navigate = useNavigate();
   const handleOtpChange = (otp: string) => setOtp(otp);
-  const phone_to = localStorage.getItem("phone_verified")
+  const phone_to1 = localStorage.getItem("phone_verified")|| "257"
   const [isReloaded, setIsReloaded] = useState(false);
+
+  const phone_to = phone_to1.toString().length === 8
+  ? "+257" + phone_to1
+  : phone_to1.toString().length === 11
+  ? phone_to1
+  : phone_to1.toString().length === 10
+  ? "+" + phone_to1
+  : phone_to1;
 
 
 
   const [timer, setTimer] = useState(60);
   const [buttonText, setButtonText] = useState('Renvoyer l\'OTP');
   const [isDisabled, setIsDisabled] = useState(true);
-  let otp_verified = localStorage.getItem("otp");
+  let otp_verified = localStorage.getItem("otp")|| "2024";
 
   useEffect(() => {
     if (timer > 0) {
@@ -33,19 +43,44 @@ function OtpVerification() {
     }
   }, [timer]);
 
+  useEffect(() => {
+    sendSMS(phone_to, otp_verified);
+  }, [phone_to, otp_verified]); // Adding dependencies
+
+  const sendSMS = async (phone_to: string, otp: string) => { // Use string instead of String
+    const msg = "Amstel Royal OTP: " + otp;
+
+  
+
+    try {
+      const response = await axios.post(`${API_URL}sendOTP`, {
+        phone: phone_to,
+        msg: msg
+      });
+      console.log('SMS sent successfully:', response.data);
+      return response.data; // Optionally return data if needed
+    } catch (error) {
+      console.error('Error sending SMS:', error);
+      throw new Error('Failed to send SMS');
+    }
+  };
+
+
   const resettingOTP = () => {
     setTimer(10);
     setButtonText('Veuillez patienter...');
     setIsDisabled(true);
 
-    const otp = Math.floor(1000 + Math.random() * 9000);
-    localStorage.setItem('otp', JSON.stringify(otp));
+    const otpNumber = Math.floor(1000 + Math.random() * 9000);
+    const otpString = otpNumber.toString(); // Convert number to string
+    localStorage.setItem('otp', otpString);
+    sendSMS(phone_to, otpString); // Pass as string
     setIsReloaded(true);
     setInterval(() => {
       setIsReloaded(false);
-      otp_verified = localStorage.getItem("otp")
-    }, 3000)
-  }
+      otp_verified = localStorage.getItem("otp") || "";
+    }, 3000);
+  };
 
   return (
     <div className="mt-8">
@@ -76,7 +111,7 @@ function OtpVerification() {
         </button>
         <h2 className="text-xl font-medium text-text-black">Vérification OTP</h2>
       </div>
-      <p>{otp_verified}</p>
+      
 
       <p className="text-text-black/70 mt-2">
         Entrez l'OTP envoyé au <span className="font-medium text-text-black">{phone_to}</span>

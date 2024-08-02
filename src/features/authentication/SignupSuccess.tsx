@@ -7,8 +7,8 @@ function SignupSuccess() {
   const navigate = useNavigate();
   const { code } = useProfileData();
   return (
-    <div className="flex h-screen flex-col items-center px-4 pb-8">
-      <h2 className="8 mb-12 text-xl font-medium text-text-black">
+    <div className="flex h-screen flex-col items-center px-4 pb-8 ">
+      <h2 className="8 mb-12 text-xl font-medium text-text-black mt-5">
         Inscription réussie
       </h2>
       <GlassProst />
