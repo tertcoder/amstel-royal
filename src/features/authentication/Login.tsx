@@ -7,18 +7,23 @@ import GlassProstSmall from "../../ui/GlassProstSmall";
 import glass from "../../assets/small_glass.png";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
+import { PhoneInput } from 'react-international-phone';
+import 'react-international-phone/style.css';
 
 type LoginDataType = {
-  identifier: string;
   password: string;
 }
 function Login() {
   const { login, isLoading, message, errorMessage } = useLogin();
   const [showPassword, setShowPassword] = useState(false);
   // const { login, isLoading } = useLogin();
+  const [phone, setPhone] = useState('');
+  const [phoneEmpty, setPhoneEmpty] = useState('');
   const { register, handleSubmit, formState: { errors }, reset } = useForm<LoginDataType>();
   const onSubmit: SubmitHandler<LoginDataType> = (data) => {
-    login(data, { onSettled: () => reset() });
+    if (!phone || phone.length < 10) { setPhoneEmpty("Votre numero de téléphone est requis"); return; }
+
+    login({ identifier: phone, ...data }, { onSettled: () => reset() });
   }
   return (
     <>
@@ -69,8 +74,8 @@ function Login() {
         <form onSubmit={handleSubmit(onSubmit)} className="mt-2 w-full space-y-5">
           <div className="flex flex-col gap-4">
             <div>
-              <div className="flex justify-between rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70">
-                <input
+              <div className="flex justify-between items-center rounded-xl bg-input px-4 py-3 shadow-sm-blur duration-150 focus-within:border focus-within:border-text-black/70">
+                {/* <input
                   disabled={isLoading}
                   type="text"
                   placeholder="Téléphone ou code client"
@@ -80,6 +85,14 @@ function Login() {
                   {...register("identifier", {
                     required: "Entrez votre numero de téléphone ou Code client",
                   })}
+                /> */}
+                <PhoneInput
+                  defaultCountry="bi"
+                  value={phone}
+                  onChange={(phone) => { setPhone(phone); setPhoneEmpty(''); console.log(phone) }}
+                  className="flex-1 bg-transparent text-text-black mystyle outline-none placeholder:text-text-black/70"
+                  inputClassName="bg-transparent max-w-full text-text-black outline-none placeholder:text-text-black/70"
+                  inputStyle={{ backgroundColor: 'transparent', border: 'none', outline: 'none', color: '#2C1E0E' }}
                 />
                 <svg
                   width="24"
@@ -99,9 +112,9 @@ function Login() {
                 </svg>
 
               </div>
-              {errors?.identifier?.message && (
+              {phoneEmpty && (
                 <span className="text-sm font-medium text-red-400">
-                  *{errors?.identifier?.message}
+                  *{phoneEmpty}
                 </span>
               )}
             </div>

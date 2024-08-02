@@ -28,6 +28,7 @@
     "react-hook-form": "^7.52.1",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^5.2.1",
+    "react-international-phone": "^4.3.0",
     "react-phone-input-2": "^2.15.1",
     "react-qr-rounded": "^1.0.0",
     "react-qr-scanner": "^1.0.0-alpha.11",

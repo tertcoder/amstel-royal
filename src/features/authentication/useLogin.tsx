@@ -24,12 +24,15 @@ export function useLogin() {
         }, 1000);
       } else {
         toast.error("Téléphone, Code ou mot de passse incorrect");
+        console.log(data)
         setMessage(data[0].Message)
       }
     },
     onError: (error) => {
-      if (error.message === 'Erreur de Conexion Internet') { toast.error("Vous n'êtes pas connecté au serveur"); 
-      setErrorMessage("Vous n'êtes pas connecté au serveur"); } else {
+      if (error.message === 'Erreur de Conexion Internet') {
+        toast.error("Vous n'êtes pas connecté au serveur");
+        setErrorMessage("Vous n'êtes pas connecté au serveur");
+      } else {
         toast.error(error.message); setErrorMessage(error.message)
       }
       setMessage(2);
